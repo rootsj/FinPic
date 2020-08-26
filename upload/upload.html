@@ -1,26 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>upload.html</title>
+    <link rel="stylesheet" href="/upload.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 </head>
+
 <body>
-    <div id = "logo">
+    <div id="logo">
         <img>
     </div>
-    <div id = "picture_tags">
-        <input type = "text">
+    <div id="picture_tags">
+        <input type="text">
     </div>
-    <div id = "drop_zone">
-        UPLOAD FILE<br>
+    <div id="drop_zone">
+        <input type="file" id="upload_picture" name="picture" accept="image/png,image/jpg,image/gif"> UPLOAD FILE<br>
         JPG,PNG,GIF
     </div>
-    <script>
+    <div class="drag_and_drop">
 
+    </div>
+    <script>
+        let dragOver = function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            if (e.type == "dragover") {
+                $(e.target).css({
+                    "background-color": "black",
+                    "outline-offset": "-20px"
+                });
+            } else {
+                $(e.target).css({
+                    "background-color": "blue",
+                    "outline-offset": "-10px"
+                });
+            }
+        };
+        let uploadFiles = function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            dragOver(e);
+            e.dataTransfer = e.originalEvent.dataTransfer;
+            let files = e.target.files || e.dataTransfer.files;
+            if (files.length > 1) {
+                alert("YOU CAN UPLOAD ONLY ONE FILE AT ONCE");
+                return;
+            }
+            if (files[0].type.match(/image.*/)) {
+                $(e.target).css({
+                    "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
+                    "outline": "none",
+                    "background-size": "100% 100%"
+                });
+            } else {
+                alert("YOU CAN UPLOAD ONLY IMAGE TYPE FILES");
+                return;
+            }
+        };
+        $(".drag_and_drop").on("dragover", dragOver).on("dragleave", dragOver).on("drop", uploadFiles);
     </script>
 </body>
+
 </html>
