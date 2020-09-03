@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import picturesDTO.Pictures;
 import profilesDTO.Profiles;
-import repositories.PicturesRepository;
 import repositories.ProfilesRepository;
 import repositories.UsersRepository;
 import usersDTO.Users;
@@ -20,31 +19,40 @@ import usersDTO.Users;
 public class ProfilesController {
 	  private final ProfilesRepository profilesRepository;
 	  private final UsersRepository usersRepository;
-	  private final PicturesRepository picturesRepository;
 	  
-	  ProfilesController(ProfilesRepository profilesRepository,UsersRepository usersRepository, PicturesRepository picturesRepository) {
+	  ProfilesController(ProfilesRepository profilesRepository,UsersRepository usersRepository) {
 	    this.profilesRepository = profilesRepository;
 	    this.usersRepository = usersRepository;
-	    this.picturesRepository = picturesRepository;
 	  }
 
+	  // 프로필 사진 생성 및 업데이트
 	  @PutMapping("/users/{userEmail}/profileImage")
 	  public String updateProfileImage(@RequestParam("img") MultipartFile img, @PathVariable String userEmail) {
 		  Users user = usersRepository.findByUserEmail(userEmail);
+		  
+		  // 확장자 확인 작입
+		  String fileName = img.getOriginalFilename();
+		  String ext = fileName.substring(fileName.lastIndexOf(".")+ 1);
+		  System.out.println(ext);  
+
+		  if ( !ext.equals("png") && !ext.equals("gif") && !ext.equals("jpeg") && !ext.equals("jpg")) {
+			  System.out.println("여긴아니야");
+			  return "잘못된 확장자 파일 업로드.jsp";
+		  }
 		  if (user != null) {
 			  Profiles profile = profilesRepository.findByUserId(user);
 			  if (profile == null) {
 				  Profiles newProfilePic = Profiles.builder().userId(user).build();
 				  profilesRepository.save(newProfilePic);
 				  try {
-					img.transferTo(new File("C:/OpenPose/FinPic/img/"+user.getUserEmail() + "_" + newProfilePic.getProfileNumber()+".jpg"));
+					img.transferTo(new File("C:/OpenPose/FinPic/img/"+user.getUserEmail() + "_" + newProfilePic.getProfileNumber()+"."+ext));
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
 				}
 			  }
 			  else {
 				  try {
-					img.transferTo(new File("C:/OpenPose/FinPic/img/"+user.getUserEmail() + "_" + profile.getProfileNumber()+".jpg"));
+					img.transferTo(new File("C:/OpenPose/FinPic/img/"+user.getUserEmail() + "_" + profile.getProfileNumber()+"."+ext));
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
 				}
@@ -56,7 +64,7 @@ public class ProfilesController {
 		  	}
 	  }
 	  
-	  
+	  // 프로필 정보 삽입 및 업데이트
   	  @PutMapping("/users/{userEmail}/profile")
 	  public String updateProfile(@RequestParam(required = false, value = "introduction") String introduction,
 			  @RequestParam(required = false, value = "snsLink1") String snsLink1,@RequestParam(required = false, value = "snsLink2") String snsLink2,
@@ -76,11 +84,32 @@ public class ProfilesController {
 					profile.setSnsLink3(snsLink3);
 					profilesRepository.save(profile);
 				}
-				
 				return "redirect1:/somewhere.jsp";
 			}else {
 				return "redirect:/somewhere.jsp";
 			}
 		}
-
+  	  
+  	  // 프로필 이미지 삭제
+  	  // 기본 프로필 이미지로 대체하는 방식
+  	  @PutMapping("/users/{userEmail}/profileImageDel")
+  	  public String deleteProfileImage(@PathVariable String userEmail) {
+  		  Users user = usersRepository.findByUserEmail(userEmail);
+  		  String result = "실패한 삭제.jsp";
+  		if (user != null) {
+			Profiles profile = profilesRepository.findByUserId(user);
+			if (profile != null) {
+				String[] extention = {"gif","jpg","jpeg","png"};
+				String dirPath = "C:/OpenPose/FinPic/img/"; 
+				for (String ext : extention) {
+					File img = new File(dirPath + user.getUserEmail() + "_" + profile.getProfileNumber() + "." + ext);
+					if (img.exists()==true) {
+						img.delete();
+						result = "성공적인 삭제.jsp";
+					}
+				}
+			}
+  		}
+  		return result;
+  	  }	
 }
