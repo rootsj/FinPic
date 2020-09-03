@@ -52,10 +52,5 @@ public class TagsController {
 	  public List<Tags> tags(@RequestParam("tagName") String tagName){
 		  return repository.findByTagNameContaining(tagName);
 	  }
-	  
-	  
 	  //tagRegisterDate가 24시간 이내인 경우 트렌드에 출력
-	  
-	  
-	  
 }

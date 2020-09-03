@@ -48,8 +48,7 @@ public class Users {
 	//Profiles Entity와 일대일 양방향 관계 Mapping
 	@OneToOne(mappedBy = "userId")
 	Profiles profileId;
-	
-	
+
 	public Users(long userNumber, String userName, String userEmail, String userPassword, Date userRegisterDate, List<Pictures> pictures, List<FavoritePictures> favoritePictures, Profiles profileId) {
 		this.userNumber = userNumber;
 		this.userName = userName;
@@ -60,8 +59,4 @@ public class Users {
 		this.favoritePictures = favoritePictures;
 		this.profileId = profileId;
 	}
-
-
-	
-	
 }

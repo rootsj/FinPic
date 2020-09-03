@@ -13,6 +13,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import picturesDTO.Pictures;
 import usersDTO.Users;
 
 @Builder
@@ -37,8 +38,8 @@ public class Profiles {
 	@JoinColumn(name = "USERS_ID")
 	Users userId;
 
-	public Profiles(long profileNumber, String introduction, String snsLink1, String snsLink2,
-			String snsLink3, Users userId) {
+	public Profiles(long profileNumber, String introduction, String snsLink1, String snsLink2, String snsLink3,
+			Users userId) {
 		super();
 		this.profileNumber = profileNumber;
 		this.introduction = introduction;
@@ -47,5 +48,4 @@ public class Profiles {
 		this.snsLink3 = snsLink3;
 		this.userId = userId;
 	}
-	
 }

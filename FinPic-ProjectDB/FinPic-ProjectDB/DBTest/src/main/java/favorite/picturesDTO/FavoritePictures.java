@@ -41,6 +41,4 @@ public class FavoritePictures {
 		this.userId = userId;
 		this.pictureId = pictureId;
 	}
-
-	
 }
