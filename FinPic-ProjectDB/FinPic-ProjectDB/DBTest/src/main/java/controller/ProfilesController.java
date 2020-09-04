@@ -1,9 +1,9 @@
 package controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,35 +24,48 @@ public class ProfilesController {
 	    this.profilesRepository = profilesRepository;
 	    this.usersRepository = usersRepository;
 	  }
-
+	  
+	  // 프로필 정보 전달
+	  @GetMapping("/users/{userEmail}")
+	  public Profiles getProfile(@PathVariable String userEmail) {
+		  Users user = usersRepository.findByUserEmail(userEmail);
+		  return profilesRepository.findByUserId(user);
+	  }
+	  
 	  // 프로필 사진 생성 및 업데이트
-	  @PutMapping("/users/{userEmail}/profileImage")
+	  @PutMapping("/users/{userEmail}/profileImageUpdate")
 	  public String updateProfileImage(@RequestParam("img") MultipartFile img, @PathVariable String userEmail) {
 		  Users user = usersRepository.findByUserEmail(userEmail);
-		  
-		  // 확장자 확인 작입
+		  // 확장자 확인 작업
+		  // 프론트에서도 작업 가능
 		  String fileName = img.getOriginalFilename();
-		  String ext = fileName.substring(fileName.lastIndexOf(".")+ 1);
-		  System.out.println(ext);  
-
-		  if ( !ext.equals("png") && !ext.equals("gif") && !ext.equals("jpeg") && !ext.equals("jpg")) {
-			  System.out.println("여긴아니야");
+		  String fileExt = fileName.substring(fileName.lastIndexOf(".")+ 1);
+		  String[] extList = {"gif","jpg","jpeg","png"};
+		  boolean fileBool = false;
+		  for (String ext : extList) {
+			  if (fileExt.equals(ext)) {
+				  fileBool = true;
+				  break;
+			  }
+		  }
+		  if(!fileBool) {
 			  return "잘못된 확장자 파일 업로드.jsp";
 		  }
+
 		  if (user != null) {
 			  Profiles profile = profilesRepository.findByUserId(user);
 			  if (profile == null) {
 				  Profiles newProfilePic = Profiles.builder().userId(user).build();
 				  profilesRepository.save(newProfilePic);
 				  try {
-					img.transferTo(new File("C:/OpenPose/FinPic/img/"+user.getUserEmail() + "_" + newProfilePic.getProfileNumber()+"."+ext));
+					img.transferTo(new File("C:/OpenPose/FinPic/img/"+user.getUserEmail() + "_" + newProfilePic.getProfileNumber()+"."+fileExt));
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
 				}
 			  }
 			  else {
 				  try {
-					img.transferTo(new File("C:/OpenPose/FinPic/img/"+user.getUserEmail() + "_" + profile.getProfileNumber()+"."+ext));
+					img.transferTo(new File("C:/OpenPose/FinPic/img/"+user.getUserEmail() + "_" + profile.getProfileNumber()+"."+fileExt));
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
 				}
@@ -65,7 +78,7 @@ public class ProfilesController {
 	  }
 	  
 	  // 프로필 정보 삽입 및 업데이트
-  	  @PutMapping("/users/{userEmail}/profile")
+  	  @PutMapping("/users/{userEmail}/profileUpdate")
 	  public String updateProfile(@RequestParam(required = false, value = "introduction") String introduction,
 			  @RequestParam(required = false, value = "snsLink1") String snsLink1,@RequestParam(required = false, value = "snsLink2") String snsLink2,
 			  @RequestParam(required = false, value = "snsLink3") String snsLink3,@PathVariable String userEmail) {
