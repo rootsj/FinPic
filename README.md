@@ -3,148 +3,122 @@
 # we are going to make funny webpage!
 
 # pom.xml
-<?xml version="1.0" encoding="UTF-8"?><br>
-<project xmlns="http://maven.apache.org/POM/4.0.0"<br>
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"<br>
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"><br>
-	<modelVersion>4.0.0</modelVersion><br>
-	<parent><br>
-		<groupId>org.springframework.boot</groupId><br>
-		<artifactId>spring-boot-starter-parent</artifactId><br>
-		<version>2.3.3.RELEASE</version><br>
-		<relativePath /> <!-- lookup parent from repository --><br>
-	</parent><br>
-	<groupId>com.example</groupId><br>
-	<artifactId>DBTest</artifactId><br>
-	<version>0.0.1-SNAPSHOT</version><br>
-	<packaging>war</packaging><br>
-	<name>DBTest</name><br>
-	<description>Demo project for Spring Boot</description><br><br>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.3.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>DBTest</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>DBTest</name>
+	<description>Demo project for Spring Boot</description>
+	
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
 
-	<properties><br>
-		<java.version>1.8</java.version><br>
-	</properties><br>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 
-	<dependencies><br>
-		<dependency><br>
-			<groupId>org.springframework.boot</groupId><br>
-			<artifactId>spring-boot-starter-data-jpa</artifactId><br>
-		</dependency><br>
-		<dependency><br>
-			<groupId>org.springframework.boot</groupId><br>
-			<artifactId>spring-boot-starter-web</artifactId><br>
-		</dependency><br><br>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<!-- maven으로 oracle DB driver setting시 repository 설정도 해줘야한다 구글링 ㄱㄱ <dependency> 
+			<groupId>com.oracle.database.jdbc</groupId> <artifactId>ojdbc8</artifactId> 
+			<scope>runtime</scope> </dependency> -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
 
-		<dependency><br>
-			<groupId>org.springframework.boot</groupId><br>
-			<artifactId>spring-boot-devtools</artifactId><br>
-			<scope>runtime</scope><br>
-			<optional>true</optional><br>
-		</dependency><br>
-		<!-- maven으로 oracle DB driver setting시 repository 설정도 해줘야한다 구글링 ㄱㄱ <dependency> <br>
-			<groupId>com.oracle.database.jdbc</groupId> <artifactId>ojdbc8</artifactId> <br>
-			<scope>runtime</scope> </dependency> --><br>
-		<dependency><br>
-			<groupId>org.projectlombok</groupId><br>
-			<artifactId>lombok</artifactId><br>
-			<optional>true</optional><br>
-		</dependency><br>
-		<dependency><br>
-			<groupId>org.springframework.boot</groupId><br>
-			<artifactId>spring-boot-starter-tomcat</artifactId><br>
-			<scope>provided</scope><br>
-		</dependency><br>
-		<dependency><br>
-			<groupId>org.springframework.boot</groupId><br>
-			<artifactId>spring-boot-starter-test</artifactId><br>
-			<scope>test</scope><br>
-			<exclusions><br>
-				<exclusion><br>
-					<groupId>org.junit.vintage</groupId><br>
-					<artifactId>junit-vintage-engine</artifactId><br>
-				</exclusion><br>
-			</exclusions><br>
-		</dependency><br>
-		<dependency><br>
-			<groupId>io.jsonwebtoken</groupId><br>
-			<artifactId>jjwt</artifactId><br>
-			<version>0.9.1</version><br>
-		</dependency><br><br>
+		<!-- jdk 9 이상의 경우 xml처리를 위한 jaxb-api 필요 -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.1</version>
+		</dependency>
 
-		<!-- jdk 9 이상의 경우 xml처리를 위한 jaxb-api 필요 --><br>
-		<dependency><br>
-			<groupId>javax.xml.bind</groupId><br>
-			<artifactId>jaxb-api</artifactId><br>
-			<version>2.3.1</version><br>
-		</dependency><br><br>
-
-		<dependency><br>
-			<groupId>com.jslsolucoes</groupId><br>
-			<artifactId>ojdbc6</artifactId><br>
-			<version>11.2.0.1.0</version><br>
-		</dependency><br><br>
-
-
-		<!-- jsp 사용을 위한 설정 --><br>
-		<dependency><br>
-			<groupId>org.apache.tomcat.embed</groupId><br>
-			<artifactId>tomcat-embed-jasper</artifactId><br>
-			<version>9.0.36</version><br>
-		</dependency><br><br>
+		<dependency>
+			<groupId>com.jslsolucoes</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.1.0</version>
+		</dependency>
 
 
-		<!-- jstl 라이브러리 --><br>
-		<dependency><br>
-			<groupId>javax.servlet</groupId><br>
-			<artifactId>javax.servlet-api</artifactId><br>
-			<version>3.1.0</version><br>
-		</dependency><br>
-		<dependency><br>
-			<groupId>javax.servlet</groupId><br>
-			<artifactId>jstl</artifactId><br>
-		</dependency><br>
-		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 --><br><br>
+		<!-- jsp 사용을 위한 설정 -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<version>9.0.36</version>
+		</dependency>
 
-	</dependencies><br><br>
 
-	<build><br>
-		<plugins><br>
-			<plugin><br>
-				<groupId>org.springframework.boot</groupId><br>
-				<artifactId>spring-boot-maven-plugin</artifactId><br>
-			</plugin><br>
-		</plugins><br>
-	</build><br><br>
+		<!-- jstl 라이브러리 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 
-</project><br>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
 
 # application.properties
-
-server.port=80
-
-#DataSource Setting<br>
-spring.datasource.driver-class-name=oracle.jdbc.OracleDriver<br>
-spring.datasource.url=jdbc:oracle:thin:@127.0.0.1:1521:xe<br>
-spring.datasource.username=SCOTT<br>
-spring.datasource.password=TIGER<br>
-
-
-#JPA Setting<br>
-spring.jpa.hibernate.ddl-auto=create<br>
-#spring.jpa.hibernate.ddl-auto=none<br>
-spring.jpa.generate-ddl=false<br>
-spring.jpa.show-sql=true<br>
-spring.jpa.properties.hibernate.format_sql=true<br><br>
-spring.jpa.database=oracle<br>
-spring.jpa.database-platform=org.hibernate.dialect.Oracle12cDialect<br>
-
-
-#Logging Setting<br>
-logging.level.org.hibernate=info<br>
-
-jwt.expmin=30<br>
-jwt.salt=MYSALT<br>
-
 
 
 # Vue 설정
