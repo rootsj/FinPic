@@ -13,7 +13,8 @@
     1) Manually select features<br>
     2) Router 추가 설정 나머지 default<br>
     
-  - main.js (내용)<br>
+  - main.js (내용)<br><br>
+  
 import Vue from 'vue'<br>
 import App from './App.vue'<br>
 import router from './router'<br>
