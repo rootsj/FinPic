@@ -120,6 +120,31 @@
 
 # application.properties
 
+server.port=80
+
+#DataSource Setting<br>
+spring.datasource.driver-class-name=oracle.jdbc.OracleDriver<br>
+spring.datasource.url=jdbc:oracle:thin:@127.0.0.1:1521:xe<br>
+spring.datasource.username=SCOTT<br>
+spring.datasource.password=TIGER<br><br>
+
+
+#JPA Setting<br>
+spring.jpa.hibernate.ddl-auto=create<br>
+#spring.jpa.hibernate.ddl-auto=none<br>
+spring.jpa.generate-ddl=false<br>
+spring.jpa.show-sql=true<br>
+spring.jpa.properties.hibernate.format_sql=true<br>
+spring.jpa.database=oracle<br>
+spring.jpa.database-platform=org.hibernate.dialect.Oracle12cDialect<br><br>
+
+
+#Logging Setting<br>
+logging.level.org.hibernate=info<br><br>
+
+jwt.expmin=30<br>
+jwt.salt=MYSALT<br>
+
 
 # Vue 설정
   - vue create frontend<br>
