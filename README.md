@@ -13,7 +13,11 @@
     1) Manually select features<br>
     2) Router 추가 설정 나머지 default<br>
     
-  - main.js (내용)<br><br>
+  
+  - axios 설정 내용<br>
+    1) npm axios 설치<br>
+      npm install axios
+  - main.js (내용)<br>
   
 import Vue from 'vue'<br>
 import App from './App.vue'<br>
