@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+	<div id="app">
+		email
+		<input type="email" name="email" id="email" v-model="email" >
+		<input type="password" name="login" id="pass" v-model="password" >
+		<input type="submit" @click="login" value="로그인" id="login">
+		
+		<br><hr><br>
+		사용자 정보{{message}}<br>
+		
+		<button id="getInfo" @click="getInfo">정보 확인</button>
+		<button id="logout" @click="logout">로그아웃</button>
+	
+		<br><hr><br>
+		<table border="1">
+			<tr><td id="status">1. 상태 {{status}} </td></tr>
+			<tr><td id="token">2. 토큰 {{token}} </td></tr>
+			<tr><td id="info">3. 정보 {{info}} </td></tr>
+		</table>
+	</div>
+	
+	<script>
+		const storage = window.sessionStorage;
+		
+		 var app = new Vue({
+		      el: '#app',
+		      data: {
+			       email : "a@b.com",
+			       password : "11",
+			       message: "로그인 하기",
+			       status: "",
+			       token: "",
+			       info: ""
+		      },
+		      methods:{
+		    	  //v-model 로 출력
+		    	  setInfo(status, token, info){
+		    		  this.status = status;
+		    		  this.token = token;
+		    		  this.info = info;
+		    	  },
+		    	  logout(){
+		    		  storage.setItem("jwt-auth-token", "");
+		    		  storage.setItem("login_user", "");
+		    		  this.message = "로그인해 주세요";
+		    		  this.setInfo("로그아웃 성공", "","");
+		    	  },
+		    	  getInfo(){
+		    		  axios.post("/api/info", {
+		    				email : "a@b.com",
+		    				password : "some password"
+		    			}, 
+		    			{
+		    				headers : {
+		    					"jwt-auth-token" : storage.getItem("jwt-auth-token")
+		    			    }
+		    			}
+		    		  ).then(res => {
+		    			  this.setInfo( "정보 조회 성공", res.headers.auth_token, JSON.stringify(res.data));
+		    		  }).catch(e => {
+		    			  this.setInfo("정보 조회 실패", "", e.response.data.msg);
+		    	 	  });
+		    	   },
+		    	   login(){
+		    		   storage.setItem("jwt-auth-token", "");
+			    	   storage.setItem("login_user", "");
+			    	   
+			    	   axios.post("/api/user/signin", {
+		    					email : this.email,
+		    					password : this.password
+		    				}).then(res =>{
+		    					
+		    					if(res.data.status){
+		    						
+			    					this.message = res.data.data.email + "로 로그인 되었습니다";
+			    					
+			    					console.log(res.headers["jwt-auth-token"]);
+			    					
+			    					//화면에 정보 출력
+			    					this.setInfo("성공", 	res.headers["jwt-auth-token"], JSON.stringify(res.data.data));
+			    					
+			    					//토큰 & email 정보 저장
+			    					storage.setItem("jwt-auth-token", res.headers["jwt-auth-token"]);
+			    					storage.setItem("login_user", res.data.data.email);
+			    				
+		    					}else{
+			    			
+		    						this.setInfo("", "", "");
+			    					this.message = "로그인 하세요";
+			    					alert("입력 정보를 확인");
+			    				
+		    					}
+		    					
+		    			   }).catch(e => {
+		    			        this.setInfo("실패", "", JSON.stringify(e.response || e.message));
+		    	 	       });
+		    	   },
+		    	   init(){
+		    		   if(storage.getItem("jwt-auth-token")){
+		    			   this.message = storage.getItem("login_user") + "로 로그인 되었습니다";
+		    		   }else{
+		    			   storage.setItem("jwt-auth-token", "");
+		    		   }
+		    	   }//init()
+		      }, mounted(){
+		    	  this.init();
+		      }
+		 });
+		     
+	</script>
+	
+</body>
+</html>
