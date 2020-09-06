@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.Follow;
-import com.example.demo.model.Users;
-import com.example.demo.repository.FollowRepository;
-import com.example.demo.repository.UsersRepository;
+import followDTO.Follow;
+import repositories.FollowRepository;
+import repositories.UsersRepository;
+import usersDTO.Users;
 
 @RestController
 public class FollowController {
