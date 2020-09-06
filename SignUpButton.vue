@@ -1,5 +1,5 @@
 <template>
-    <div id = "signUpButton" v-if="token != null" >
+    <div id = "signUpButton" v-if="token == null || token.length == 0" >
         <button type = "button" v-on:click = "SignUpPageLink">Sign Up</button>
     </div>
 </template>
