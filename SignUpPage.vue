@@ -49,10 +49,12 @@ export default {
         },
       })
         .then((res) => {console.log(res.data)
-        //redirect는 메인페이지로 한다 이후 메인페이지 완성되면 추가
+        //redirect 하는 곳 조건식 추가 할 것임
+        this.$router.push("http://127.0.0.1:80");
         })
         .catch(() => {});
     },
+
   },
 };
 </script>
