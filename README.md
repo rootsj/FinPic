@@ -7,23 +7,6 @@
 controller기능, 내용 확인 및 작업 가능<br>
 
 # pom.xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.3.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>DBTest</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<name>DBTest</name>
-	<description>Demo project for Spring Boot</description>
 	
 	<properties>
 		<java.version>1.8</java.version>
@@ -119,8 +102,6 @@ controller기능, 내용 확인 및 작업 가능<br>
 			</plugin>
 		</plugins>
 	</build>
-
-</project>
 
 # application.properties
 
