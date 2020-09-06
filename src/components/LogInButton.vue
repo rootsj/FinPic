@@ -11,7 +11,8 @@ export default {
     name : "LogInButton",
     methods : {
         LogInPageLink : function(){
-            this.$router.push("/log-in-page")
+            this.$router.push("/loginpage")
+            this.$router.go("/")
         }
     },
     data : function(){

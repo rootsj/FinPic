@@ -2,18 +2,21 @@
 <template>
   <div id="app">
     <div id="nav">
-      index page
+        <LogInButton/><br>
+        <LogOutButton/><br>
     </div>
     <router-view/>
   </div>
 </template>
 <script>
-
+import LogInButton from '../../components/LogInButton.vue'
+import LogOutButton from '../../components/LogOutButton.vue'
 
 export default {
     name : "App",
     components : {
-
+      LogInButton,
+      LogOutButton,
     }
 }
 </script>

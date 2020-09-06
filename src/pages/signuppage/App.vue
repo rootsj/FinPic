@@ -2,18 +2,18 @@
 <template>
   <div id="app">
     <div id="nav">
-      index page
+        <SignUpPageView/>
     </div>
     <router-view/>
   </div>
 </template>
 <script>
-
+import SignUpPageView from '../../views/SignUpPageView.vue'
 
 export default {
     name : "App",
     components : {
-
+      SignUpPageView,
     }
 }
 </script>

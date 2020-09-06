@@ -2,18 +2,22 @@
 <template>
   <div id="app">
     <div id="nav">
-      index page
+        <router-link to = "/sign-up-page">signUpPage</router-link><br>
+        <LogInPage/><br>
+        <SignUpButton/><br>
     </div>
     <router-view/>
   </div>
 </template>
 <script>
-
+import LogInPage from '../../components/LogInPage.vue'
+import SignUpButton from '../../components/SignUpButton.vue'
 
 export default {
     name : "App",
     components : {
-
+      SignUpButton,
+      LogInPage,
     }
 }
 </script>
