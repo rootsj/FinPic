@@ -48,7 +48,7 @@ public class PicturesAndTagsController {
 		  //Picture logic
 		  try {
 			  Pictures newPicture = Pictures.builder().uploadDate(registerDate).userId(userRepository.findById(userNumber).orElseThrow(()-> null)).build();
-			  img.transferTo(new File("C:/somewhere/"+newPicture.getPictureNumber()));
+			  img.transferTo(new File("C:/OpenPose/FinpickImg/"+newPicture.getPictureNumber()+".png"));
 			  pictureId = newPicture;
 			  pictureRepository.save(newPicture);
 		  } catch (IllegalStateException | IOException e) {

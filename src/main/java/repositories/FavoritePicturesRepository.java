@@ -16,4 +16,7 @@ public interface FavoritePicturesRepository extends JpaRepository<FavoritePictur
 
 	// pictureId에 해당하는 FavoritePictures 객체
 	public FavoritePictures findByPictureId(Pictures pictureId);
+
+	// userId와 pictureId에 해당하는 FavoritePictures 객체
+	public FavoritePictures findByUserIdAndPictureId(Users userId, Pictures pictureId);
 }

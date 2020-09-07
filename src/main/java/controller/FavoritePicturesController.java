@@ -31,19 +31,27 @@ public class FavoritePicturesController {
 
 	// 해당하는 유저의 즐겨찾기에 저장
 	@PostMapping("/favorite/{userEmail}/{pictureNumber}")
-	public FavoritePictures newFavorite(@PathVariable String userEmail, @PathVariable long pictureNumber) {
+	public void newFavorite(@PathVariable String userEmail, @PathVariable long pictureNumber) {
 		Users userId = usersRepository.findByUserEmail(userEmail);
 		Pictures pictureId = pictureRepository.findById(pictureNumber).orElseThrow(null);
-		FavoritePictures newFavorite = FavoritePictures.builder().pictureId(pictureId).userId(userId).build();
-		return favoriteRepository.save(newFavorite);
+		//null값 아닐때
+		if(userId != null && pictureId != null){
+			FavoritePictures favorite = favoriteRepository.findByPictureId(pictureId);
+			//중복저장 안되도록
+			if(favorite == null) {
+				FavoritePictures newFavorite = FavoritePictures.builder().pictureId(pictureId).userId(userId).build();
+				favoriteRepository.save(newFavorite);
+			}
+			
+		}
+		
 	}
 
 	// 유저 한 명의 즐겨찾기 전체 보여 주기
 	@GetMapping("/favorite/{userNumber}")
 	public List<Long> favoriteAll(@PathVariable long userNumber) {
 		ArrayList<Long> pictureNumberList = new ArrayList<>();
-		List<FavoritePictures> favoriteList = favoriteRepository
-				.findByUserId(usersRepository.findById(userNumber).orElseThrow(() -> null));
+		List<FavoritePictures> favoriteList = favoriteRepository.findByUserId(usersRepository.findById(userNumber).orElseThrow(() -> null));
 		for (FavoritePictures favorite : favoriteList) {
 			pictureNumberList.add(favorite.getPictureId().getPictureNumber());
 		}
@@ -52,10 +60,12 @@ public class FavoritePicturesController {
 
 	// 즐겨찾기 삭제
 	// Picture Number로 Picture 객체 찾고 찾은 Picture 객체로 favoritePicture 객체 찾아서 삭제
-	@DeleteMapping("/favorite/{pictureNumber}")
-	void deleteFavorite(@PathVariable Long pictureNumber) {
+	//내 아이디와 pictureNumber
+	@DeleteMapping("/favorite/{userNumber}/{pictureNumber}")
+	public void deleteFavorite(@PathVariable long userNumber, @PathVariable Long pictureNumber) {
 		Pictures pictureId = pictureRepository.findById(pictureNumber).orElseThrow(() -> null);
-		FavoritePictures favorite = favoriteRepository.findByPictureId(pictureId);
+		Users userId = usersRepository.findById(userNumber).orElseThrow(() -> null);
+		FavoritePictures favorite = favoriteRepository.findByUserIdAndPictureId(userId, pictureId);
 		favoriteRepository.delete(favorite);
 	}
 
