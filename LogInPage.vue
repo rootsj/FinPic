@@ -33,7 +33,7 @@ export default {
           console.log(storage.getItem("userNumber"));
 
           //redirect를 위한 부분인데 다른 방법은 없을까?
-          this.$router.push("/");
+          this.$router.push("/mainpage");
           this.$router.go("/");
         })
         .catch();

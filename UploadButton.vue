@@ -1,6 +1,6 @@
 <template>
-    <div id = "logInButton" v-if="token == null || token.length == 0" >
-        <button type = "button" v-on:click = "LogInPageLink">Log In</button>
+    <div id = "signUpButton" v-if="token != null && token.length != 0" >
+        <button type = "button" v-on:click = "UploadPageLink">Upload</button>
     </div>
 </template>
 
@@ -8,10 +8,10 @@
 const storage = window.sessionStorage;
 
 export default {
-    name : "LogInButton",
+    name : "UploadButton",
     methods : {
-        LogInPageLink : function(){
-            this.$router.push("/loginpage")
+        UploadPageLink : function(){
+            this.$router.push("/uploadpage")
             this.$router.go("/")
         }
     },
@@ -20,5 +20,6 @@ export default {
             token : storage.getItem("jwt-auth-token")
         }
     },
+
 }
 </script>

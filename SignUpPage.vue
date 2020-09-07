@@ -50,7 +50,8 @@ export default {
       })
         .then((res) => {console.log(res.data)
         //redirect 하는 곳 조건식 추가 할 것임
-        this.$router.push("http://127.0.0.1:80");
+        this.$router.push("/mainpage");
+        this.$router.go("/");
         })
         .catch(() => {});
     },

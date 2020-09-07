@@ -13,7 +13,7 @@ export default {
         LogOutLink : function(){
             storage.setItem("jwt-auth-token", "");
             storage.setItem("userNumber", "");
-            this.$router.push("/");
+            this.$router.push("/mainpage");
             this.$router.go("/");
         }
     },

@@ -11,7 +11,8 @@ export default {
     name : "SignUpButton",
     methods : {
         SignUpPageLink : function(){
-            this.$router.push("/sign-up-page")
+            this.$router.push("/signuppage")
+            this.$router.go("/")
         }
     },
     data : function(){
