@@ -19,8 +19,8 @@ import interceptor.JwtInterceptor;
 @SpringBootApplication
 @EnableScheduling
 @EnableJpaRepositories("repositories")
-@EntityScan(basePackages = {"usersDTO","tagsDTO","profilesDTO","picturesDTO","pictures.and.tagsDTO","followersDTO","favorite.picturesDTO","pictures.and.usersDTO"})
-@ComponentScan(basePackages = {"scheduler","interceptor","service","controller","repositories","usersDTO","tagsDTO","profilesDTO","picturesDTO","pictures.and.tagsDTO","followersDTO","favorite.picturesDTO","pictures.and.usersDTO"})
+@EntityScan(basePackages = {"usersDTO","tagsDTO","profilesDTO","picturesDTO","pictures.and.tagsDTO","followDTO","favorite.picturesDTO","pictures.and.usersDTO","config"})
+@ComponentScan(basePackages = {"scheduler","interceptor","service","controller","repositories","usersDTO","tagsDTO","profilesDTO","picturesDTO","pictures.and.tagsDTO","followDTO","favorite.picturesDTO","pictures.and.usersDTO","config"})
 public class DbTestApplication implements WebMvcConfigurer{
 	@Autowired
 	private JwtInterceptor jwtInterceptor;
