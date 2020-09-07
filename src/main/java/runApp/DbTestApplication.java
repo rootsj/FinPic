@@ -33,7 +33,7 @@ public class DbTestApplication implements WebMvcConfigurer{
 		registry.addInterceptor(jwtInterceptor).addPathPatterns("").excludePathPatterns(Arrays.asList(""));
 		
 	}
-	
+	 
 	//CORS(Cross-Origin Resource Sharing)
 	//웹 브라우저에서 외부 도메인 서버와 통신하기 위한 방식을 표준화한 스펙
 	@Override

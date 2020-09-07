@@ -44,13 +44,14 @@ public class PicturesAndTagsController {
 		  Pictures pictureId = null;
 		  Date registerDate = new Date();
 		  String tagNameList []  = tagName.replaceAll("\\p{Z}", "").split("#");
-		  
+		  String fileName = img.getOriginalFilename(); 
+		  String fileExt = fileName.substring(fileName.lastIndexOf(".")+ 1);
 		  //Picture logic
 		  try {
 			  Pictures newPicture = Pictures.builder().uploadDate(registerDate).userId(userRepository.findById(userNumber).orElseThrow(()-> null)).build();
-			  img.transferTo(new File("C:/somewhere/"+newPicture.getPictureNumber()));
-			  pictureId = newPicture;
 			  pictureRepository.save(newPicture);
+			  img.transferTo(new File("H:/FinIMG/"+newPicture.getPictureNumber()+"."+fileExt));
+			  pictureId = newPicture;
 		  } catch (IllegalStateException | IOException e) {
 			  e.printStackTrace();
 		  }
