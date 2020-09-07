@@ -2,7 +2,6 @@
 <template>
   <div id="app">
     <div id="nav">
-        <router-link to = "/sign-up-page">signUpPage</router-link><br>
         <LogInPage/><br>
         <SignUpButton/><br>
     </div>

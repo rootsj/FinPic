@@ -16,5 +16,10 @@ module.exports = {
             template: 'public/signuppage.html',
             filename: 'signuppage.out.html'
         },
+        uploadpage:{
+            entry: 'src/pages/uploadpage/main.js',
+            template: 'public/uploadpage.html',
+            filename: 'uploadpage.out.html'
+        },
     },
 };

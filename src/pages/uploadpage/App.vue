@@ -2,24 +2,18 @@
 <template>
   <div id="app">
     <div id="nav">
-        <LogInButton/><br>
-        <LogOutButton/><br>
-        <UploadButton/>
+        <UploadPage/>
     </div>
     <router-view/>
   </div>
 </template>
 <script>
-import LogInButton from '../../components/LogInButton.vue'
-import LogOutButton from '../../components/LogOutButton.vue'
-import UploadButton from '../../components/UploadButton.vue'
+import UploadPage from '../../components/UploadPage.vue'
 
 export default {
     name : "App",
     components : {
-      LogInButton,
-      LogOutButton,
-      UploadButton,
+      UploadPage,
     }
 }
 </script>
