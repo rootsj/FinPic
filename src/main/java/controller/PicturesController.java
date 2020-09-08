@@ -75,6 +75,26 @@ public class PicturesController {
 		  }
 		  return resultBase64;
 	  }
+	  
+	  //모든 사진 반환
+	  @GetMapping(value = "/all-pictures")
+	  public List<String> getAllPictures() throws IOException{
+		  List<String> resultBase64 = new ArrayList<>();
+			  File file = new File("H:/FinIMG/");
+			  File files [] = file.listFiles();
+			  for(File j : files) {
+				  String fileExtention = j.getName().substring(j.getName().lastIndexOf(".")+1);
+				  FileInputStream in = new FileInputStream(j);
+				  byte bytes[] = new byte[(int)j.length()];
+				  in.read(bytes);
+				  String encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
+				  //Vue에서 알아먹을 수 있도록 확장자명과 파일 이름을 넘겨준다
+				  resultBase64.add("data:image/"+fileExtention+";base64,"+encodedfile);
+			  }
+		 
+		  return resultBase64;
+	  }
+	  
 	  //사진 다운로드
 	  //프론트에서 사진 날짜별 정렬 후 렌더링
 }
