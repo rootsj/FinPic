@@ -1,8 +1,12 @@
 package controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,7 +53,7 @@ public class FavoritePicturesController {
 
 	// 유저 한 명의 즐겨찾기 전체 보여 주기
 	@GetMapping("/favorite/{userNumber}")
-	public List<String> favoriteAll(@PathVariable long userNumber) {
+	public List<String> favoriteAll(@PathVariable long userNumber) throws IOException {
 		List<FavoritePictures> favoriteList = favoriteRepository.findByUserId(usersRepository.findById(userNumber).orElseThrow(() -> null));
 		List<String> resultBase64 = new ArrayList<>();
 		for (FavoritePictures favorite : favoriteList) {
