@@ -29,9 +29,9 @@ public class ProfilesController {
 	}
 
 	// 프로필 정보 전달
-	@GetMapping("/users/{userEmail}")
-	public Profiles getProfile(@PathVariable String userEmail) {
-		Users user = usersRepository.findByUserEmail(userEmail);
+	@GetMapping("/users/{userNumber}")
+	public Profiles getProfile(@PathVariable long userNumber) {
+		Users user = usersRepository.findByUserNumber(userNumber);
 		return profilesRepository.findByUserId(user);
 	}
 
