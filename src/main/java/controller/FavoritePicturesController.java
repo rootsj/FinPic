@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -53,11 +55,13 @@ public class FavoritePicturesController {
 
 	// 유저 한 명의 즐겨찾기 전체 보여 주기
 	@GetMapping("/favorite/{userNumber}")
-	public List<String> favoriteAll(@PathVariable long userNumber) throws IOException {
+	public Map<String, Object> favoriteAll(@PathVariable long userNumber) throws IOException {
 		List<FavoritePictures> favoriteList = favoriteRepository.findByUserId(usersRepository.findById(userNumber).orElseThrow(() -> null));
+		Map<String, Object> resultMap = new HashMap<>();
 		List<String> resultBase64 = new ArrayList<>();
+		List<String> pictureNumberList = new ArrayList<>();
+		List<Pictures> pictureObject = new ArrayList<>();
 		for (FavoritePictures favorite : favoriteList) {
-			//favorite.getPictureId().getPictureNumber()
 			String fileName = String.valueOf(favorite.getPictureId().getPictureNumber());
 			File file = new File("H:/FinIMG/");
 			File files [] = file.listFiles();
@@ -69,11 +73,16 @@ public class FavoritePicturesController {
 					byte bytes[] = new byte[(int)j.length()];
 					in.read(bytes);
 					String encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
+					pictureObject.add(favorite.getPictureId());
+					pictureNumberList.add(fileName);
 					resultBase64.add("data:image/"+fileExtention+";base64,"+encodedfile);
 				}
 			}
 		}
-		return resultBase64;
+		resultMap.put("pictureObject",pictureObject);
+		resultMap.put("pictureNumberList", pictureNumberList);
+		resultMap.put("img", resultBase64);
+		return resultMap;
 	}
 
 	// 즐겨찾기 삭제

@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,19 +44,29 @@ public class PicturesController {
 	  //한번에 여러개 삭제하는 기능 추가 예정
 	  //관리자 기능 혹은 신고 기능으로 삭제하는 기능 추가 예정 
 	  @DeleteMapping("/pictures/{pictureNumber}")
-	  public String deletePicture(@PathVariable long pictureNumber) {
+	  public void deletePicture(@PathVariable long pictureNumber) {
 		  Pictures picture = repository.findById(pictureNumber).orElseThrow(()->null);
+		  String fileName = String.valueOf(pictureNumber);
+		  File file = new File("H:/FinIMG/");
+		  File files [] = file.listFiles();
+		  for(File i : files) {
+			  String fileExtention = i.getName().substring(i.getName().lastIndexOf(".")+1);
+			  if(i.getName().equals(fileName+"."+fileExtention)) {
+				  i.delete();
+			  }
+		  }
 		  repository.delete(picture);
-		  return "redirect:/something.jsp";
 	  }
 	  
 	  //userNumber로 Picture 검색(즉 My page에서 내가 올린 사진 출력 기능 담당)
 	  @GetMapping(value = "/pictures/{userNumber}")
-	  public List<String> getUserPictures(@PathVariable long userNumber) throws IOException{
+	  public Map<String, Object> getUserPictures(@PathVariable long userNumber) throws IOException{
 		  Users user = userRepository.findById(userNumber).orElseThrow(()->null);
 		  List<Pictures> pictures = repository.findByUserId(user);
+		  Map<String, Object> resultMap = new HashMap<>();
 		  List<String> resultBase64 = new ArrayList<>();
-		  
+		  List<String> pictureNumberList = new ArrayList<>();
+		  List<Pictures> pictureObject = new ArrayList<>();
 		  for(Pictures i : pictures) {
 			  //확장자 명을 동적으로 설정해야한다 어떻게 할까
 			  //for문을 두번 쓰는 것으로 해결해 놓았다. 다른 방법은 없을까
@@ -70,20 +82,29 @@ public class PicturesController {
 					  String encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
 					  //Vue에서 알아먹을 수 있도록 확장자명과 파일 이름을 넘겨준다
 					  resultBase64.add("data:image/"+fileExtention+";base64,"+encodedfile);
+					  pictureNumberList.add(fileName);
+					  pictureObject.add(i);
 				  }
 			  }
 		  }
-		  return resultBase64;
+		  resultMap.put("pictureObject",pictureObject);
+		  resultMap.put("pictureNumberList", pictureNumberList);
+		  resultMap.put("img", resultBase64);
+		  return resultMap;
 	  }
 	  
 	  //모든 사진 반환
 	  @GetMapping(value = "/all-pictures")
-	  public List<String> getAllPictures() throws IOException{
+	  public Map<String, Object> getAllPictures() throws IOException{
+		  Map<String, Object> resultMap = new HashMap<>();
 		  List<String> resultBase64 = new ArrayList<>();
+		  List<String> pictureNumberList = new ArrayList<>();
+		  List<Pictures> allPicturesObject = repository.findAll();
 			  File file = new File("H:/FinIMG/");
 			  File files [] = file.listFiles();
 			  for(File j : files) {
 				  String fileExtention = j.getName().substring(j.getName().lastIndexOf(".")+1);
+				  pictureNumberList.add(j.getName().substring(0, j.getName().lastIndexOf(".")));
 				  FileInputStream in = new FileInputStream(j);
 				  byte bytes[] = new byte[(int)j.length()];
 				  in.read(bytes);
@@ -91,8 +112,10 @@ public class PicturesController {
 				  //Vue에서 알아먹을 수 있도록 확장자명과 파일 이름을 넘겨준다
 				  resultBase64.add("data:image/"+fileExtention+";base64,"+encodedfile);
 			  }
-		 
-		  return resultBase64;
+			  resultMap.put("pictureObject", allPicturesObject);
+			  resultMap.put("pictureNumberList", pictureNumberList);
+			  resultMap.put("img", resultBase64);
+			  return resultMap;
 	  }
 	  
 	  //사진 다운로드
