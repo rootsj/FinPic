@@ -110,7 +110,13 @@ controller기능, 내용 확인 및 작업 가능<br>
 			<artifactId>guava</artifactId>
 			<version>26.0-jre</version>
 		</dependency>
-
+		
+		<!-- Base64로 변환하기 위한 api들을 import하는 종속성 -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>
