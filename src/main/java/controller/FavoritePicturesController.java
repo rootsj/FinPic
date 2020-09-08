@@ -49,13 +49,27 @@ public class FavoritePicturesController {
 
 	// 유저 한 명의 즐겨찾기 전체 보여 주기
 	@GetMapping("/favorite/{userNumber}")
-	public List<Long> favoriteAll(@PathVariable long userNumber) {
-		ArrayList<Long> pictureNumberList = new ArrayList<>();
+	public List<String> favoriteAll(@PathVariable long userNumber) {
 		List<FavoritePictures> favoriteList = favoriteRepository.findByUserId(usersRepository.findById(userNumber).orElseThrow(() -> null));
+		List<String> resultBase64 = new ArrayList<>();
 		for (FavoritePictures favorite : favoriteList) {
-			pictureNumberList.add(favorite.getPictureId().getPictureNumber());
+			//favorite.getPictureId().getPictureNumber()
+			String fileName = String.valueOf(favorite.getPictureId().getPictureNumber());
+			File file = new File("H:/FinIMG/");
+			File files [] = file.listFiles();
+			for(File j : files) {
+				String fileExtention = j.getName().substring(j.getName().lastIndexOf(".")+1);
+				if(j.getName().equals(fileName+"."+fileExtention)) {
+					//base64로 변환하는 부분
+					FileInputStream in = new FileInputStream(j);
+					byte bytes[] = new byte[(int)j.length()];
+					in.read(bytes);
+					String encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
+					resultBase64.add("data:image/"+fileExtention+";base64,"+encodedfile);
+				}
+			}
 		}
-		return pictureNumberList;
+		return resultBase64;
 	}
 
 	// 즐겨찾기 삭제
