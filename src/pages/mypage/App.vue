@@ -2,21 +2,17 @@
 <template>
   <div id="app">
     <div id="nav">
-        <UploadPage/>
-        <OneImage/>
+      
     </div>
     <router-view/>
   </div>
 </template>
 <script>
-import UploadPage from '../../components/UploadPage.vue'
-import OneImage from '../../components/OneImage.vue'
 
 export default {
     name : "App",
     components : {
-      UploadPage,
-      OneImage
+
     }
 }
 </script>

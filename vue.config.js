@@ -21,5 +21,10 @@ module.exports = {
             template: 'public/uploadpage.html',
             filename: 'uploadpage.out.html'
         },
+        mypage:{
+            entry: 'src/pages/mypage/main.js',
+            template: 'public/mypage.html',
+            filename: 'mypage.out.html'
+        },
     },
 };
