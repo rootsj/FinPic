@@ -26,5 +26,10 @@ module.exports = {
             template: 'public/mypage.html',
             filename: 'mypage.out.html'
         },
+        othersmypage:{
+            entry: 'src/pages/othersmypage/main.js',
+            template: 'public/othersmypage.html',
+            filename: 'othersmypage.out.html'
+        },
     },
 };

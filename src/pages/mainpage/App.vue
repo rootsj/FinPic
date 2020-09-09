@@ -2,9 +2,14 @@
 <template>
   <div id="app">
     <div id="nav">
-        <LogInButton/><br>
-        <LogOutButton/><br>
+        <MainPageButton/><br>
+        <MyPageButton/>  
+        <LogInButton/>
         <UploadButton/>
+        <LogOutButton/>
+        <!--<TagSearchBox/>-->
+        <TagSearchBoxNoAll/>
+        <AllImage/>
     </div>
     <router-view/>
   </div>
@@ -13,6 +18,11 @@
 import LogInButton from '../../components/LogInButton.vue'
 import LogOutButton from '../../components/LogOutButton.vue'
 import UploadButton from '../../components/UploadButton.vue'
+//import TagSearchBox from '../../components/TagSearchBox.vue'
+import MainPageButton from '../../components/MainPageButton.vue'
+import MyPageButton from '../../components/MyPageButton.vue'
+import TagSearchBoxNoAll from '../../components/TagSearchBoxNoAll.vue'
+import AllImage from '../../components/AllImage.vue'
 
 export default {
     name : "App",
@@ -20,7 +30,12 @@ export default {
       LogInButton,
       LogOutButton,
       UploadButton,
-    }
+      //TagSearchBox,
+      MainPageButton,
+      MyPageButton,
+      TagSearchBoxNoAll,
+      AllImage,
+    },
 }
 </script>
 <style>

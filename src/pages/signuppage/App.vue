@@ -2,6 +2,7 @@
 <template>
   <div id="app">
     <div id="nav">
+        <MainPageButton/>
         <SignUpPageView/>
     </div>
     <router-view/>
@@ -9,11 +10,13 @@
 </template>
 <script>
 import SignUpPageView from '../../views/SignUpPageView.vue'
+import MainPageButton from '../../components/MainPageButton.vue'
 
 export default {
     name : "App",
     components : {
       SignUpPageView,
+      MainPageButton,
     }
 }
 </script>

@@ -38,7 +38,8 @@ export default {
                     }
         })
         .then((res) => {console.log(res.data)
-            //올린 사진 게시글로 이동
+                this.$router.push("/mainpage");
+                this.$router.go("/");
         })
         .catch(() => {});
         },

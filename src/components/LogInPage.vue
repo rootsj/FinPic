@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         req : function(){
-                 this.$axios
+            this.$axios
         .get("http://localhost:80/users/login", {
           params: {
             userEmail: document.getElementById("userEmail").value,
@@ -29,9 +29,7 @@ export default {
         .then((res) => {
           storage.setItem("jwt-auth-token", res.headers["jwt-auth-token"]);
           storage.setItem("userNumber", res.data.data["userNumber"]);
-          console.log(res.data.data);
-          console.log(storage.getItem("userNumber"));
-
+          storage.setItem("userEmail", res.data.data["userEmail"]);
           //redirect를 위한 부분인데 다른 방법은 없을까?
           this.$router.push("/mainpage");
           this.$router.go("/");

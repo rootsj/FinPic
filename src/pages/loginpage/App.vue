@@ -2,6 +2,7 @@
 <template>
   <div id="app">
     <div id="nav">
+        <MainPageButton/><br>
         <LogInPage/><br>
         <SignUpButton/><br>
     </div>
@@ -11,12 +12,14 @@
 <script>
 import LogInPage from '../../components/LogInPage.vue'
 import SignUpButton from '../../components/SignUpButton.vue'
+import MainPageButton from '../../components/MainPageButton.vue'
 
 export default {
     name : "App",
     components : {
       SignUpButton,
       LogInPage,
+      MainPageButton,
     }
 }
 </script>
