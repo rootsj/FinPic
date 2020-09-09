@@ -7,29 +7,7 @@
 controller기능, 내용 확인 및 작업 가능<br>
 
 # pom.xml
-<<<<<<< HEAD
-	
-=======
 
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.3.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>DBTest</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<name>DBTest</name>
-	<description>Demo project for Spring Boot</description>
-
->>>>>>> e0db355533f60163c0cde66c2dc568d0f0b7664c
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -131,8 +109,7 @@ controller기능, 내용 확인 및 작업 가능<br>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>26.0-jre</version>
-		</dependency>
-<<<<<<< HEAD
+		</dependency
 		
 		<!-- Base64로 변환하기 위한 api들을 import하는 종속성 -->
 		<dependency>
@@ -140,26 +117,7 @@ controller기능, 내용 확인 및 작업 가능<br>
 			<artifactId>commons-io</artifactId>
 			<version>1.4</version>
 		</dependency>
-=======
 
->>>>>>> e0db355533f60163c0cde66c2dc568d0f0b7664c
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
-<<<<<<< HEAD
-=======
-</project>
-
-
->>>>>>> e0db355533f60163c0cde66c2dc568d0f0b7664c
 # application.properties
 
 server.port=80
