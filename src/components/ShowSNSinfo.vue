@@ -36,6 +36,8 @@ export default {
         self.snsLink1 = res.data.snsLink1;
         self.snsLink2 = res.data.snsLink2;
         self.snsLink3 = res.data.snsLink3;
+        console.log(self.introduction);
+        console.log(self.snsLink1);
       });
   },
 };
