@@ -129,7 +129,7 @@ public class UsersController {
 	}
 	
 	//Email로 유저검색 후 유저 객체 반환
-	@GetMapping("/users/{userEmail}")
+	@GetMapping("/users/profile/{userEmail}")
 	public Map<String, Object> getOneUserByEmail(@PathVariable("userEmail") String userEmail) {
 		Map<String, Object> resultMap = new HashMap<>();
 		Users userByEmail = repository.findByUserEmail(userEmail);
