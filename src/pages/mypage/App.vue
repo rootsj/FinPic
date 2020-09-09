@@ -4,6 +4,8 @@
     <div id="nav">
       <MainPageButton/>
       <TagSearchBoxNoAll/>
+      <ShowSNSinfo/>
+      <SNSupdate/>
     </div>
     <router-view/>
   </div>
@@ -11,12 +13,16 @@
 <script>
 import MainPageButton from '../../components/MainPageButton.vue'
 import TagSearchBoxNoAll from '../../components/TagSearchBoxNoAll.vue'
+import ShowSNSinfo from '../../components/ShowSNSinfo.vue'
+import SNSupdate from '../../components/SNSupdate.vue'
 
 export default {
     name : "App",
     components : {
       MainPageButton,
       TagSearchBoxNoAll,
+      ShowSNSinfo,
+      SNSupdate,
     }
 }
 </script>
