@@ -1,11 +1,17 @@
 package controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,13 +50,14 @@ public class PicturesAndTagsController {
 		  Pictures pictureId = null;
 		  Date registerDate = new Date();
 		  String tagNameList []  = tagName.replaceAll("\\p{Z}", "").split("#");
-		  
+		  String fileName = img.getOriginalFilename(); 
+		  String fileExt = fileName.substring(fileName.lastIndexOf(".")+ 1);
 		  //Picture logic
 		  try {
 			  Pictures newPicture = Pictures.builder().uploadDate(registerDate).userId(userRepository.findById(userNumber).orElseThrow(()-> null)).build();
-			  img.transferTo(new File("C:/somewhere/"+newPicture.getPictureNumber()));
-			  pictureId = newPicture;
 			  pictureRepository.save(newPicture);
+			  img.transferTo(new File("H:/FinIMG/"+newPicture.getPictureNumber()+"."+fileExt));
+			  pictureId = newPicture;
 		  } catch (IllegalStateException | IOException e) {
 			  e.printStackTrace();
 		  }
@@ -77,18 +84,40 @@ public class PicturesAndTagsController {
 	  //여러개의 태그를 동시에 검색하는 기능도 추가 예정
 	  //좋아요 추가되면 좋아요 개수로 정렬하여 출력
 	  @GetMapping("/pictures-and-tags/{tagName}")
-	  public List<Long> getPicturesByTagName(@PathVariable String tagName) {
-		  //picture가 저장된 디렉토리로 찾아가기 위한 pictureNumber들을 저장하기 위한 빈 배열 객체
-		  ArrayList<Long> pictureNumberList = new ArrayList<>();
-		  
+	  public Map<String, Object> getPicturesByTagName(@PathVariable String tagName) throws IOException {
 		  //tagName으로 검색한 tag객체를 이용하여 PictureAndTags 객체로 이루어진 리스트 생성
 		  List<PicturesAndTags> picturesAndTagslist = repository.findByTagId(tagRepository.findByTagName(tagName));
 		  
-		  //PicturesAndTags 리스트 for문을 돌리며 각 객체의 picture 객체에 저장된 pictureNumber 추출 후 저장
+		  //불러온 이미지 파일 변환한 base64 문자열 저장하기 위한 빈 배열 객체
+		  Map<String, Object> resultMap = new HashMap<>();
+		  List<String> resultBase64 = new ArrayList<>();
+		  List<String> pictureNumberList = new ArrayList<>();
+		  List<Pictures> pictureObject = new ArrayList<>();
+		  
 		  for(PicturesAndTags i : picturesAndTagslist) {
-			  pictureNumberList.add(i.getPictureId().getPictureNumber());
+			  //확장자 명을 동적으로 설정해야한다 어떻게 할까
+			  //for문을 두번 쓰는 것으로 해결해 놓았다. 다른 방법은 없을까
+			  String fileName = String.valueOf(i.getPictureId().getPictureNumber());
+			  File file = new File("H:/FinIMG/");
+			  File files [] = file.listFiles();
+			  for(File j : files) {
+				  String fileExtention = j.getName().substring(j.getName().lastIndexOf(".")+1);
+				  if(j.getName().equals(fileName+"."+fileExtention)) {
+					  //base64로 변환하는 부분
+					  FileInputStream in = new FileInputStream(j);
+					  byte bytes[] = new byte[(int)j.length()];
+					  in.read(bytes);
+					  String encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
+					  pictureNumberList.add(fileName);
+					  pictureObject.add(i.getPictureId());
+					  resultBase64.add("data:image/"+fileExtention+";base64,"+encodedfile);
+				  }
+			  }
 		  }
-		  return pictureNumberList;
+		  resultMap.put("pictureObject",pictureObject);
+		  resultMap.put("pictureNumberList", pictureNumberList);
+		  resultMap.put("img", resultBase64);
+		  return resultMap; 
 	  }
 	  
 	  //
