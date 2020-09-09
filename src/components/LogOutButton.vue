@@ -1,5 +1,5 @@
 <template>
-    <div id = "logOutButton" v-if="token != null && token.length != 0" >
+    <div id = "logOutButton" v-if="token != null && token.length != 0 && token != 'undefined'" >
         <button type = "button" v-on:click = "LogOutLink">Log Out</button>
     </div>
 </template>

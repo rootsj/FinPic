@@ -1,7 +1,7 @@
 <template>
     <div id = "reportButton">
-        <button type = "button" v-on:click = "report()" v-if="toggle">report</button>
-        <button type = "button" v-on:click = "report()" v-if="!toggle">disreport</button>
+        <button type = "button" v-on:click = "report()" v-if="toggle && token != null && token.length != 0 && token != 'undefined'">report</button>
+        <button type = "button" v-on:click = "report()" v-if="!toggle && token != null && token.length != 0 && token != 'undefined'">disreport</button>
     </div>
 </template>
 
@@ -14,6 +14,7 @@ export default {
         return {
             toggle : true,
             pictureNumber : "",
+            token : storage.getItem("jwt-auth-token"),
         }
     },
     methods: {

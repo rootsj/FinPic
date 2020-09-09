@@ -1,7 +1,7 @@
 <template>
     <div id = "likeButton">
-        <button type = "button" v-on:click = "like()" v-if="toggle">like</button>
-        <button type = "button" v-on:click = "like()" v-if="!toggle">dislike</button>
+        <button type = "button" v-on:click = "like()" v-if="toggle && token != null && token.length != 0 && token != 'undefined'">like</button>
+        <button type = "button" v-on:click = "like()" v-if="!toggle && token != null && token.length != 0 && token != 'undefined'">dislike</button>
     </div>
 </template>
 
@@ -14,6 +14,7 @@ export default {
         return {
             toggle : true,
             pictureNumber : "",
+            token : storage.getItem("jwt-auth-token"),
         }
     },
     methods: {
