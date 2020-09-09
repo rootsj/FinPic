@@ -55,6 +55,7 @@ public class Users {
 	
 	//Profiles Entity와 일대일 양방향 관계 Mapping
 	@OneToOne(mappedBy = "userId")
+	@JsonIgnore
 	Profiles profileId;
 	
 	//PicturesAndUsers Entity와 양방향관계 매핑 변수명이 Pictures Entity와 같아서 고민 필요
