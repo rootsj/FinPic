@@ -1,11 +1,11 @@
 package controller;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +14,6 @@ import profilesDTO.Profiles;
 import repositories.ProfilesRepository;
 import repositories.UsersRepository;
 import usersDTO.Users;
-
 @RestController
 public class ProfilesController {
 	private final ProfilesRepository profilesRepository;
@@ -109,12 +108,14 @@ public class ProfilesController {
 				Profiles newProfile = Profiles.builder().introduction(introduction).snsLink1(snsLink1)
 						.snsLink2(snsLink2).snsLink3(snsLink3).userId(user).build();
 				profilesRepository.save(newProfile);
+				user.setProfileId(newProfile);
 			} else {
 				profile.setIntroduction(introduction);
 				profile.setSnsLink1(snsLink1);
 				profile.setSnsLink2(snsLink2);
 				profile.setSnsLink3(snsLink3);
 				profilesRepository.save(profile);
+				user.setProfileId(profile);
 			}
 			return "redirect1:/somewhere.jsp";
 		} else {
