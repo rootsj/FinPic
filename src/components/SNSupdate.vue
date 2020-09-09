@@ -20,6 +20,7 @@ export default {
       snsLink3: "SNSlink3",
     };
   },
+
   methods: {
     Update() {
       this.$axios({

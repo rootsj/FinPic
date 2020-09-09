@@ -2,19 +2,23 @@
     <div id = "image_show_box">
         <div id = "show" v-for="(img, index) in imgSrc" v-bind:key = "index">
             <img v-bind:src="img">
+            <LikeButton/>
         </div>
     </div>
 </template>
 
 <script>
 import EventBus from "../EventBus/EventBus.js"
-
+import LikeButton from "./LikeButton.vue"
 export default {
     name : "AllImage",
     data : function(){
         return {
             imgSrc : "",
         }
+    },
+    components : {
+        LikeButton
     },
     methods: {
         req : function(){
@@ -34,6 +38,7 @@ export default {
         .then(res => {
             self.imgSrc = res.data.img;
         })
-    }
+    },
+
 }
 </script>

@@ -1,6 +1,7 @@
 <template>
     <div id = "likeButton">
-        <button type = "button" v-on:click = "like()">like</button>
+        <button type = "button" v-on:click = "like()" v-if="toggle">like</button>
+        <button type = "button" v-on:click = "like()" v-if="!toggle">dislike</button>
     </div>
 </template>
 
@@ -9,14 +10,19 @@ const storage = window.sessionStorage;
 
 export default {
     name : "LikeButton",
-    props : [
-        pictureNumber,
-    ],
+    data : function(){
+        return {
+            toggle : true,
+            pictureNumber : "",
+        }
+    },
     methods: {
         like : function(){
-            this.$axios.put("http://localhost:80/users/like/"+storage.getItem("userNumber")+"/"+this.pictureNumber)
+            let self = this;
+            this.$axios.put("http://localhost:80/like/"+storage.getItem("userNumber")+"/"+this.pictureNumber)
             .then(res => {
                 console.log(res);
+                self.toggle = !self.toggle;
             })
         }
     },
