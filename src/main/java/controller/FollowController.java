@@ -77,5 +77,11 @@ public class FollowController {
 		return followRepository.countByToUser(toUser);
 	}
 	
-	//
+	//팔로우 유무 확인
+	@GetMapping("/follow/check/{userNumber}/{userEmail}")
+	public boolean checkFollow(@PathVariable long userNumber, @PathVariable String userEmail) {
+		Users fromUser = usersRepository.findById(userNumber).orElseThrow(null);
+		Users toUser = usersRepository.findByUserEmail(userEmail);
+		return followRepository.existsByFromUserAndToUser(fromUser, toUser);
+	}
 }
