@@ -35,8 +35,7 @@
           .then((res) => {
             self.imgSrc = res.data.img;
             self.count = res.data.img.length;
-            EventBus.$emit("search",self.imgSrc)
-            console.log(res.data);
+            EventBus.$emit("search",res);
           })
           .catch();
       },
