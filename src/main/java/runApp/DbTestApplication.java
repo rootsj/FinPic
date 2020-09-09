@@ -24,7 +24,7 @@ import interceptor.JwtInterceptor;
 public class DbTestApplication implements WebMvcConfigurer{
 	@Autowired
 	private JwtInterceptor jwtInterceptor;
-	
+	   
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		System.out.println("addInterceptors() --");
