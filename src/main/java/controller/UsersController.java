@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -38,7 +39,6 @@ public class UsersController {
 	UsersController(UsersRepository repository) {
 		this.repository = repository;
 	}
-	
 	// 모든 회원 검색
 	@GetMapping("/users")
 	public List<Users> getAll() {
@@ -71,7 +71,7 @@ public class UsersController {
 		repository.delete(user);
 		return "redirect:/somewhere.jsp";
 	}
-
+	
 	// 로그인
 	@GetMapping("/users/login")
 	public Map<String, Object> userLogIn(HttpServletResponse res, @RequestParam("userEmail") String userEmail,
@@ -127,6 +127,15 @@ public class UsersController {
 		repository.save(user);
 		return "redirect:/somewhere.jsp";
 	}
-	//관리자 기능 - 강퇴기능/정지 기능/닉네임 강제 변경/패스워드 재설정/휴면 계정 처리/
 	
+	//Email로 유저검색 후 유저 객체 반환
+	@GetMapping("/users/profile/{userEmail}")
+	public Map<String, Object> getOneUserByEmail(@PathVariable("userEmail") String userEmail) {
+		Map<String, Object> resultMap = new HashMap<>();
+		Users userByEmail = repository.findByUserEmail(userEmail);
+		resultMap.put("data", userByEmail);
+		return resultMap;
+	}
+	
+	//관리자 기능 - 강퇴기능/정지 기능/닉네임 강제 변경/패스워드 재설정/휴면 계정 처리/
 }

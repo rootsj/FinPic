@@ -2,25 +2,11 @@
 
 # we are going to make funny webpage!
 
-# pom.xml
+# swagger API 문서화
+서버 실행 후 http://127.0.0.1/swagger-ui.html 접속<br>
+controller기능, 내용 확인 및 작업 가능<br>
 
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.3.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>DBTest</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<name>DBTest</name>
-	<description>Demo project for Spring Boot</description>
+# pom.xml
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -123,21 +109,14 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>26.0-jre</version>
+		</dependency
+		
+		<!-- Base64로 변환하기 위한 api들을 import하는 종속성 -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
 		</dependency>
-
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
-</project>
-
 
 # application.properties
 
@@ -165,7 +144,6 @@ logging.level.org.hibernate=info<br><br>
 
 jwt.expmin=30<br>
 jwt.salt=MYSALT<br>
-
 
 # Vue 설정
   - vue create frontend<br>
