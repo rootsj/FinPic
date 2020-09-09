@@ -3,6 +3,7 @@
         <div id = "show" v-for="(img, index) in imgSrc" v-bind:key = "index">
             <img v-bind:src="img">
             <LikeButton/>
+            <ReportButton/>
         </div>
     </div>
 </template>
@@ -10,6 +11,7 @@
 <script>
 import EventBus from "../EventBus/EventBus.js"
 import LikeButton from "./LikeButton.vue"
+import ReportButton from "./ReportButton.vue"
 export default {
     name : "AllImage",
     data : function(){
@@ -18,7 +20,8 @@ export default {
         }
     },
     components : {
-        LikeButton
+        LikeButton,
+        ReportButton
     },
     methods: {
         req : function(){
