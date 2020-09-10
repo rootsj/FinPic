@@ -1,5 +1,5 @@
 <template>
-  <div id="ShowSNSnfo">
+  <div id="ShowUserInfo">
     introduction
     {{introduction }}
     <br />
@@ -14,7 +14,7 @@
 const storage = window.sessionStorage;
 
 export default {
-  name: "ShowSNSnfo",
+  name: "ShowUserInfo",
   data() {
     return {
       introduction: "",
@@ -28,7 +28,7 @@ export default {
     this.$axios
       .get(
         "http://localhost:80/users/" +
-          storage.getItem("userNumber") +
+          storage.getItem("otherUserNumber") +
           "/profile"
       )
       .then((res) => {
@@ -36,8 +36,6 @@ export default {
         self.snsLink1 = res.data.snsLink1;
         self.snsLink2 = res.data.snsLink2;
         self.snsLink3 = res.data.snsLink3;
-        console.log(self.introduction);
-        console.log(self.snsLink1);
       });
   },
 };

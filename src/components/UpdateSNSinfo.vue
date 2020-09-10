@@ -1,5 +1,5 @@
 <template>
-  <div id="SNSupdate">
+  <div id="UpdateSNSinfo">
     <input type="text" id="introduction" v-bind:placeholder="introduction" />
     <input type="text" id="snsLink1" v-bind:placeholder="snsLink1" />
     <input type="text" id="snsLink2" v-bind:placeholder="snsLink2" />
@@ -11,7 +11,7 @@
 const storage = window.sessionStorage;
 
 export default {
-  name: "SNSupdate",
+  name: "UpdateSNSinfo",
   data() {
     return {
       introduction: "introduction",
@@ -20,12 +20,14 @@ export default {
       snsLink3: "SNSlink3",
     };
   },
-
   methods: {
     Update() {
       this.$axios({
+        url:
+          "http://localhost:80/users/" +
+          storage.getItem("userNumber") +
+          "/profileUpdate",
         method: "put",
-        url: "http://localhost:80/users/" + storage.getItem("userNumber") + "/profileUpdate",
         params: {
           introduction: document.getElementById("introduction").value,
           snsLink1: document.getElementById("snsLink1").value,
@@ -33,11 +35,13 @@ export default {
           snsLink3: document.getElementById("snsLink3").value,
         },
       })
-        .then((res) => {console.log(res.data)
-        this.$router.push("/mainpage");
-        this.$router.go("/");
+        .then(() => {
+          console.log(document.getElementById("introduction").value);
+          console.log(document.getElementById("snsLink1").value);
+          this.$router.push("/mypage");
+          this.$router.go("/");
         })
-        .catch(() => {});
+        .catch();
     },
   },
 };

@@ -1,7 +1,7 @@
 <template>
-    <div id = "image_show_box">
+    <div id = "searchBoxInMypage">
         <div id = "show" v-for="post in postList" v-bind:key = "post.postid">
-            <img v-bind:src="post.img" v-on:click = "mypage(post.pictureNumber,post.userEmail,post.userNumber)">
+            <img v-bind:src="post.img">
             <LikeButton/>
             <ReportButton/>
         </div>
@@ -10,31 +10,21 @@
 
 <script>
 const storage = window.sessionStorage;
-
 import EventBus from "../EventBus/EventBus.js"
 import LikeButton from "./LikeButton.vue"
 import ReportButton from "./ReportButton.vue"
 
 export default {
-    name : "AllImage",
+    name : "MyPageUserImage",
     data : function(){
         return {
+            otherUserNumber : storage.getItem("otherUserNumber"),
             postList : [],
         }
     },
     components : {
         LikeButton,
-        ReportButton
-    },
-    methods: {
-        mypage : function(x,y,z){
-            EventBus.$off("search");
-            storage.setItem("otherUserEmail", y);
-            storage.setItem("otherUserNumber", z);
-            EventBus.$emit("favorite", x);
-            this.$router.push("/mypage");
-            this.$router.go("/");
-        },
+        ReportButton,
     },
     mounted() {
         EventBus.$on("search", x => {
@@ -54,7 +44,7 @@ export default {
     },
     created() {
         let self = this
-        this.$axios.get("http://127.0.0.1:80/all-pictures")
+        this.$axios.get("http://127.0.0.1:80/pictures/" + self.otherUserNumber)
         .then(res => {
             for(let i = 0 ; i < res.data.pictureNumberList.length;i++){
                 self.postList.push({
@@ -65,8 +55,9 @@ export default {
                     img : res.data.img[i],
                 })
             }
-        }).catch();
+        })
     },
+
 
 }
 </script>

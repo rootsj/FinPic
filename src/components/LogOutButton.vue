@@ -11,9 +11,7 @@ export default {
     name : "LogInButton",
     methods : {
         LogOutLink : function(){
-            storage.setItem("jwt-auth-token", "");
-            storage.setItem("userNumber", "");
-            storage.setItem("userEmail","");
+            storage.clear()
             this.$router.push("/mainpage");
             this.$router.go("/");
         }
