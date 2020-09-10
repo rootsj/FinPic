@@ -22,24 +22,22 @@ export default {
   },
   methods: {
     Update() {
-      this.$axios
-        .put(
+      this.$axios({
+        url:
           "http://localhost:80/users/" +
-            storage.getItem("userNumber") +
-            "/profileUpdate",
-          {
-            params: {
-              introduction: document.getElementById("introduction").value,
-              snsLink1: document.getElementById("snsLink1").value,
-              snsLink2: document.getElementById("snsLink2").value,
-              snsLink3: document.getElementById("snsLink3").value,
-            },
-          }
-        )
+          storage.getItem("userNumber") +
+          "/profileUpdate",
+        method: "put",
+        params: {
+          introduction: document.getElementById("introduction").value,
+          snsLink1: document.getElementById("snsLink1").value,
+          snsLink2: document.getElementById("snsLink2").value,
+          snsLink3: document.getElementById("snsLink3").value,
+        },
+      })
         .then(() => {
           console.log(document.getElementById("introduction").value);
           console.log(document.getElementById("snsLink1").value);
-          console.log("안녕하세요");
           this.$router.push("/mypage");
           this.$router.go("/");
         })
