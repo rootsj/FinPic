@@ -28,7 +28,7 @@ public class FollowController {
 
 	//팔로우 등록
 	@PostMapping("/follow/{userNumber}/{userEmail}")
-	public @ResponseBody String follow(@PathVariable long userNumber, @PathVariable String userEmail) {
+	public boolean follow(@PathVariable long userNumber, @PathVariable String userEmail) {
 		Users fromUser = usersRepository.findById(userNumber).orElseThrow(null);
 		Users toUser = usersRepository.findByUserEmail(userEmail);
 
@@ -38,9 +38,9 @@ public class FollowController {
 			follow.setToUser(toUser);
 			
 			followRepository.save(follow);
-			return "팔로우 완료";
+			return followRepository.existsByFromUserAndToUser(fromUser, toUser);
 		} else {
-			return "팔로우 error";
+			return false;
 		}
 
 	}
@@ -48,12 +48,12 @@ public class FollowController {
 	
 	//팔로우 삭제
 	@DeleteMapping("/follow/{userNumber}/{userEmail}")
-	public @ResponseBody String unFollow(@PathVariable long userNumber, @PathVariable String userEmail) {
+	public boolean unFollow(@PathVariable long userNumber, @PathVariable String userEmail) {
 		Users fromUser =  usersRepository.findById(userNumber).orElseThrow(null);
 		Users toUser = usersRepository.findByUserEmail(userEmail);
 		followRepository.deleteByFromUserAndToUser(fromUser, toUser);
 
-		return "팔로우 삭제";
+		return followRepository.existsByFromUserAndToUser(fromUser, toUser);
 	}
 
 	//내가 팔로우한사람 리스트 출력
@@ -78,4 +78,12 @@ public class FollowController {
 	}
 	
 	//
+	//팔로우 유무 확인
+	@GetMapping("/follow/check/{userNumber}/{userEmail}")
+	public boolean checkFollow(@PathVariable long userNumber, @PathVariable String userEmail) {
+	    Users fromUser = usersRepository.findById(userNumber).orElseThrow(null);
+	    Users toUser = usersRepository.findByUserEmail(userEmail);
+	    System.out.println(followRepository.existsByFromUserAndToUser(fromUser, toUser));
+	    return followRepository.existsByFromUserAndToUser(fromUser, toUser);
+	 }
 }

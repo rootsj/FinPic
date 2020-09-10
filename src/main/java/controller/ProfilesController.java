@@ -56,7 +56,7 @@ public class ProfilesController {
 	}
 	// 프로필 사진 생성 및 업데이트
 	@PutMapping("/users/{userEmail}/profileImageUpdate")
-	public String updateProfileImage(@RequestParam("img") MultipartFile img, @PathVariable String userEmail) {
+	public String updateProfileImage(@RequestParam(required = false, value = "img") MultipartFile img, @PathVariable String userEmail) {
 		Users user = usersRepository.findByUserEmail(userEmail);
 		// 확장자 확인 작업
 		// 프론트에서도 작업 가능
@@ -132,9 +132,9 @@ public class ProfilesController {
 			Profiles profile = profilesRepository.findByUserId(user);
 			if (profile != null) {
 				String[] extention = { "gif", "jpg", "jpeg", "png" };
-				String dirPath = "C:/OpenPose/FinPic/img/";
-				for (String ext : extention) {
-					File img = new File(dirPath + user.getUserEmail() + "_" + profile.getProfileNumber() + "." + ext);
+	            String dirPath = "C:/OpenPose/FinPic/img/users/";
+	            for (String ext : extention) {
+	               File img = new File(dirPath + userEmail + "." + ext);
 					if (img.exists() == true) {
 						img.delete();
 						result = "성공적인 삭제.jsp";
