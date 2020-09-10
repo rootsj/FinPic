@@ -1,25 +1,25 @@
-!SESSION 2020-09-02 15:00:57.744 -----------------------------------------------
+!SESSION 2020-09-10 17:26:05.069 -----------------------------------------------
 eclipse.buildId=4.7.1.202007271558-RELEASE
 java.version=1.8.0_201
 java.vendor=Oracle Corporation
 BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
-Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -product org.springframework.boot.ide.branding.sts4 -product org.springframework.boot.ide.branding.sts4 -product org.springframework.boot.ide.branding.sts4
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springframework.boot.ide.branding.sts4 -product org.springframework.boot.ide.branding.sts4 -product org.springframework.boot.ide.branding.sts4 -data C:\OpenPose\FinPic -product org.springframework.boot.ide.branding.sts4
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springframework.boot.ide.branding.sts4
 
-!ENTRY org.eclipse.ui 2 0 2020-09-02 15:01:02.760
+!ENTRY org.eclipse.ui 2 0 2020-09-10 17:26:26.753
 !MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.bindings' extension point
-!SUBENTRY 1 org.eclipse.ui 2 0 2020-09-02 15:01:02.760
+!SUBENTRY 1 org.eclipse.ui 2 0 2020-09-10 17:26:26.753
 !MESSAGE Defining a key binding with no key sequence has no effect: plug-in='org.springframework.ide.eclipse.boot.wizard', id='org.springframework.ide.eclipse.boot.wizard.addStarersSwitchHandler'
 
-!ENTRY org.eclipse.jface 2 0 2020-09-02 15:01:05.865
+!ENTRY org.eclipse.jface 2 0 2020-09-10 17:26:32.134
 !MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
-!SUBENTRY 1 org.eclipse.jface 2 0 2020-09-02 15:01:05.865
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-09-10 17:26:32.134
 !MESSAGE A conflict occurred for CTRL+SHIFT+T:
 Binding(CTRL+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
 		Open a type in a Java editor,
 		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2a259f6f,
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@b3004e,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
@@ -27,12 +27,12 @@ Binding(CTRL+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
 		,
 		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7ccf6114,
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@559c4e06,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
 
-!ENTRY org.eclipse.osgi 4 0 2020-09-02 15:01:14.934
+!ENTRY org.eclipse.osgi 4 0 2020-09-10 17:26:41.033
 !MESSAGE An error occurred while automatically activating bundle org.springframework.tooling.boot.ls (635).
 !STACK 0
 org.osgi.framework.BundleException: Exception in org.springframework.tooling.boot.ls.BootLanguageServerPlugin.start() of bundle org.springframework.tooling.boot.ls.
@@ -496,7 +496,7 @@ Caused by: java.lang.ClassNotFoundException: org.springframework.tooling.boot.ls
 	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
 	... 222 more
 
-!ENTRY org.eclipse.equinox.registry 4 1 2020-09-02 15:01:14.962
+!ENTRY org.eclipse.equinox.registry 4 1 2020-09-10 17:26:41.050
 !MESSAGE Plug-in org.springframework.tooling.boot.ls was unable to load class org.springframework.tooling.boot.ls.BootDashInjections.
 !STACK 0
 java.lang.ClassNotFoundException: An error occurred while automatically activating bundle org.springframework.tooling.boot.ls (635).
@@ -734,12 +734,33 @@ Caused by: java.lang.ClassNotFoundException: org.springframework.tooling.boot.ls
 	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
 	... 222 more
 
-!ENTRY org.eclipse.egit.ui 2 0 2020-09-02 15:01:17.470
+!ENTRY org.eclipse.egit.ui 2 0 2020-09-10 17:26:43.225
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\asd06'. If this is
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
 
-!ENTRY org.eclipse.ui 2 2 2020-09-02 15:01:48.231
+!ENTRY org.eclipse.core.contenttype 4 0 2020-09-10 17:27:02.542
+!MESSAGE Could not create content describer for org.springframework.boot.ide.xmlconfig. Content type has been disabled.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2020-09-10 17:27:15.376
+!MESSAGE The POM for com.jslsolucoes:ojdbc6:jar:11.2.0.1.0 is missing, no dependency information available
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2020-09-10 17:27:15.383
+!MESSAGE The POM for com.jslsolucoes:ojdbc6:jar:11.2.0.1.0 is missing, no dependency information available
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2020-09-10 17:27:17.058
+!MESSAGE The POM for com.jslsolucoes:ojdbc6:jar:11.2.0.1.0 is missing, no dependency information available
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2020-09-10 17:27:26.476
+!MESSAGE The POM for com.jslsolucoes:ojdbc6:jar:11.2.0.1.0 is missing, no dependency information available
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2020-09-10 17:27:26.845
+!MESSAGE The POM for com.jslsolucoes:ojdbc6:jar:11.2.0.1.0 is missing, no dependency information available
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2020-09-10 17:27:29.386
+!MESSAGE The POM for com.jslsolucoes:ojdbc6:jar:11.2.0.1.0 is missing, no dependency information available
+
+!ENTRY org.eclipse.ui 2 2 2020-09-10 17:29:13.056
 !MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
