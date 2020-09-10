@@ -2,7 +2,12 @@
 
 # we are going to make funny webpage!
 
+# swagger API 문서화
+서버 실행 후 http://127.0.0.1/swagger-ui.html 접속<br>
+controller기능, 내용 확인 및 작업 가능<br>
+
 # pom.xml
+
 
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -22,6 +27,7 @@
 	<name>DBTest</name>
 	<description>Demo project for Spring Boot</description>
 
+	
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -125,6 +131,13 @@
 			<version>26.0-jre</version>
 		</dependency>
 
+		<!-- Base64로 변환하기 위한 api들을 import하는 종속성 -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -136,7 +149,9 @@
 		</plugins>
 	</build>
 
+
 </project>
+
 
 
 # application.properties
@@ -165,7 +180,6 @@ logging.level.org.hibernate=info<br><br>
 
 jwt.expmin=30<br>
 jwt.salt=MYSALT<br>
-
 
 # Vue 설정
   - vue create frontend<br>
