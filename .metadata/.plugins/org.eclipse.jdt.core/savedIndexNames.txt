@@ -9,7 +9,6 @@ INDEX VERSION 1.131+C:\OpenPose\FinPic\.metadata\.plugins\org.eclipse.jdt.core
 2469393919.index
 1784213029.index
 3924432333.index
-2207765891.index
 1692395065.index
 3872537624.index
 549687561.index
