@@ -2,8 +2,8 @@
     <div id = "image_show_box">
         <div id = "show" v-for="post in postList" v-bind:key = "post.postid">
             <img v-bind:src="post.img" v-on:click = "mypage(post.pictureNumber,post.userEmail,post.userNumber)">
-            <LikeButton/>
-            <ReportButton/>
+            <LikeButton :pictureNumber="post.pictureNumber"/>
+            <ReportButton :pictureNumber ="post.pictureNumber"/>
         </div>
     </div>
 </template>
