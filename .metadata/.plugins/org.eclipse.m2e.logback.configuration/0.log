@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2020-09-10 17:26:42,766 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
 2020-09-10 17:27:11,892 [Worker-8: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: com.example:DBTest:0.0.1-SNAPSHOT @ C:\OpenPose\FinPic\FinPic-dev1.02\pom.xml.
 2020-09-10 17:27:12,468 [Worker-5: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: com.example:DBTest:0.0.1-SNAPSHOT @ C:\OpenPose\FinPic\FinPic-dev1.02\pom.xml.
@@ -23,3 +24,6 @@
 2020-09-10 17:27:29,790 [Worker-0: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2020-09-10 17:27:29,801 [Worker-0: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2020-09-10 17:27:29,802 [Worker-0: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\OpenPose\FinPic\FinPic-dev1.02\src\test\resources
+=======
+2020-09-02 15:01:16,999 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+>>>>>>> a7211fcf6bd1a2608510254b94382c34b0fe9912
