@@ -8,7 +8,11 @@
 controller기능, 내용 확인 및 작업 가능<br>
 
 # pom.xml
+<<<<<<< HEAD:FinPic-Vue.dev1.01/README.md
 	
+=======
+
+>>>>>>> a194a3129057d8692cbbb1ba310fe856ac812fd9:README.md
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -110,7 +114,11 @@ controller기능, 내용 확인 및 작업 가능<br>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>26.0-jre</version>
+<<<<<<< HEAD:FinPic-Vue.dev1.01/README.md
 		</dependency>
+=======
+		</dependency
+>>>>>>> a194a3129057d8692cbbb1ba310fe856ac812fd9:README.md
 		
 		<!-- Base64로 변환하기 위한 api들을 import하는 종속성 -->
 		<dependency>
@@ -118,6 +126,7 @@ controller기능, 내용 확인 및 작업 가능<br>
 			<artifactId>commons-io</artifactId>
 			<version>1.4</version>
 		</dependency>
+<<<<<<< HEAD:FinPic-Vue.dev1.01/README.md
 	</dependencies>
 
 	<build>
@@ -128,6 +137,8 @@ controller기능, 내용 확인 및 작업 가능<br>
 			</plugin>
 		</plugins>
 	</build>
+=======
+>>>>>>> a194a3129057d8692cbbb1ba310fe856ac812fd9:README.md
 
 # application.properties
 
