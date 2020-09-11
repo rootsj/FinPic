@@ -2,8 +2,8 @@
     <div id = "searchBoxInMypage">
         <div id = "show" v-for="post in postList" v-bind:key = "post.postid">
             <img v-bind:src="post.img">
-            <LikeButton/>
-            <ReportButton/>
+            <LikeButton :pictureNumber="post.pictureNumber"/>
+            <ReportButton :pictureNumber="post.pictureNumber"/>
         </div>
     </div>
 </template>
