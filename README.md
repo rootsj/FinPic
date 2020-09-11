@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # FinPic
 
 # we are going to make funny webpage!
@@ -234,3 +235,29 @@ Favotrite : 클릭시 Favorite 새로 등록
 Download : 다운로드하게 함
 Copy link : 링크 복사해줌
 조회수 : 이 글의 like 수를 보여줌
+=======
+# signup
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+>>>>>>> 3a49c065ed7ffc869d076ce97da124d2f4f5e657
