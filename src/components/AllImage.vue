@@ -31,6 +31,7 @@ export default {
             EventBus.$off("search");
             storage.setItem("otherUserEmail", y);
             storage.setItem("otherUserNumber", z);
+            storage.setItem("pictureNumber", x);
             EventBus.$emit("favorite", x);
             this.$router.push("/mypage");
             this.$router.go("/");
