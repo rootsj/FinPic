@@ -8,13 +8,12 @@
       <ShowUserEmail />
       <ShowUserInfo />
       <button type="button" v-on:click="update()" v-if="myUserNumber == userNumber">SHOWUPDATEPAGE</button>
-      <UpdateInfo v-if="toggleUpdate" />
       <UpdateSNSinfo v-if="toggleUpdate" />
+      <UpdateInfo v-if="toggleUpdate" />
       <UpdateProfileImg v-if="toggleUpdate" />
       <DelProfileImgBtn v-if="toggleUpdate" />
-      <br />
       <DeleteID v-if="toggleUpdate" />
-      <MyPageUserImage v-if="toggleMyPicture" />
+      <ShowPost v-if="toggleMyPicture" />
       <FollowButton />
     </div>
     <router-view />
@@ -32,7 +31,7 @@ import UpdateSNSinfo from "../../components/UpdateSNSinfo.vue";
 import ShowProfileImg from "../../components/ShowProfileImg.vue";
 import DelProfileImgBtn from "../../components/DelProfileImgBtn.vue";
 import UpdateInfo from "../../components/UpdateInfo.vue";
-import MyPageUserImage from "../../components/MyPageUserImage.vue";
+import ShowPost from "../../components/ShowPost.vue";
 import DeleteID from "../../components/DeleteID.vue";
 import FollowButton from "../../components/FollowButton.vue";
 
@@ -72,7 +71,7 @@ export default {
     ShowProfileImg,
     DelProfileImgBtn,
     UpdateInfo,
-    MyPageUserImage,
+    ShowPost,
     DeleteID,
     FollowButton,
   },
