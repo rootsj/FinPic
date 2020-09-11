@@ -1,12 +1,18 @@
 package controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import followDTO.Follow;
@@ -56,13 +62,32 @@ public class FollowController {
 		return followRepository.existsByFromUserAndToUser(fromUser, toUser);
 	}
 
-	//내가 팔로우한사람 리스트 출력
-	@GetMapping("/follow/follow/{userNumber}")
-	public List<Follow> findFollowers(@PathVariable long userNumber) {
-		Users fromUser = usersRepository.findById(userNumber).orElseThrow(null);
-		List<Follow> follows = followRepository.findByFromUser(fromUser);
-		return follows;
-	}
+	   //내가 팔로우한사람 리스트 출력
+	   @GetMapping("/follow/follow/{userNumber}")
+	   public Map<String, Object> findFollowers(@PathVariable long userNumber) throws IOException {
+	      Map<String, Object> resultMap = new HashMap<>();
+	      Users fromUser = usersRepository.findById(userNumber).orElseThrow(null);
+	      List<String> resultBase64 = new ArrayList<>();
+	      List<Follow> follows = followRepository.findByFromUser(fromUser);
+	      File file = new File("C:/OpenPose/FinPic/img/users/");
+	      File files [] = file.listFiles();
+	      for(Follow i : follows) {
+	         String fileName = i.getToUser().getUserEmail();
+	         for(File j : files) {
+	            String fileExtention = j.getName().substring(j.getName().lastIndexOf(".")+1);
+	            if(j.getName().substring(0, j.getName().lastIndexOf(".")).equals(fileName)) {
+	                 FileInputStream in = new FileInputStream(j);
+	                 byte bytes[] = new byte[(int)j.length()];
+	                 in.read(bytes);
+	                 String encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
+	                 resultBase64.add("data:image/"+fileExtention+";base64,"+encodedfile);
+	            }
+	         }
+	      }
+	      resultMap.put("data", follows);
+	      resultMap.put("img", resultBase64);
+	      return resultMap;
+	   }
 
 	//내가 팔로우한 사람 카운팅
 	@GetMapping("/follow/count/{userNumber}")
