@@ -47,7 +47,7 @@ public class PicturesController {
 	  public void deletePicture(@PathVariable long pictureNumber) {
 		  Pictures picture = repository.findById(pictureNumber).orElseThrow(()->null);
 		  String fileName = String.valueOf(pictureNumber);
-		  File file = new File("H:/FinIMG/");
+		  File file = new File("C:/FinIMG/");
 		  File files [] = file.listFiles();
 		  for(File i : files) {
 			  String fileExtention = i.getName().substring(i.getName().lastIndexOf(".")+1);
@@ -71,7 +71,7 @@ public class PicturesController {
 			  //확장자 명을 동적으로 설정해야한다 어떻게 할까
 			  //for문을 두번 쓰는 것으로 해결해 놓았다. 다른 방법은 없을까
 			  String fileName = String.valueOf(i.getPictureNumber());
-			  File file = new File("H:/FinIMG/");
+			  File file = new File("C:/FinIMG/");
 			  File files [] = file.listFiles();
 			  for(File j : files) {
 				  String fileExtention = j.getName().substring(j.getName().lastIndexOf(".")+1);
@@ -100,7 +100,7 @@ public class PicturesController {
 		  List<String> resultBase64 = new ArrayList<>();
 		  List<String> pictureNumberList = new ArrayList<>();
 		  List<Pictures> allPicturesObject = repository.findAll();
-			  File file = new File("H:/FinIMG/");
+			  File file = new File("C:/FinIMG/");
 			  File files [] = file.listFiles();
 			  for(File j : files) {
 				  String fileExtention = j.getName().substring(j.getName().lastIndexOf(".")+1);
