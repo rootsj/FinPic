@@ -22,6 +22,7 @@ axios.post(url, headers : {
 		System.out.println("addCorsMappings() --");
 		registry.addMapping("/**")
 		.allowedOrigins("*")
+		.allowedMethods("*")
 		.exposedHeaders("jwt-auth-token");
 	}
 에서 exposedHeaders 부분
