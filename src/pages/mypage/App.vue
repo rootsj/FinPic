@@ -15,6 +15,7 @@
       <DeleteID v-if = "toggleUpdate"/>
       <MyPageUserImage v-if = "toggleMyPicture"/>
       <FollowButton/>
+      <FollowListButton/>
     </div>
     <router-view/>
   </div>
@@ -34,6 +35,7 @@ import UpdateInfo from "../../components/UpdateInfo.vue";
 import MyPageUserImage from "../../components/MyPageUserImage.vue";
 import DeleteID from "../../components/DeleteID.vue";
 import FollowButton from "../../components/FollowButton.vue";
+import FollowListButton from "../../components/FollowListButton.vue";
 
 export default {
     name : "App",
@@ -75,6 +77,7 @@ export default {
       MyPageUserImage,
       DeleteID,
       FollowButton,
+      FollowListButton,
     },
     created() {
       this.pictureNumber = storage.getItem("PictureNumber");
