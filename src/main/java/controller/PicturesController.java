@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import pictures.and.tagsDTO.PicturesAndTags;
 import picturesDTO.Pictures;
+import repositories.PicturesAndTagsRepository;
 import repositories.PicturesRepository;
 import repositories.UsersRepository;
 import usersDTO.Users;
@@ -28,10 +30,12 @@ import usersDTO.Users;
 public class PicturesController {
 	  private final PicturesRepository repository;
 	  private final UsersRepository userRepository;
+	  private final PicturesAndTagsRepository picturesAndTagsRepository;
 	  
-	  PicturesController(PicturesRepository repository, UsersRepository userRepository) {
+	  PicturesController(PicturesRepository repository, UsersRepository userRepository, PicturesAndTagsRepository picturesAndTagsRepository) {
 	    this.repository = repository;
 	    this.userRepository = userRepository;
+	    this.picturesAndTagsRepository = picturesAndTagsRepository;
 	  }
 	  
 	  //모든 picture 검색
@@ -117,7 +121,37 @@ public class PicturesController {
 			  resultMap.put("img", resultBase64);
 			  return resultMap;
 	  }
-	  
+		// 사진 한장 가져오기
+		@GetMapping(value = "/showpost/{picturesNumber}")
+		public Map<String, Object> getPicture(@PathVariable long picturesNumber) throws IOException {
+			Map<String, Object> resultMap = new HashMap<>();
+			Pictures picture = repository.findById(picturesNumber).orElseThrow(() -> null);
+			List<PicturesAndTags> tags = picturesAndTagsRepository.findByPictureId(picture);
+			String pictureImgBase64 = null;
+			String pictureNumber = null;
+			File file = new File("C:/FinIMG");
+			File files[] = file.listFiles();
+			String fullTags = " ";
+			for (PicturesAndTags i : tags) {
+				fullTags = fullTags + " " + "#" + i.getTagId().getTagName() + " ";
+			}
+			resultMap.put("tags", fullTags);
+			for (File f : files) {
+				String fileExt = f.getName().substring(f.getName().lastIndexOf(".") + 1);
+				if (f.getName().equals(String.valueOf(picturesNumber) + "." + fileExt)) {
+					pictureNumber = f.getName().substring(0, f.getName().lastIndexOf("."));
+					FileInputStream in = new FileInputStream(f);
+					byte bytes[] = new byte[(int) f.length()];
+					in.read(bytes);
+					String encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
+					pictureImgBase64 = "data:image/" + fileExt + ";base64," + encodedfile;
+					resultMap.put("img", pictureImgBase64);
+					in.close();
+					return resultMap;
+				}
+			}
+			return null;
+		}
 	  //사진 다운로드
 	  //프론트에서 사진 날짜별 정렬 후 렌더링
 }
