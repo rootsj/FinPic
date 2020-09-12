@@ -4,6 +4,7 @@
             <img v-bind:src="post.img">
             <LikeButton :pictureNumber="post.pictureNumber"/>
             <ReportButton :pictureNumber="post.pictureNumber"/>
+            <FavoriteButton :mypicture-number="post.pictureNumber"/>
         </div>
     </div>
 </template>
@@ -13,6 +14,7 @@ const storage = window.sessionStorage;
 import EventBus from "../EventBus/EventBus.js"
 import LikeButton from "./LikeButton.vue"
 import ReportButton from "./ReportButton.vue"
+import FavoriteButton from "./FavoriteButton.vue"
 
 export default {
     name : "MyPageUserImage",
@@ -25,6 +27,7 @@ export default {
     components : {
         LikeButton,
         ReportButton,
+        FavoriteButton
     },
     mounted() {
         EventBus.$on("search", x => {

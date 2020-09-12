@@ -16,6 +16,7 @@
       <ShowPost />
       <MyPageUserImage v-if = "toggleMyPicture"/>
       <FollowButton/>
+      <FavoriteListButton/>
       <FollowListButton/>
     </div>
     <router-view/>
@@ -36,6 +37,7 @@ import UpdateInfo from "../../components/UpdateInfo.vue";
 import MyPageUserImage from "../../components/MyPageUserImage.vue";
 import DeleteID from "../../components/DeleteID.vue";
 import FollowButton from "../../components/FollowButton.vue";
+import FavoriteListButton from "../../components/FavoriteListButton.vue";
 import FollowListButton from "../../components/FollowListButton.vue";
 import ShowPost from "../../components/ShowPost.vue";
 
@@ -79,8 +81,10 @@ export default {
       MyPageUserImage,
       DeleteID,
       FollowButton,
+      FavoriteListButton,
       FollowListButton,
       ShowPost,
+
     },
     created() {
       this.pictureNumber = storage.getItem("PictureNumber");
