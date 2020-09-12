@@ -37,7 +37,7 @@ public class FavoritePicturesController {
 
 	// 해당하는 유저의 즐겨찾기에 저장
 	@PostMapping("/favorite/{userEmail}/{pictureNumber}")
-	public void newFavorite(@PathVariable String userEmail, @PathVariable long pictureNumber) {
+	public boolean newFavorite(@PathVariable String userEmail, @PathVariable long pictureNumber) {
 		Users userId = usersRepository.findByUserEmail(userEmail);
 		Pictures pictureId = pictureRepository.findById(pictureNumber).orElseThrow(null);
 		//null값 아닐때
@@ -47,9 +47,11 @@ public class FavoritePicturesController {
 			if(favorite == null) {
 				FavoritePictures newFavorite = FavoritePictures.builder().pictureId(pictureId).userId(userId).build();
 				favoriteRepository.save(newFavorite);
+				return true;
 			}
 			
 		}
+		return false;
 		
 	}
 
@@ -89,13 +91,27 @@ public class FavoritePicturesController {
 	// Picture Number로 Picture 객체 찾고 찾은 Picture 객체로 favoritePicture 객체 찾아서 삭제
 	//내 아이디와 pictureNumber
 	@DeleteMapping("/favorite/{userNumber}/{pictureNumber}")
-	public void deleteFavorite(@PathVariable long userNumber, @PathVariable Long pictureNumber) {
+	public boolean deleteFavorite(@PathVariable long userNumber, @PathVariable Long pictureNumber) {
 		Pictures pictureId = pictureRepository.findById(pictureNumber).orElseThrow(() -> null);
 		Users userId = usersRepository.findById(userNumber).orElseThrow(() -> null);
 		FavoritePictures favorite = favoriteRepository.findByUserIdAndPictureId(userId, pictureId);
 		favoriteRepository.delete(favorite);
+		return false;
 	}
-
+	
+	   // 즐겨찾기 한지 안 한지 구분.
+	   @GetMapping("/favorite/{userNumber}/check/{pictureNumber}")
+	   public boolean checkFavorite(@PathVariable long userNumber, @PathVariable Long pictureNumber) {
+	      System.out.println("--------즐겨찾기 구분");
+	      Pictures pictureId = pictureRepository.findById(pictureNumber).orElseThrow(() -> null);
+	      Users userId = usersRepository.findById(userNumber).orElseThrow(() -> null);
+	      FavoritePictures favorite = favoriteRepository.findByUserIdAndPictureId(userId, pictureId);
+	      if (favorite == null) {
+	         return false;
+	      } else {
+	         return true;
+	      }
+	   }
 	// 확장기능.즐겨찾기 내에서 검색 (태그검색.picture)
 	// 확장기능.카테고리 저장
 
