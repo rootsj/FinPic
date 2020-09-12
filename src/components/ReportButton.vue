@@ -12,20 +12,28 @@ export default {
     name : "ReportButton",
     data : function(){
         return {
-            toggle : true,
-            pictureNumber : "",
+            toggle : "",
             token : storage.getItem("jwt-auth-token"),
         }
     },
+    props : [
+        "pictureNumber"
+    ],
     methods: {
         report : function(){
             let self = this;
             this.$axios.put("http://localhost:80/report/"+storage.getItem("userNumber")+"/"+this.pictureNumber)
             .then(res => {
-                console.log(res);
-                self.toggle = !self.toggle;
+                self.toggle = res.data;
             })
         }
+    },
+    created() {
+        let self = this;
+        this.$axios.get("http://localhost:80/report/verify/"+storage.getItem("userNumber")+"/"+this.pictureNumber)
+        .then(res => {
+            self.toggle = res.data;
+        })
     },
 }
 </script>

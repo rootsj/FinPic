@@ -2,8 +2,8 @@
     <div id = "image_show_box">
         <div id = "show" v-for="post in postList" v-bind:key = "post.postid">
             <img v-bind:src="post.img" v-on:click = "mypage(post.pictureNumber,post.userEmail,post.userNumber)">
-            <LikeButton/>
-            <ReportButton/>
+            <LikeButton :pictureNumber="post.pictureNumber"/>
+            <ReportButton :pictureNumber ="post.pictureNumber"/>
             <FavoriteButton :mypicture-number="post.pictureNumber"/>
         </div>
     </div>
@@ -34,7 +34,7 @@ export default {
             EventBus.$off("search");
             storage.setItem("otherUserEmail", y);
             storage.setItem("otherUserNumber", z);
-            //EventBus.$emit("favoriteAdd", x);
+            storage.setItem("pictureNumber", x);
             this.$router.push("/mypage");
             this.$router.go("/");
         },

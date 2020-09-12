@@ -13,9 +13,11 @@
       <UpdateProfileImg v-if = "toggleUpdate"/>
       <DelProfileImgBtn v-if = "toggleUpdate"/>
       <DeleteID v-if = "toggleUpdate"/>
+      <ShowPost />
       <MyPageUserImage v-if = "toggleMyPicture"/>
       <FollowButton/>
       <FavoriteListButton/>
+      <FollowListButton/>
     </div>
     <router-view/>
   </div>
@@ -36,8 +38,8 @@ import MyPageUserImage from "../../components/MyPageUserImage.vue";
 import DeleteID from "../../components/DeleteID.vue";
 import FollowButton from "../../components/FollowButton.vue";
 import FavoriteListButton from "../../components/FavoriteListButton.vue";
-
-
+import FollowListButton from "../../components/FollowListButton.vue";
+import ShowPost from "../../components/ShowPost.vue";
 
 export default {
     name : "App",
@@ -52,7 +54,7 @@ export default {
           toggleMyPicture : true,
           toggleFavorite : false,
           toggleFollowList : false,
-          toggleOnePicture : false,
+          toggleOnePicture : true,
       }
     },
     methods : {
@@ -80,13 +82,15 @@ export default {
       DeleteID,
       FollowButton,
       FavoriteListButton,
+      FollowListButton,
+      ShowPost,
+
     },
     created() {
       this.pictureNumber = storage.getItem("PictureNumber");
       this.userEmail = storage.getItem("otherUserEmail");
       this.userNumber = storage.getItem("otherUserNumber");
       this.myUserNumber = storage.getItem("userNumber");
-      console.log(this.userEmail);
     },
 }
 </script>
