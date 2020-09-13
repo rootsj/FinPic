@@ -1,7 +1,7 @@
 <template>
   <div id="ShowPost">
     <div id="show">
-      <img v-bind:src="img" />
+      <img class="imgStyle" v-bind:src="img" />
       <LikeButton :pictureNumber="pictureNumber" />
       <ReportButton :pictureNumber="pictureNumber" />
       {{tags}}
@@ -41,3 +41,8 @@ export default {
   },
 };
 </script>
+<style>
+.imgStyle {
+  width: 100%;
+}
+</style>

@@ -1,7 +1,13 @@
 <template>
   <div id="ShowProfileImg">
-    <img v-if="!img" src="./../assets/baseImg.png" width="175" v-on:click = "mypage()"/>
-    <img v-if="img" v-bind:src="img" width="175" v-on:click = "mypage()"/>
+    <img
+      class="ShowProfileImg"
+      v-if="!img"
+      src="./../assets/baseImg.png"
+      width="175"
+      v-on:click="mypage()"
+    />
+    <img v-if="img" v-bind:src="img" width="175" v-on:click="mypage()" />
   </div>
 </template>
 
@@ -15,11 +21,11 @@ export default {
       img: "",
     };
   },
-  methods : {
-    mypage : function(){
+  methods: {
+    mypage: function () {
       this.$router.replace("/mypage");
       this.$router.go("/");
-    }
+    },
   },
   created() {
     this.$axios
@@ -34,4 +40,8 @@ export default {
   },
 };
 </script>
-
+<style>
+.ShowProfileImg {
+  width: 30%;
+}
+</style>

@@ -46,7 +46,7 @@ export default {
   border: 0;
   border-bottom: 1px solid #555;
   background: transparent;
-  width: 40%;
+  width: 50%;
   padding: 8px 0 5px 0;
   font-size: 16px;
   color: #fff;

@@ -79,7 +79,7 @@ export default {
   top: 10px;
 }
 .filebox label {
-  width: 38.5%;
+  width: 98.5%;
   font-family: "NanumSquare_acL", sans-serif;
   display: inline-block;
   padding: 0.5em 0.75em;
@@ -110,10 +110,10 @@ export default {
 }
 
 .updateProImgButton {
-  width: 40%;
+  width: 100%;
   height: 30px;
   font-family: "NanumSquare", sans-serif;
-  font-size: 15px;
+  font-size: inherit;
   letter-spacing: 2.5px;
   font-weight: 500;
   color: white;

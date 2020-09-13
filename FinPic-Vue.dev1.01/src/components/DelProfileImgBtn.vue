@@ -24,7 +24,7 @@ export default {
 </script>
 <style>
 .DelProfileImgButton {
-  width: 40%;
+  width: 100%;
   height: 30px;
   font-family: "NanumSquare_0", sans-serif;
   font-size: 15px;

@@ -62,7 +62,7 @@ export default {
   border: 0;
   border-bottom: 1px solid #555;
   background: transparent;
-  width: 40%;
+  width: 100%;
   padding: 8px 0 5px 0;
   font-size: 16px;
   color: #fff;
@@ -73,7 +73,7 @@ export default {
   border-bottom: 1px solid #673fbf;
 }
 .updateInfoButton {
-  width: 40%;
+  width: 100%;
   height: 30px;
   font-family: "NanumSquare_0", sans-serif;
   font-size: 15px;

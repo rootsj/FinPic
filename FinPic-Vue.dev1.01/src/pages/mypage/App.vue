@@ -2,46 +2,80 @@
 <template>
   <div id="app">
     <div id="nav">
+      <div class="LogInButton">
+        <LogInButton />
+      </div>
+      <div class="MyPageButton">
+        <MyPageButton />
+      </div>
+      <div class="UploadButton">
+        <UploadButton />
+      </div>
+      <br />
+      <div class="LogOutButton">
+        <LogOutButton />
+      </div>
       <MainPageButton />
       <div class="TagSearchBoxNoAll">
         <TagSearchBoxNoAll />
       </div>
-      <ShowProfileImg />
-      <ShowUserEmail />
-      <ShowUserInfo />
-
-      <button
-        class="updateButton"
-        type="button"
-        v-on:click="update()"
-        v-if="myUserNumber == userNumber"
-      >Update Info</button>
-      <div class="UpdateProfileImg">
-        <UpdateProfileImg v-if="toggleUpdate" />
+      <div id="info" class="info">
+        <ShowProfileImg class="info-item" />
+        <ShowUserEmail class="info-item" />
+        <ShowUserInfo class="info-item" />
+        <button
+          class="updateButton"
+          type="button"
+          v-on:click="mypost()"
+          v-if="myUserNumber == userNumber"
+        >My Post</button>
+        <br />
+        <br />
+        <button
+          class="updateButton"
+          type="button"
+          v-on:click="favorite()"
+          v-if="myUserNumber == userNumber"
+        >Favorite</button>
+        <br />
+        <br />
+        <button
+          class="updateButton"
+          type="button"
+          v-on:click="update()"
+          v-if="myUserNumber == userNumber"
+        >Update Info</button>
       </div>
-      <div class="DelProfileImgBtn">
-        <DelProfileImgBtn v-if="toggleUpdate" />
+      <div id="updateInfo" class="updateInfo">
+        <div class="UpdateProfileImg">
+          <UpdateProfileImg v-if="toggleUpdate" />
+        </div>
+        <div class="DelProfileImgBtn">
+          <DelProfileImgBtn v-if="toggleUpdate" />
+        </div>
+        <div class="UpdateInfo">
+          <UpdateInfo v-if="toggleUpdate" />
+        </div>
+        <div class="UpdateSNSinfo">
+          <UpdateSNSinfo v-if="toggleUpdate" />
+        </div>
+        <div class="DeleteID">
+          <DeleteID v-if="toggleUpdate" />
+        </div>
+        <ShowPost v-if="toggleMyPicture" />
+        <MyPageUserImage v-if="toggleMyPicture" />
+        <FollowButton />
+        <FavoriteListButton />
       </div>
-      <div class="UpdateInfo">
-        <UpdateInfo v-if="toggleUpdate" />
-      </div>
-      <div class="UpdateSNSinfo">
-        <UpdateSNSinfo v-if="toggleUpdate" />
-      </div>
-      <div class="DeleteID">
-        <DeleteID v-if="toggleUpdate" />
-      </div>
-      <ShowPost v-if="toggleMyPicture" />
-      <MyPageUserImage v-if="toggleMyPicture" />
-      <FollowButton />
-      <FavoriteListButton />
     </div>
     <router-view />
   </div>
 </template>
 <script>
 const storage = window.sessionStorage;
-
+import LogInButton from "../../components/LogInButton.vue";
+import LogOutButton from "../../components/LogOutButton.vue";
+import UploadButton from "../../components/UploadButton.vue";
 import MainPageButton from "../../components/MainPageButton.vue";
 import TagSearchBoxNoAll from "../../components/TagSearchBoxNoAll.vue";
 import ShowUserInfo from "../../components/ShowUserInfo.vue";
@@ -82,8 +116,27 @@ export default {
       this.toggleFollowList = false;
       this.toggleOnePicture = false;
     },
+    mypost: function () {
+      this.toggleUpdate = false;
+      this.toggleTagPicture = false;
+      this.toggleMyPicture = true;
+      this.toggleFavorite = false;
+      this.toggleFollowList = false;
+      this.toggleOnePicture = false;
+    },
+    favorite: function () {
+      this.toggleUpdate = false;
+      this.toggleTagPicture = false;
+      this.toggleMyPicture = false;
+      this.toggleFavorite = true;
+      this.toggleFollowList = false;
+      this.toggleOnePicture = false;
+    },
   },
   components: {
+    LogInButton,
+    LogOutButton,
+    UploadButton,
     MainPageButton,
     TagSearchBoxNoAll,
     ShowUserInfo,
@@ -113,6 +166,19 @@ export default {
   text-align: center;
   padding: 30px;
 }
+.info {
+  position: absolute;
+  width: 38%;
+  top: 220px;
+  left: 10%;
+}
+.updateInfo {
+  align-content: center;
+  position: absolute;
+  top: 210px;
+  width: 40%;
+  left: 38%;
+}
 
 div.UpdateProfileImg {
   position: relative;
@@ -135,10 +201,10 @@ div.DeleteID {
 }
 
 .updateButton {
-  width: 100px;
+  width: 30%;
   height: 40px;
   font-family: "NanumSquare_0", sans-serif;
-  font-size: 5px;
+  font-size: inherit;
   letter-spacing: 2.5px;
   font-weight: 500;
   color: white;
@@ -159,5 +225,31 @@ div.DeleteID {
 @font-face {
   font-family: "NanumSquare_0";
   src: url("./../../assets/NanumSquare.ttf");
+}
+div.LogInButton {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+div.LogOutButton {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+div.MyPageButton {
+  position: absolute;
+  top: 20px;
+  right: 250px;
+}
+div.UploadButton {
+  position: absolute;
+  top: 20px;
+  right: 140px;
+}
+
+.UploadButton {
+  position: absolute;
+  top: 20px;
+  right: 250px;
 }
 </style>

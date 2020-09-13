@@ -31,7 +31,7 @@ export default {
 </script>
 <style>
 .DelButton {
-  width: 40%;
+  width: 100%;
   height: 30px;
   font-family: "NanumSquare", sans-serif;
   font-size: 15px;

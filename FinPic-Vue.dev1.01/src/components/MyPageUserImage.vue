@@ -1,7 +1,7 @@
 <template>
   <div id="searchBoxInMypage">
     <div id="show" v-for="post in postList" v-bind:key="post.postid">
-      <img v-bind:src="post.img" />
+      <img class="imgStyle" v-bind:src="post.img" />
       <LikeButton :pictureNumber="post.pictureNumber" />
       <ReportButton :pictureNumber="post.pictureNumber" />
     </div>
@@ -60,6 +60,9 @@ export default {
 };
 </script>
 <style>
+.imgStyle {
+  width: 100%;
+}
 .UpdateDelProfileImgButton {
   width: 40%;
   height: 30px;

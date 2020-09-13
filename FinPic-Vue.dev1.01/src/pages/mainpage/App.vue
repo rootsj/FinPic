@@ -84,6 +84,11 @@ export default {
   line-height: inherit;
 }
 
+div.LogInButton {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
 div.LogOutButton {
   position: absolute;
   top: 20px;
@@ -92,19 +97,14 @@ div.LogOutButton {
 div.MyPageButton {
   position: absolute;
   top: 20px;
-  right: 140px;
+  right: 250px;
 }
 div.UploadButton {
   position: absolute;
   top: 20px;
-  right: 250px;
+  right: 140px;
 }
 
-.UploadButton {
-  position: absolute;
-  top: 20px;
-  right: 250px;
-}
 .AllImage {
   position: relative;
   top: 20px;
