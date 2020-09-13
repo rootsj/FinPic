@@ -36,23 +36,21 @@ public class FavoritePicturesController {
 	}
 
 	// 해당하는 유저의 즐겨찾기에 저장
-	@PostMapping("/favorite/{userEmail}/{pictureNumber}")
-	public boolean newFavorite(@PathVariable String userEmail, @PathVariable long pictureNumber) {
-		Users userId = usersRepository.findByUserEmail(userEmail);
+	@PostMapping("/favorite/{userNumber}/{pictureNumber}")
+	public boolean newFavorite(@PathVariable long userNumber, @PathVariable long pictureNumber) {
+		Users userId = usersRepository.findById(userNumber).orElseThrow(null);
 		Pictures pictureId = pictureRepository.findById(pictureNumber).orElseThrow(null);
 		//null값 아닐때
 		if(userId != null && pictureId != null){
-			FavoritePictures favorite = favoriteRepository.findByPictureId(pictureId);
-			//중복저장 안되도록
+			FavoritePictures favorite = favoriteRepository.findByUserIdAndPictureId(userId,pictureId);
+			//중복저장 안되도록 
 			if(favorite == null) {
 				FavoritePictures newFavorite = FavoritePictures.builder().pictureId(pictureId).userId(userId).build();
 				favoriteRepository.save(newFavorite);
 				return true;
 			}
-			
 		}
 		return false;
-		
 	}
 
 	// 유저 한 명의 즐겨찾기 전체 보여 주기
@@ -65,7 +63,7 @@ public class FavoritePicturesController {
 		List<Pictures> pictureObject = new ArrayList<>();
 		for (FavoritePictures favorite : favoriteList) {
 			String fileName = String.valueOf(favorite.getPictureId().getPictureNumber());
-			File file = new File("H:/FinIMG/");
+			File file = new File("C:/FinIMG/");
 			File files [] = file.listFiles();
 			for(File j : files) {
 				String fileExtention = j.getName().substring(j.getName().lastIndexOf(".")+1);
