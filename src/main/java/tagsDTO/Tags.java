@@ -3,6 +3,7 @@ package tagsDTO;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class Tags {
 	Date registerDate;
 	
 	//PicturesAndTags Entity와 양방향관계 매핑 변수명이 Pictures Entity와 같아서 고민 필요
-	@OneToMany(mappedBy = "tagId")
+	@OneToMany(mappedBy = "tagId", cascade = CascadeType.MERGE)
 	@JsonIgnore
 	List<PicturesAndTags> picturesAndTags;
 	

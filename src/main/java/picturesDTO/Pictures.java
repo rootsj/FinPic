@@ -3,6 +3,7 @@ package picturesDTO;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -49,22 +50,22 @@ public class Pictures {
 	Users userId;
 	
 	//PicturesAndTags Entity와 양방향관계 Mapping
-	@OneToMany(mappedBy = "pictureId")
+	@OneToMany(mappedBy = "pictureId", cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	List<PicturesAndTags> picturesAndTags;
 	
 	//FavoritePictures Entity와 양방향관계 Mapping
-	@OneToMany(mappedBy = "pictureId")
+	@OneToMany(mappedBy = "pictureId", cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	List<FavoritePictures> favoritePictures;
 	
 	//PicturesAndUsers Entity와 양방향관계 Mapping
-	@OneToMany(mappedBy = "likedPictureId")
+	@OneToMany(mappedBy = "likedPictureId", cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	List<PicturesAndUsers> picturesAndUsers;
 	
 	//PicturesAndUsers Entity와 양방향관계 Mapping
-	@OneToMany(mappedBy = "reportedPictureId")
+	@OneToMany(mappedBy = "reportedPictureId", cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	List<PicturesAndUsers> reportedPicturesAndUsers;
 	public Pictures(long pictureNumber,long likeCounter,long reportCounter,Date uploadDate, Users userId, List<PicturesAndTags> picturesAndTags, List<FavoritePictures> favoritePictures, List<PicturesAndUsers> picturesAndUsers,List<PicturesAndUsers> reportedPicturesAndUsers) {
