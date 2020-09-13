@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,12 +11,8 @@ import java.util.Map;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import pictures.and.tagsDTO.PicturesAndTags;
 import picturesDTO.Pictures;
@@ -56,10 +51,13 @@ public class PicturesController {
 		  for(File i : files) {
 			  String fileExtention = i.getName().substring(i.getName().lastIndexOf(".")+1);
 			  if(i.getName().equals(fileName+"."+fileExtention)) {
+				  System.gc();
+				  System.runFinalization();
 				  i.delete();
 			  }
 		  }
 		  repository.delete(picture);
+		  
 	  }
 	  
 	  //userNumber로 Picture 검색(즉 My page에서 내가 올린 사진 출력 기능 담당)
