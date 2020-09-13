@@ -32,6 +32,12 @@ export default {
       this.$axios
         .get("http://localhost:80/pictures-and-tags/" + self.tagName)
         .then((res) => {
+          res.data.pictureNumberList.sort(function (a, b) {
+            return a - b;
+          });
+          res.data.pictureObject.sort(function (a, b) {
+            return a.pictureNumber - b.pictureNumber;
+          });
           self.imgSrc = res.data.img;
           self.count = res.data.img.length;
           EventBus.$emit("search", res);

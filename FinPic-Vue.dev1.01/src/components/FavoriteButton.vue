@@ -8,7 +8,6 @@
     >Favorites</button>
   </div>
 </template>
-
 <script>
 const storage = window.sessionStorage;
 
@@ -23,17 +22,18 @@ export default {
   },
   created: function () {
     let self = this;
+    console.log("FAVORITE BUTTON CREATED" + self.pictureNumber);
     this.$axios
       .get(
         "http://127.0.0.1:80/favorite/" +
           storage.getItem("userNumber") +
           "/check/" +
-          this.pictureNumber
+          self.pictureNumber
       )
       .then((res) => {
-        console.log(res.data);
         self.add = res.data;
-      });
+      })
+      .catch();
   },
   methods: {
     checked: function (add) {
@@ -53,7 +53,7 @@ export default {
             "http://127.0.0.1:80/favorite/" +
             storage.getItem("userNumber") +
             "/" +
-            this.pictureNumber,
+            self.pictureNumber,
         }).then((res) => {
           self.add = res.data;
         });
@@ -65,7 +65,7 @@ export default {
             "http://127.0.0.1:80/favorite/" +
               storage.getItem("userNumber") +
               "/" +
-              this.pictureNumber
+              self.pictureNumber
           )
           .then((res) => {
             self.add = res.data;
@@ -73,30 +73,32 @@ export default {
       }
     },
   },
+  watch: {
+    pictureNumber: function () {
+      let self = this;
+      console.log("FAVORITE BUTTON CREATED" + self.pictureNumber);
+      this.$axios
+        .get(
+          "http://127.0.0.1:80/favorite/" +
+            storage.getItem("userNumber") +
+            "/check/" +
+            self.pictureNumber
+        )
+        .then((res) => {
+          self.add = res.data;
+        })
+        .catch();
+    },
+  },
 };
 </script>
 <style scoped>
-button {
-  border: none;
-  color: white;
-  padding: 8px 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-  cursor: pointer;
-  border-radius: 50%px;
-  border: 3px solid white;
-}
 .checked::before {
-  /* background: black; */
-  color: white;
-  opacity: 0.5;
+  background-color: #e7e7e7;
+  color: black;
 }
 .checked {
-  /* background: linear-gradient(45deg, #333333, #626b73);
-box-shadow: 0px 4px 30px rgba(63, 65, 67, 0.6); */
-  background: linear-gradient(45deg, #d5135a, #f05924);
-  box-shadow: 0px 4px 30px rgba(223, 45, 70, 0.35);
+  background-color: #f44336;
+  color: #e7e7e7;
 }
 </style>

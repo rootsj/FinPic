@@ -52,6 +52,8 @@ public class PicturesController {
 		for (File i : files) {
 			String fileExtention = i.getName().substring(i.getName().lastIndexOf(".") + 1);
 			if (i.getName().equals(fileName + "." + fileExtention)) {
+			    System.gc();
+			    System.runFinalization();
 				i.delete();
 			}
 		}

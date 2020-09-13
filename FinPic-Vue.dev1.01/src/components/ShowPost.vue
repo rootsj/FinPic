@@ -2,8 +2,8 @@
   <div id="ShowPost">
     <div id="show">
       <img class="imgStyle" v-bind:src="img" />
-      <LikeButton :pictureNumber="pictureNumber" />
-      <ReportButton :pictureNumber="pictureNumber" />
+      <LikeButton :pictureNumber="pictureNumber" v-if="img" />
+      <ReportButton :pictureNumber="pictureNumber" v-if="img" />
       {{tags}}
     </div>
   </div>
@@ -26,7 +26,7 @@ export default {
     LikeButton,
     ReportButton,
   },
-  created() {
+  mounted() {
     let self = this;
     this.$axios
       .get("http://localhost:80/showpost/" + storage.getItem("pictureNumber"))
@@ -35,6 +35,7 @@ export default {
         self.tags = res.data.tags;
         console.log(self.img);
       });
+    storage.setItem("pictureNumber", "");
     console.log(storage.getItem("pictureNumber"));
     console.log("ShowPost");
     console.log(self.img);

@@ -202,7 +202,7 @@ div.DeleteID {
 
 .updateButton {
   width: 30%;
-  height: 40px;
+  height: 25px;
   font-family: "NanumSquare_0", sans-serif;
   font-size: inherit;
   letter-spacing: 2.5px;

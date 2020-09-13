@@ -1,19 +1,14 @@
 <template>
   <div id="favoriteList">
     <div class="wrapper">
-      <div id="favorite" v-for="post in postList" v-bind:key="post.id">
+      <div id="favorite" v-for="post in postList" v-bind:key="post.postId">
         <!--<a v-bind:href="post.link" target="_blank">-->
         <img v-bind:src="post.img" />
         <p>posted by: {{post.userEmail}}</p>
         <p>사진번호: {{post.pictureNumber}}</p>
         <!--태그 가지고 오는 걸로 바꾸기.-->
-        <p>포스트 아이디 : {{post.postId}}</p>
-        <p>포스트점아이디:{{post.id}}</p>
         <!--삭제버튼-->
-        <button
-          type="button"
-          v-on:click.stop="deleteFavorite(post.pictureNumber,post.postId)"
-        >&#x00D7;</button>
+        <button type="button" v-on:click="deleteFavorite(post.pictureNumber,post.postId)">&#x00D7;</button>
         <!--</a>-->
       </div>
     </div>
@@ -29,7 +24,6 @@ export default {
   data: function () {
     return {
       postList: [],
-      nextPostId: 0,
     };
   },
   created: function () {
@@ -39,12 +33,16 @@ export default {
   methods: {
     favoriteReq: function () {
       let self = this;
+      this.postList = [];
       this.$axios
         .get("http://127.0.0.1:80/favorite/" + storage.getItem("userNumber")) //favoritelist출력
         .then((res) => {
+          res.data.pictureObject.sort(function (a, b) {
+            return a.pictureNumber - b.pictureNumber;
+          });
           for (var i = 0; i < res.data.pictureNumberList.length; i++) {
             self.postList.push({
-              postId: this.nextPostId++,
+              postId: i,
               pictureNumber: res.data.pictureNumberList[i],
               link: "",
               userEmail: res.data.pictureObject[i].userId.userEmail,
@@ -70,20 +68,21 @@ export default {
         });
         self.postList.splice(index, 1); //postList 삭제
         EventBus.$off("favorite-req");
+        // EventBus.$emit('favoriteChange',res.data);
       });
     },
   },
 };
 </script>
 <style scoped>
-/* body {
+body {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   margin-top: 16px;
   margin-bottom: 16px;
-} */
+}
 div#favoriteList {
   display: flex;
   align-items: center;

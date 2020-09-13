@@ -8,7 +8,7 @@
       <div>
         <LikeButton :pictureNumber="post.pictureNumber" />
         <ReportButton :pictureNumber="post.pictureNumber" />
-        <FavoriteButton :mypicture-number="post.pictureNumber" />
+        <FavoriteButton :pictureNumber="post.pictureNumber" />
       </div>
     </div>
   </div>
@@ -44,15 +44,24 @@ export default {
   },
   mounted() {
     EventBus.$on("search", (x) => {
+      let self = this;
       this.postList = [];
       for (let i = 0; i < x.data.pictureNumberList.length; i++) {
-        this.postList.push({
-          postId: i,
-          pictureNumber: x.data.pictureNumberList[i],
-          userEmail: x.data.pictureObject[i].userId.userEmail,
-          userNumber: x.data.pictureObject[i].userId.userNumber,
-          img: x.data.img[i],
-        });
+        if (x.data.pictureObject[i].userId != null) {
+          self.postList.push({
+            postId: i,
+            pictureNumber: x.data.pictureNumberList[i],
+            userEmail: x.data.pictureObject[i].userId.userEmail,
+            userNumber: x.data.pictureObject[i].userId.userNumber,
+            img: x.data.img[i],
+          });
+        } else {
+          self.postList.push({
+            postId: i,
+            pictureNumber: x.data.pictureNumberList[i],
+            img: x.data.img[i],
+          });
+        }
       }
     });
   },
@@ -61,14 +70,25 @@ export default {
     this.$axios
       .get("http://127.0.0.1:80/all-pictures")
       .then((res) => {
+        res.data.pictureObject.sort(function (a, b) {
+          return a.pictureNumber - b.pictureNumber;
+        });
         for (let i = 0; i < res.data.pictureNumberList.length; i++) {
-          self.postList.push({
-            postId: i,
-            pictureNumber: res.data.pictureNumberList[i],
-            userEmail: res.data.pictureObject[i].userId.userEmail,
-            userNumber: res.data.pictureObject[i].userId.userNumber,
-            img: res.data.img[i],
-          });
+          if (res.data.pictureObject[i].userId != null) {
+            self.postList.push({
+              postId: i,
+              pictureNumber: res.data.pictureNumberList[i],
+              userEmail: res.data.pictureObject[i].userId.userEmail,
+              userNumber: res.data.pictureObject[i].userId.userNumber,
+              img: res.data.img[i],
+            });
+          } else {
+            self.postList.push({
+              postId: i,
+              pictureNumber: res.data.pictureNumberList[i],
+              img: res.data.img[i],
+            });
+          }
         }
       })
       .catch();

@@ -79,7 +79,7 @@ export default {
   top: 10px;
 }
 .filebox label {
-  width: 98.5%;
+  width: 96.5%;
   font-family: "NanumSquare_acL", sans-serif;
   display: inline-block;
   padding: 0.5em 0.75em;

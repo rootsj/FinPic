@@ -6,7 +6,7 @@
       v-on:click="like()"
       v-if="toggle && token != null && token.length != 0 && token != 'undefined'"
     >
-      <img src="./../assets/heart.png" width="45px" />
+      <img src="./../assets/grayHeart.png" width="45px" />
     </i>
     <i
       class="btn_like"
@@ -14,7 +14,7 @@
       v-on:click="like()"
       v-if="!toggle && token != null && token.length != 0 && token != 'undefined'"
     >
-      <img src="./../assets/grayHeart.png" width="45px" />
+      <img src="./../assets/heart.png" width="45px" />
     </i>
   </div>
 </template>
@@ -33,6 +33,7 @@ export default {
   props: ["pictureNumber"],
   methods: {
     like: function () {
+      console.log(this.pictureNumber);
       let self = this;
       this.$axios
         .put(
@@ -46,8 +47,26 @@ export default {
         });
     },
   },
-  created() {
+  watch: {
+    pictureNumber: function () {
+      let self = this;
+      console.log("LIKE BUTTON CREATED" + this.pictureNumber);
+      this.$axios
+        .get(
+          "http://localhost:80/like/verify/" +
+            storage.getItem("userNumber") +
+            "/" +
+            this.pictureNumber
+        )
+        .then((res) => {
+          self.toggle = res.data;
+        })
+        .catch();
+    },
+  },
+  created: function () {
     let self = this;
+    console.log("LIKE BUTTON CREATED" + this.pictureNumber);
     this.$axios
       .get(
         "http://localhost:80/like/verify/" +
@@ -57,7 +76,8 @@ export default {
       )
       .then((res) => {
         self.toggle = res.data;
-      });
+      })
+      .catch();
   },
 };
 </script>

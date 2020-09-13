@@ -1,9 +1,15 @@
 <template>
   <div id="searchBoxInMypage">
-    <div id="show" v-for="post in postList" v-bind:key="post.postid">
-      <img class="imgStyle" v-bind:src="post.img" />
+    <div id="show" v-for="post in postList" v-bind:key="post.postId">
+      <img
+        class="imgStyle"
+        v-bind:src="post.img"
+        v-on:click="mypage(post.pictureNumber,post.userEmail,post.userNumber)"
+      />
       <LikeButton :pictureNumber="post.pictureNumber" />
       <ReportButton :pictureNumber="post.pictureNumber" />
+      <FavoriteButton :pictureNumber="post.pictureNumber" />
+      <DeleteMyImg :pictureNumber="post.pictureNumber" />
     </div>
   </div>
 </template>
@@ -13,6 +19,8 @@ const storage = window.sessionStorage;
 import EventBus from "../EventBus/EventBus.js";
 import LikeButton from "./LikeButton.vue";
 import ReportButton from "./ReportButton.vue";
+import FavoriteButton from "./FavoriteButton.vue";
+import DeleteMyImg from "./DeleteMyImg.vue";
 
 export default {
   name: "MyPageUserImage",
@@ -25,10 +33,17 @@ export default {
   components: {
     LikeButton,
     ReportButton,
+    FavoriteButton,
+    DeleteMyImg,
   },
   mounted() {
     EventBus.$on("search", (x) => {
+      console.log("-----------");
       this.postList = [];
+      x.data.pictureObject.sort(function (a, b) {
+        return a.pictureNumber - b.pictureNumber;
+      });
+      console.log(x);
       for (let i = 0; i < x.data.pictureNumberList.length; i++) {
         this.postList.push({
           postId: i,
@@ -45,6 +60,10 @@ export default {
     this.$axios
       .get("http://127.0.0.1:80/pictures/" + self.otherUserNumber)
       .then((res) => {
+        this.postList = [];
+        res.data.pictureObject.sort(function (a, b) {
+          return a.pictureNumber - b.pictureNumber;
+        });
         for (let i = 0; i < res.data.pictureNumberList.length; i++) {
           self.postList.push({
             postId: i,
@@ -55,7 +74,16 @@ export default {
           });
         }
       });
-    console.log("MyPageUserImage");
+  },
+  methods: {
+    mypage: function (x, y, z) {
+      EventBus.$off("search");
+      storage.setItem("otherUserEmail", y);
+      storage.setItem("otherUserNumber", z);
+      storage.setItem("pictureNumber", x);
+      this.$router.push("/mypage");
+      this.$router.go("/");
+    },
   },
 };
 </script>
