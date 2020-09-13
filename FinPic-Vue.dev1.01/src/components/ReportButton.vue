@@ -1,19 +1,19 @@
 <template>
   <div id="reportButton">
     <i
-      type="button"
+      class="fa fa-warning"
+      style="position:relative;right:2px;font-size:30px;color:white"
       v-on:click="report()"
       v-if="toggle && token != null && token.length != 0 && token != 'undefined'"
-    >
-      <img src="./../assets/grayCaution.png" width="40px" />
-    </i>
+    ></i>
     <i
-      type="button"
+      class="fa fa-warning"
+      style="font-size:30px;color:#FFBB00"
       v-on:click="report()"
       v-if="!toggle && token != null && token.length != 0 && token != 'undefined'"
-    >
-      <img src="./../assets/caution.png" width="40px" />
-    </i>
+    ></i>
+    <!-- <button type = "button" v-on:click = "report()" v-if="toggle && token != null && token.length != 0 && token != 'undefined'">report</button> -->
+    <!-- <button type = "button" v-on:click = "report()" v-if="!toggle && token != null && token.length != 0 && token != 'undefined'">disreport</button> -->
   </div>
 </template>
 
@@ -78,3 +78,7 @@ export default {
   },
 };
 </script>
+<style scoped>
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url("https://fonts.googleapis.com/css?family=Raleway:200");
+</style>

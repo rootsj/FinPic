@@ -1,15 +1,19 @@
 <template>
-  <div id="searchBoxInMypage">
-    <div id="show" v-for="post in postList" v-bind:key="post.postId">
-      <img
-        class="imgStyle"
-        v-bind:src="post.img"
-        v-on:click="mypage(post.pictureNumber,post.userEmail,post.userNumber)"
-      />
-      <LikeButton :pictureNumber="post.pictureNumber" />
-      <ReportButton :pictureNumber="post.pictureNumber" />
-      <FavoriteButton :pictureNumber="post.pictureNumber" />
-      <DeleteMyImg :pictureNumber="post.pictureNumber" />
+  <div id="searchBoxInMypage" class="mypageimgContainer">
+    <div class="wrapper">
+      <div class="mypageimg" id="show" v-for="post in postList" v-bind:key="post.postId">
+        <img
+          class="pageImg"
+          v-bind:src="post.img"
+          v-on:click="mypage(post.pictureNumber,post.userEmail,post.userNumber)"
+        />
+        <div class="userBtn">
+          <LikeButton :pictureNumber="post.pictureNumber" />
+          <ReportButton :pictureNumber="post.pictureNumber" />
+          <FavoriteButton :pictureNumber="post.pictureNumber" />
+          <DeleteMyImg style="position:relative;left:5px;" :pictureNumber="post.pictureNumber" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -87,36 +91,40 @@ export default {
   },
 };
 </script>
-<style>
-.imgStyle {
+<style scoped>
+.mypageimgContainer {
+  position: absolute;
+  width: 120%;
+  left: 0%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.wrapper {
+  display: flex;
   width: 100%;
+  flex-wrap: wrap;
 }
-.UpdateDelProfileImgButton {
-  width: 40%;
-  height: 30px;
-  font-family: "NanumSquare_0", sans-serif;
-  font-size: 15px;
-  letter-spacing: 2.5px;
-  font-weight: 500;
-  color: white;
-  background-color: #323232;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
-  outline: none;
+.mypageimg {
+  max-width: 25%;
+  margin: 2%;
+  margin-bottom: 5%;
+  transition: 0.15s all ease-in-out;
+}
+
+.userBtn {
   position: relative;
-  top: 10px;
+  left: 20%;
+  width: 30%;
+  display: flex;
 }
-.DelProfileImgButton:hover {
-  background-color: #fff;
-  box-shadow: 0px 15px 20px rgba(103, 63, 191, 0.4);
-  color: #323232;
-  transform: translateY(-7px);
+.pageImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-@font-face {
-  font-family: "NanumSquare_0";
-  src: url("./../assets/NanumSquare.ttf");
+.pageImg:hover {
+  transform: scale(1.05);
 }
 </style>

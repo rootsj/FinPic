@@ -31,13 +31,7 @@
         >My Post</button>
         <br />
         <br />
-        <button
-          class="updateButton"
-          type="button"
-          v-on:click="favorite()"
-          v-if="myUserNumber == userNumber"
-        >Favorite</button>
-        <br />
+        <FavoriteListButton />
         <br />
         <button
           class="updateButton"
@@ -46,7 +40,7 @@
           v-if="myUserNumber == userNumber"
         >Update Info</button>
       </div>
-      <div id="updateInfo" class="updateInfo">
+      <div id="content" class="content">
         <div class="UpdateProfileImg">
           <UpdateProfileImg v-if="toggleUpdate" />
         </div>
@@ -64,8 +58,7 @@
         </div>
         <ShowPost v-if="toggleMyPicture" />
         <MyPageUserImage v-if="toggleMyPicture" />
-        <FollowButton />
-        <FavoriteListButton />
+        <FavoriteList v-if="toggleFavorite" />
       </div>
     </div>
     <router-view />
@@ -87,9 +80,10 @@ import DelProfileImgBtn from "../../components/DelProfileImgBtn.vue";
 import UpdateInfo from "../../components/UpdateInfo.vue";
 import ShowPost from "../../components/ShowPost.vue";
 import DeleteID from "../../components/DeleteID.vue";
-import FollowButton from "../../components/FollowButton.vue";
 import MyPageUserImage from "../../components/MyPageUserImage.vue";
 import FavoriteListButton from "../../components/FavoriteListButton.vue";
+import FavoriteList from "../../components/FavoriteList.vue";
+import EventBus from "../../EventBus/EventBus.js";
 
 export default {
   name: "App",
@@ -148,15 +142,23 @@ export default {
     UpdateInfo,
     ShowPost,
     DeleteID,
-    FollowButton,
     MyPageUserImage,
     FavoriteListButton,
+    FavoriteList,
   },
   created() {
     this.pictureNumber = storage.getItem("PictureNumber");
     this.userEmail = storage.getItem("otherUserEmail");
     this.userNumber = storage.getItem("otherUserNumber");
     this.myUserNumber = storage.getItem("userNumber");
+    EventBus.$on("favoriteToggle", (x) => {
+      this.toggleUpdate = x;
+      this.toggleTagPicture = x;
+      this.toggleMyPicture = x;
+      this.toggleFavorite = true;
+      this.toggleFollowList = x;
+      this.toggleOnePicture = x;
+    });
     console.log(this.userEmail);
   },
 };
@@ -172,7 +174,7 @@ export default {
   top: 220px;
   left: 10%;
 }
-.updateInfo {
+.content {
   align-content: center;
   position: absolute;
   top: 210px;

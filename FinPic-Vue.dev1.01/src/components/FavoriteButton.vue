@@ -1,11 +1,13 @@
 <template>
   <div id="favoriteButton">
-    <button
-      type="button"
+    <i
+      class="fa fa-heart"
+      style="font-size:30px;color:white"
       v-bind:class="checked(add)"
       v-if="token != null && token.length != 0 && token != 'undefined'"
       v-on:click="favoriteAdd(add)"
-    >Favorites</button>
+    ></i>
+    <!-- <button type = "button" v-bind:class="checked(add)" v-if="token != null && token.length != 0 && token != 'undefined'" v-on:click = "favoriteAdd(add)">Favorites</button> -->
   </div>
 </template>
 <script>
@@ -93,12 +95,9 @@ export default {
 };
 </script>
 <style scoped>
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url("https://fonts.googleapis.com/css?family=Raleway:200");
 .checked::before {
-  background-color: #e7e7e7;
-  color: black;
-}
-.checked {
-  background-color: #f44336;
-  color: #e7e7e7;
+  color: #ed0000;
 }
 </style>

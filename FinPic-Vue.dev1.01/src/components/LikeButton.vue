@@ -1,21 +1,21 @@
 <template>
   <div id="likeButton">
     <i
-      class="btn_like"
-      type="button"
+      class="fa fa-thumbs-up"
+      style="position:relative;right:3px;font-size:30px;color:#0500A5"
       v-on:click="like()"
       v-if="toggle && token != null && token.length != 0 && token != 'undefined'"
-    >
-      <img src="./../assets/grayHeart.png" width="45px" />
-    </i>
+    ></i>
+
     <i
-      class="btn_like"
-      type="button"
+      class="fa fa-thumbs-up"
+      style="position:relative;right:3px;font-size:30px;color:white"
       v-on:click="like()"
       v-if="!toggle && token != null && token.length != 0 && token != 'undefined'"
-    >
-      <img src="./../assets/heart.png" width="45px" />
-    </i>
+    ></i>
+
+    <!-- <button type = "button" v-on:click = "like()" v-if="toggle && token != null && token.length != 0 && token != 'undefined'">like</button> -->
+    <!-- <button type = "button" v-on:click = "like()" v-if="!toggle && token != null && token.length != 0 && token != 'undefined'">dislike</button> -->
   </div>
 </template>
 
@@ -81,3 +81,7 @@ export default {
   },
 };
 </script>
+<style scoped>
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url("https://fonts.googleapis.com/css?family=Raleway:200");
+</style>

@@ -1,10 +1,12 @@
 <template>
   <div id="DeleteMyImg">
-    <button
+    <i
+      class="fa fa-trash"
+      style="position:relative;left:1px;font-size:30px;color:#8C8C8C"
       type="button"
       v-on:click="DeleteImg"
       v-if="token != null && token.length != 0 && token != 'undefined'"
-    >Delete</button>
+    ></i>
   </div>
 </template>
 <script>
@@ -34,3 +36,7 @@ export default {
   },
 };
 </script>
+<style scoped>
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url("https://fonts.googleapis.com/css?family=Raleway:200");
+</style>

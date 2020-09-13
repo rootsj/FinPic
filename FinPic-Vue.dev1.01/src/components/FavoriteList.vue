@@ -1,15 +1,19 @@
 <template>
   <div id="favoriteList">
     <div class="wrapper">
-      <div id="favorite" v-for="post in postList" v-bind:key="post.postId">
-        <!--<a v-bind:href="post.link" target="_blank">-->
-        <img v-bind:src="post.img" />
-        <p>posted by: {{post.userEmail}}</p>
-        <p>사진번호: {{post.pictureNumber}}</p>
-        <!--태그 가지고 오는 걸로 바꾸기.-->
-        <!--삭제버튼-->
-        <button type="button" v-on:click="deleteFavorite(post.pictureNumber,post.postId)">&#x00D7;</button>
-        <!--</a>-->
+      <div id="favorite" v-for="post in postList" v-bind:key="post.id">
+        <button class="deletebtn" v-on:click.stop="deleteFavorite(post.pictureNumber,post.postId)">
+          <i class="fa fa-close"></i>
+        </button>
+        <img
+          class="favoriteListImgStyle"
+          v-bind:src="post.img"
+          v-on:click="mypage(post.pictureNumber,post.userEmail,post.userNumber)"
+        />
+        <div id="postinfo">
+          <p>posted by: {{post.userEmail}}</p>
+          <p>사진번호: {{post.pictureNumber}}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -24,14 +28,17 @@ export default {
   data: function () {
     return {
       postList: [],
+      dummy: 0,
     };
   },
   created: function () {
+    this.dummy = 1;
     console.log("favoritelist-created");
     EventBus.$on("favorite-req", this.favoriteReq);
   },
-  methods: {
-    favoriteReq: function () {
+  watch: {
+    dummy: function () {
+      console.log("------FAVORITE REQ -------");
       let self = this;
       this.postList = [];
       this.$axios
@@ -45,12 +52,46 @@ export default {
               postId: i,
               pictureNumber: res.data.pictureNumberList[i],
               link: "",
+              userNumber: res.data.pictureObject[i].userId.userNumber,
               userEmail: res.data.pictureObject[i].userId.userEmail,
               img: res.data.img[i],
             });
           }
           console.log(res.data);
         });
+    },
+  },
+  methods: {
+    favoriteReq: function () {
+      console.log("------FAVORITE REQ -------");
+      let self = this;
+      this.postList = [];
+      this.$axios
+        .get("http://127.0.0.1:80/favorite/" + storage.getItem("userNumber")) //favoritelist출력
+        .then((res) => {
+          res.data.pictureObject.sort(function (a, b) {
+            return a.pictureNumber - b.pictureNumber;
+          });
+          for (var i = 0; i < res.data.pictureNumberList.length; i++) {
+            self.postList.push({
+              postId: i,
+              pictureNumber: res.data.pictureNumberList[i],
+              link: "",
+              userNumber: res.data.pictureObject[i].userId.userNumber,
+              userEmail: res.data.pictureObject[i].userId.userEmail,
+              img: res.data.img[i],
+            });
+          }
+          console.log(res.data);
+        });
+    },
+    mypage: function (x, y, z) {
+      EventBus.$off("search");
+      storage.setItem("otherUserEmail", y);
+      storage.setItem("otherUserNumber", z);
+      storage.setItem("pictureNumber", x);
+      this.$router.push("/mypage");
+      this.$router.go("/");
     },
     deleteFavorite: function (pictureNumber, postId) {
       let self = this;
@@ -75,15 +116,7 @@ export default {
 };
 </script>
 <style scoped>
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 16px;
-  margin-bottom: 16px;
-}
-div#favoriteList {
+#favoriteList {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,14 +126,16 @@ div#favoriteList {
   display: flex;
   max-width: 500px;
   flex-wrap: wrap;
-  padding-top: 12px;
+  padding-top: 5px;
 }
 #favorite {
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px,
     rgba(0, 0, 0, 0.117647) 0px 1px 4px;
   max-width: 140px;
+  max-height: 250px;
   margin: 12px;
   transition: 0.15s all ease-in-out;
+  background-color: white;
 }
 #favorite:hover {
   transform: scale(1.1);
@@ -109,8 +144,18 @@ img {
   height: 100px;
   width: 130px;
 }
-p {
+#postinfo {
+  font-family: "NanumSquare_0", sans-serif;
   font-size: 10px;
   padding: 4px;
+}
+.deletebtn {
+  float: right;
+  background-color: rgb(145, 144, 144);
+  border: none;
+  color: white;
+  padding: 4px 4px;
+  font-size: 10px;
+  cursor: pointer;
 }
 </style>
