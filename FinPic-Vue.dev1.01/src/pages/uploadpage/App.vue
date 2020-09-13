@@ -2,23 +2,23 @@
 <template>
   <div id="app">
     <div id="nav">
-        <MainPageButton/>
-        <UploadPage/>
+      <MainPageButton />
+      <UploadPage />
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 <script>
-import UploadPage from '../../components/UploadPage.vue'
-import MainPageButton from '../../components/MainPageButton.vue'
+import UploadPage from "../../components/UploadPage.vue";
+import MainPageButton from "../../components/MainPageButton.vue";
 
 export default {
-    name : "App",
-    components : {
-      UploadPage,
-      MainPageButton,
-    }
-}
+  name: "App",
+  components: {
+    UploadPage,
+    MainPageButton,
+  },
+};
 </script>
 <style>
 #app {

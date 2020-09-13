@@ -2,26 +2,29 @@
 <template>
   <div id="app">
     <div id="nav">
-        <MainPageButton/><br>
-        <LogInPage/><br>
-        <SignUpButton/><br>
+      <MainPageButton />
+      <br />
+      <LogInPage />
+      <br />
+      <SignUpButton />
+      <br />
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 <script>
-import LogInPage from '../../components/LogInPage.vue'
-import SignUpButton from '../../components/SignUpButton.vue'
-import MainPageButton from '../../components/MainPageButton.vue'
+import LogInPage from "../../components/LogInPage.vue";
+import SignUpButton from "../../components/SignUpButton.vue";
+import MainPageButton from "../../components/MainPageButton.vue";
 
 export default {
-    name : "App",
-    components : {
-      SignUpButton,
-      LogInPage,
-      MainPageButton,
-    }
-}
+  name: "App",
+  components: {
+    SignUpButton,
+    LogInPage,
+    MainPageButton,
+  },
+};
 </script>
 <style>
 #app {

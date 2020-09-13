@@ -5,19 +5,21 @@
         v-bind:src="post.img"
         v-on:click="mypage(post.pictureNumber,post.userEmail,post.userNumber)"
       />
-      <LikeButton :pictureNumber="post.pictureNumber" />
-      <ReportButton :pictureNumber="post.pictureNumber" />
+      <div>
+        <LikeButton :pictureNumber="post.pictureNumber" />
+        <ReportButton :pictureNumber="post.pictureNumber" />
+        <FavoriteButton :mypicture-number="post.pictureNumber" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 const storage = window.sessionStorage;
-
 import EventBus from "../EventBus/EventBus.js";
 import LikeButton from "./LikeButton.vue";
 import ReportButton from "./ReportButton.vue";
-
+import FavoriteButton from "./FavoriteButton.vue";
 export default {
   name: "AllImage",
   data: function () {
@@ -28,14 +30,14 @@ export default {
   components: {
     LikeButton,
     ReportButton,
+    FavoriteButton,
   },
   methods: {
     mypage: function (x, y, z) {
       EventBus.$off("search");
-      storage.setItem("pictureNumber", x);
       storage.setItem("otherUserEmail", y);
       storage.setItem("otherUserNumber", z);
-      EventBus.$emit("favorite", x);
+      storage.setItem("pictureNumber", x);
       this.$router.push("/mypage");
       this.$router.go("/");
     },
