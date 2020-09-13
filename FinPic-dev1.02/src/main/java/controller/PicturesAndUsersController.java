@@ -34,7 +34,8 @@ public class PicturesAndUsersController {
 	  
 	  //Like
 	  @PutMapping("/like/{userNumber}/{pictureNumber}")
-	  public void countLike(@PathVariable long userNumber, @PathVariable long pictureNumber) {
+	  public boolean countLike(@PathVariable long userNumber, @PathVariable long pictureNumber) {
+		  System.out.println("LIKE BUTTON");
 		  Users likedUser = userRepository.findById(userNumber).orElseThrow(()->null);
 		  Pictures likedPicture = pictureRepository.findById(pictureNumber).orElseThrow(()->null);
 		  PicturesAndUsers picturesAndUsers = repository.findByLikedPictureIdAndLikedUserId(likedPicture, likedUser);
@@ -43,16 +44,19 @@ public class PicturesAndUsersController {
 			  likedPicture.setLikeCounter(likedPicture.getLikeCounter() + 1);
 			  pictureRepository.save(likedPicture);
 			  repository.save(picturesAndUsers);
+			  return false;
 		  }else {
 			  likedPicture.setLikeCounter(likedPicture.getLikeCounter() - 1);
 			  pictureRepository.save(likedPicture);
 			  repository.delete(picturesAndUsers);
+			  return true;
 		  }
 	  }
 	  
 	  //Report
 	  @PutMapping("/report/{userNumber}/{pictureNumber}")
-	  public void countReport(@PathVariable long userNumber, @PathVariable long pictureNumber) {
+	  public boolean countReport(@PathVariable long userNumber, @PathVariable long pictureNumber) {
+		  System.out.println("REPORT BUTTON");
 		  Users reportedUser = userRepository.findById(userNumber).orElseThrow(()->null);
 		  Pictures reportedPicture = pictureRepository.findById(pictureNumber).orElseThrow(()->null);
 		  PicturesAndUsers picturesAndUsers = repository.findByReportedPictureIdAndReportedUserId(reportedPicture, reportedUser);
@@ -61,10 +65,39 @@ public class PicturesAndUsersController {
 			  reportedPicture.setReportCounter(reportedPicture.getReportCounter() + 1);
 			  pictureRepository.save(reportedPicture);
 			  repository.save(picturesAndUsers);
+			  return false;
 		  }else {
 			  reportedPicture.setReportCounter(reportedPicture.getReportCounter() - 1);
 			  pictureRepository.save(reportedPicture);
 			  repository.delete(picturesAndUsers);
+			  return true;
 		  }
 	  }
+	  
+	  //verify like
+	  @GetMapping("/like/verify/{userNumber}/{pictureNumber}")
+	  public boolean verifyLike(@PathVariable long userNumber, @PathVariable long pictureNumber) {
+		  Users user = userRepository.findById(userNumber).orElseThrow(null);
+		  Pictures picture = pictureRepository.findById(pictureNumber).orElseThrow(null);
+		  PicturesAndUsers picturesAndUsers = repository.findByLikedPictureIdAndLikedUserId(picture, user);
+		  if(picturesAndUsers == null) {
+			  return true;
+		  }else {			  
+			  return false;
+		  }
+	  }
+	  
+	  //verify report
+	  @GetMapping("/report/verify/{userNumber}/{pictureNumber}")
+	  public boolean verifyReport(@PathVariable long userNumber, @PathVariable long pictureNumber) {
+		  Users user = userRepository.findById(userNumber).orElseThrow(null);
+		  Pictures picture = pictureRepository.findById(pictureNumber).orElseThrow(null);
+		  PicturesAndUsers picturesAndUsers = repository.findByReportedPictureIdAndReportedUserId(picture, user);
+		  if(picturesAndUsers == null) {
+			  return true;
+		  }else {			  
+			  return false;
+		  }
+	  }
+	  
 }

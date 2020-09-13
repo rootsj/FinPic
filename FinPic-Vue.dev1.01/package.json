@@ -13,6 +13,10 @@
     "jquery": "^3.5.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
+<<<<<<< HEAD
+=======
+    "vue-style-loader": "^4.1.2",
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828
     "vuex": "^3.4.0"
   },
   "devDependencies": {

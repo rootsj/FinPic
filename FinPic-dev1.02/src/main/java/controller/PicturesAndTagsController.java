@@ -56,7 +56,12 @@ public class PicturesAndTagsController {
 		  try {
 			  Pictures newPicture = Pictures.builder().uploadDate(registerDate).userId(userRepository.findById(userNumber).orElseThrow(()-> null)).build();
 			  pictureRepository.save(newPicture);
+<<<<<<< HEAD:FinPic-dev1.02/src/main/java/controller/PicturesAndTagsController.java
 			  img.transferTo(new File("H:/FinIMG/"+newPicture.getPictureNumber()+"."+fileExt));
+=======
+			  img.transferTo(new File("C:/OpenPose/FinPic/img/pictures/"+newPicture.getPictureNumber()+"."+fileExt));
+
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828:src/main/java/controller/PicturesAndTagsController.java
 			  pictureId = newPicture;
 		  } catch (IllegalStateException | IOException e) {
 			  e.printStackTrace();
@@ -98,7 +103,12 @@ public class PicturesAndTagsController {
 			  //확장자 명을 동적으로 설정해야한다 어떻게 할까
 			  //for문을 두번 쓰는 것으로 해결해 놓았다. 다른 방법은 없을까
 			  String fileName = String.valueOf(i.getPictureId().getPictureNumber());
+<<<<<<< HEAD:FinPic-dev1.02/src/main/java/controller/PicturesAndTagsController.java
 			  File file = new File("H:/FinIMG/");
+=======
+			  File file = new File("C:/OpenPose/FinPic/img/pictures/");
+
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828:src/main/java/controller/PicturesAndTagsController.java
 			  File files [] = file.listFiles();
 			  for(File j : files) {
 				  String fileExtention = j.getName().substring(j.getName().lastIndexOf(".")+1);

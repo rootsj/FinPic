@@ -2,6 +2,7 @@
 <template>
   <div id="app">
     <div id="nav">
+<<<<<<< HEAD
       <MainPageButton />
       <TagSearchBoxNoAll />
       <ShowProfileImg />
@@ -16,13 +17,86 @@
       <DeleteID v-if="toggleUpdate" />
       <MyPageUserImage v-if="toggleMyPicture" />
       <FollowButton />
+=======
+      <div class="LogInButton">
+        <LogInButton />
+      </div>
+      <div class="MyPageButton">
+        <MyPageButton />
+      </div>
+      <div class="UploadButton">
+        <UploadButton />
+      </div>
+      <br />
+      <div class="LogOutButton">
+        <LogOutButton />
+      </div>
+      <MainPageButton />
+      <div class="TagSearchBoxNoAll">
+        <TagSearchBoxNoAll />
+      </div>
+      <div id="info" class="info">
+        <ShowProfileImg class="info-item" />
+        <ShowUserEmail class="info-item" />
+        <ShowUserInfo class="info-item" />
+        <button
+          class="updateButton"
+          type="button"
+          v-on:click="mypost()"
+          v-if="myUserNumber == userNumber"
+        >My Post</button>
+        <br />
+        <br />
+        <button
+          class="updateButton"
+          type="button"
+          v-on:click="favorite()"
+          v-if="myUserNumber == userNumber"
+        >Favorite</button>
+        <br />
+        <br />
+        <button
+          class="updateButton"
+          type="button"
+          v-on:click="update()"
+          v-if="myUserNumber == userNumber"
+        >Update Info</button>
+      </div>
+      <div id="updateInfo" class="updateInfo">
+        <div class="UpdateProfileImg">
+          <UpdateProfileImg v-if="toggleUpdate" />
+        </div>
+        <div class="DelProfileImgBtn">
+          <DelProfileImgBtn v-if="toggleUpdate" />
+        </div>
+        <div class="UpdateInfo">
+          <UpdateInfo v-if="toggleUpdate" />
+        </div>
+        <div class="UpdateSNSinfo">
+          <UpdateSNSinfo v-if="toggleUpdate" />
+        </div>
+        <div class="DeleteID">
+          <DeleteID v-if="toggleUpdate" />
+        </div>
+        <ShowPost v-if="toggleMyPicture" />
+        <MyPageUserImage v-if="toggleMyPicture" />
+        <FollowButton />
+        <FavoriteListButton />
+      </div>
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828
     </div>
     <router-view />
   </div>
 </template>
 <script>
 const storage = window.sessionStorage;
+<<<<<<< HEAD
 
+=======
+import LogInButton from "../../components/LogInButton.vue";
+import LogOutButton from "../../components/LogOutButton.vue";
+import UploadButton from "../../components/UploadButton.vue";
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828
 import MainPageButton from "../../components/MainPageButton.vue";
 import TagSearchBoxNoAll from "../../components/TagSearchBoxNoAll.vue";
 import ShowUserInfo from "../../components/ShowUserInfo.vue";
@@ -32,9 +106,17 @@ import UpdateSNSinfo from "../../components/UpdateSNSinfo.vue";
 import ShowProfileImg from "../../components/ShowProfileImg.vue";
 import DelProfileImgBtn from "../../components/DelProfileImgBtn.vue";
 import UpdateInfo from "../../components/UpdateInfo.vue";
+<<<<<<< HEAD
 import MyPageUserImage from "../../components/MyPageUserImage.vue";
 import DeleteID from "../../components/DeleteID.vue";
 import FollowButton from "../../components/FollowButton.vue";
+=======
+import ShowPost from "../../components/ShowPost.vue";
+import DeleteID from "../../components/DeleteID.vue";
+import FollowButton from "../../components/FollowButton.vue";
+import MyPageUserImage from "../../components/MyPageUserImage.vue";
+import FavoriteListButton from "../../components/FavoriteListButton.vue";
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828
 
 export default {
   name: "App",
@@ -61,8 +143,32 @@ export default {
       this.toggleFollowList = false;
       this.toggleOnePicture = false;
     },
+<<<<<<< HEAD
   },
   components: {
+=======
+    mypost: function () {
+      this.toggleUpdate = false;
+      this.toggleTagPicture = false;
+      this.toggleMyPicture = true;
+      this.toggleFavorite = false;
+      this.toggleFollowList = false;
+      this.toggleOnePicture = false;
+    },
+    favorite: function () {
+      this.toggleUpdate = false;
+      this.toggleTagPicture = false;
+      this.toggleMyPicture = false;
+      this.toggleFavorite = true;
+      this.toggleFollowList = false;
+      this.toggleOnePicture = false;
+    },
+  },
+  components: {
+    LogInButton,
+    LogOutButton,
+    UploadButton,
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828
     MainPageButton,
     TagSearchBoxNoAll,
     ShowUserInfo,
@@ -72,9 +178,17 @@ export default {
     ShowProfileImg,
     DelProfileImgBtn,
     UpdateInfo,
+<<<<<<< HEAD
     MyPageUserImage,
     DeleteID,
     FollowButton,
+=======
+    ShowPost,
+    DeleteID,
+    FollowButton,
+    MyPageUserImage,
+    FavoriteListButton,
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828
   },
   created() {
     this.pictureNumber = storage.getItem("PictureNumber");
@@ -87,6 +201,7 @@ export default {
 </script>
 <style>
 #app {
+<<<<<<< HEAD
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -107,3 +222,95 @@ export default {
   color: #42b983;
 }
 </style>
+=======
+  text-align: center;
+  padding: 30px;
+}
+.info {
+  position: absolute;
+  width: 38%;
+  top: 220px;
+  left: 10%;
+}
+.updateInfo {
+  align-content: center;
+  position: absolute;
+  top: 210px;
+  width: 40%;
+  left: 38%;
+}
+
+div.UpdateProfileImg {
+  position: relative;
+}
+div.DelProfileImgBtn {
+  position: relative;
+  top: 30px;
+}
+div.UpdateInfo {
+  position: relative;
+  top: 30px;
+}
+div.UpdateSNSinfo {
+  position: relative;
+  top: 40px;
+}
+div.DeleteID {
+  position: relative;
+  top: 60px;
+}
+
+.updateButton {
+  width: 30%;
+  height: 40px;
+  font-family: "NanumSquare_0", sans-serif;
+  font-size: inherit;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: white;
+  background-color: #323232;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+.updateButton:hover {
+  background-color: #fff;
+  box-shadow: 0px 15px 20px rgba(103, 63, 191, 0.4);
+  color: #323232;
+  transform: translateY(-7px);
+}
+@font-face {
+  font-family: "NanumSquare_0";
+  src: url("./../../assets/NanumSquare.ttf");
+}
+div.LogInButton {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+div.LogOutButton {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+div.MyPageButton {
+  position: absolute;
+  top: 20px;
+  right: 250px;
+}
+div.UploadButton {
+  position: absolute;
+  top: 20px;
+  right: 140px;
+}
+
+.UploadButton {
+  position: absolute;
+  top: 20px;
+  right: 250px;
+}
+</style>
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828

@@ -2,6 +2,7 @@
 <template>
   <div id="app">
     <div id="nav">
+<<<<<<< HEAD
       <MainPageButton/>
       <TagSearchBoxNoAll/>
     </div>
@@ -19,6 +20,25 @@ export default {
       TagSearchBoxNoAll,
     }
 }
+=======
+      <MainPageButton />
+      <TagSearchBoxNoAll />
+    </div>
+    <router-view />
+  </div>
+</template>
+<script>
+import MainPageButton from "../../components/MainPageButton.vue";
+import TagSearchBoxNoAll from "../../components/TagSearchBoxNoAll.vue";
+
+export default {
+  name: "App",
+  components: {
+    MainPageButton,
+    TagSearchBoxNoAll,
+  },
+};
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828
 </script>
 <style>
 #app {

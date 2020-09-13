@@ -63,7 +63,11 @@ public class FavoritePicturesController {
 		List<Pictures> pictureObject = new ArrayList<>();
 		for (FavoritePictures favorite : favoriteList) {
 			String fileName = String.valueOf(favorite.getPictureId().getPictureNumber());
+<<<<<<< HEAD
 			File file = new File("H:/FinIMG/");
+=======
+			File file = new File("C:/OpenPose/FinPic/img/pictures/");
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828
 			File files [] = file.listFiles();
 			for(File j : files) {
 				String fileExtention = j.getName().substring(j.getName().lastIndexOf(".")+1);

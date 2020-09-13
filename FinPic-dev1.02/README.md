@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828
 # FinPic
 
 # we are going to make funny webpage!
@@ -7,7 +11,19 @@
 controller기능, 내용 확인 및 작업 가능<br>
 
 # pom.xml
+<<<<<<< HEAD
+<<<<<<< HEAD:FinPic-dev1.02/README.md
 
+=======
+<<<<<<< HEAD:FinPic-Vue.dev1.01/README.md
+	
+=======
+
+>>>>>>> a194a3129057d8692cbbb1ba310fe856ac812fd9:README.md
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828:FinPic-Vue.dev1.01/README.md
+=======
+
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -109,7 +125,19 @@ controller기능, 내용 확인 및 작업 가능<br>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>26.0-jre</version>
+<<<<<<< HEAD
+<<<<<<< HEAD:FinPic-dev1.02/README.md
 		</dependency
+=======
+<<<<<<< HEAD:FinPic-Vue.dev1.01/README.md
+		</dependency>
+=======
+		</dependency
+>>>>>>> a194a3129057d8692cbbb1ba310fe856ac812fd9:README.md
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828:FinPic-Vue.dev1.01/README.md
+=======
+		</dependency
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828
 		
 		<!-- Base64로 변환하기 위한 api들을 import하는 종속성 -->
 		<dependency>
@@ -117,6 +145,25 @@ controller기능, 내용 확인 및 작업 가능<br>
 			<artifactId>commons-io</artifactId>
 			<version>1.4</version>
 		</dependency>
+<<<<<<< HEAD
+<<<<<<< HEAD:FinPic-dev1.02/README.md
+=======
+<<<<<<< HEAD:FinPic-Vue.dev1.01/README.md
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+=======
+>>>>>>> a194a3129057d8692cbbb1ba310fe856ac812fd9:README.md
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828:FinPic-Vue.dev1.01/README.md
+=======
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828
 
 # application.properties
 
@@ -224,3 +271,32 @@ Favotrite : 클릭시 Favorite 새로 등록
 Download : 다운로드하게 함
 Copy link : 링크 복사해줌
 조회수 : 이 글의 like 수를 보여줌
+<<<<<<< HEAD
+=======
+# signup
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+>>>>>>> 3a49c065ed7ffc869d076ce97da124d2f4f5e657
+=======
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828

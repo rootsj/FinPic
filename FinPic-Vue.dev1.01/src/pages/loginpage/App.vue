@@ -2,6 +2,7 @@
 <template>
   <div id="app">
     <div id="nav">
+<<<<<<< HEAD
         <MainPageButton/><br>
         <LogInPage/><br>
         <SignUpButton/><br>
@@ -22,6 +23,31 @@ export default {
       MainPageButton,
     }
 }
+=======
+      <MainPageButton />
+      <br />
+      <LogInPage />
+      <br />
+      <SignUpButton />
+      <br />
+    </div>
+    <router-view />
+  </div>
+</template>
+<script>
+import LogInPage from "../../components/LogInPage.vue";
+import SignUpButton from "../../components/SignUpButton.vue";
+import MainPageButton from "../../components/MainPageButton.vue";
+
+export default {
+  name: "App",
+  components: {
+    SignUpButton,
+    LogInPage,
+    MainPageButton,
+  },
+};
+>>>>>>> 138afde70951ec04c39d0e74e8704962af1a7828
 </script>
 <style>
 #app {
