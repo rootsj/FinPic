@@ -24,33 +24,34 @@ import usersDTO.Users;
 
 @RestController
 public class FavoritePicturesController {
-	private final FavoritePicturesRepository favoriteRepository;
-	private final PicturesRepository pictureRepository;
-	private final UsersRepository usersRepository;
+   private final FavoritePicturesRepository favoriteRepository;
+   private final PicturesRepository pictureRepository;
+   private final UsersRepository usersRepository;
 
-	FavoritePicturesController(FavoritePicturesRepository favoriteRepository, PicturesRepository pictureRepository,
-			UsersRepository usersRepository) {
-		this.favoriteRepository = favoriteRepository;
-		this.pictureRepository = pictureRepository;
-		this.usersRepository = usersRepository;
-	}
+   FavoritePicturesController(FavoritePicturesRepository favoriteRepository, PicturesRepository pictureRepository,
+         UsersRepository usersRepository) {
+      this.favoriteRepository = favoriteRepository;
+      this.pictureRepository = pictureRepository;
+      this.usersRepository = usersRepository;
+   }
+
 
 	// 해당하는 유저의 즐겨찾기에 저장
-	@PostMapping("/favorite/{userEmail}/{pictureNumber}")
-	public void newFavorite(@PathVariable String userEmail, @PathVariable long pictureNumber) {
-		Users userId = usersRepository.findByUserEmail(userEmail);
+	@PostMapping("/favorite/{userNumber}/{pictureNumber}")
+	public boolean newFavorite(@PathVariable long userNumber, @PathVariable long pictureNumber) {
+		Users userId = usersRepository.findById(userNumber).orElseThrow(null);
 		Pictures pictureId = pictureRepository.findById(pictureNumber).orElseThrow(null);
 		//null값 아닐때
 		if(userId != null && pictureId != null){
-			FavoritePictures favorite = favoriteRepository.findByPictureId(pictureId);
-			//중복저장 안되도록
+			FavoritePictures favorite = favoriteRepository.findByUserIdAndPictureId(userId,pictureId);
+			//중복저장 안되도록 
 			if(favorite == null) {
 				FavoritePictures newFavorite = FavoritePictures.builder().pictureId(pictureId).userId(userId).build();
 				favoriteRepository.save(newFavorite);
+				return true;
 			}
-			
 		}
-		
+		return false;
 	}
 
 	// 유저 한 명의 즐겨찾기 전체 보여 주기
@@ -63,7 +64,11 @@ public class FavoritePicturesController {
 		List<Pictures> pictureObject = new ArrayList<>();
 		for (FavoritePictures favorite : favoriteList) {
 			String fileName = String.valueOf(favorite.getPictureId().getPictureNumber());
+<<<<<<< HEAD:FinPic-dev1.02/src/main/java/controller/FavoritePicturesController.java
 			File file = new File("C:/OpenPose/FinPic/img/pictures/");
+=======
+			File file = new File("C:/FinIMG/");
+>>>>>>> 6656d99c6bfacb1e0598db31d59c598e87bb6b2b:src/main/java/controller/FavoritePicturesController.java
 			File files [] = file.listFiles();
 			for(File j : files) {
 				String fileExtention = j.getName().substring(j.getName().lastIndexOf(".")+1);
@@ -85,18 +90,35 @@ public class FavoritePicturesController {
 		return resultMap;
 	}
 
-	// 즐겨찾기 삭제
-	// Picture Number로 Picture 객체 찾고 찾은 Picture 객체로 favoritePicture 객체 찾아서 삭제
-	//내 아이디와 pictureNumber
-	@DeleteMapping("/favorite/{userNumber}/{pictureNumber}")
-	public void deleteFavorite(@PathVariable long userNumber, @PathVariable Long pictureNumber) {
-		Pictures pictureId = pictureRepository.findById(pictureNumber).orElseThrow(() -> null);
-		Users userId = usersRepository.findById(userNumber).orElseThrow(() -> null);
-		FavoritePictures favorite = favoriteRepository.findByUserIdAndPictureId(userId, pictureId);
-		favoriteRepository.delete(favorite);
-	}
 
-	// 확장기능.즐겨찾기 내에서 검색 (태그검색.picture)
-	// 확장기능.카테고리 저장
+   // 즐겨찾기 삭제
+   // Picture Number로 Picture 객체 찾고 찾은 Picture 객체로 favoritePicture 객체 찾아서 삭제
+   // 내 아이디와 pictureNumber
+   @DeleteMapping("/favorite/{userNumber}/{pictureNumber}")
+   public boolean deleteFavorite(@PathVariable long userNumber, @PathVariable Long pictureNumber) {
+      System.out.println("--------즐겨찾기 삭제");
+      Pictures pictureId = pictureRepository.findById(pictureNumber).orElseThrow(() -> null);
+      Users userId = usersRepository.findById(userNumber).orElseThrow(() -> null);
+      FavoritePictures favorite = favoriteRepository.findByUserIdAndPictureId(userId, pictureId);
+      favoriteRepository.delete(favorite);
+      return false;
+   }
+
+   // 즐겨찾기 한지 안 한지 구분.
+   @GetMapping("/favorite/{userNumber}/check/{pictureNumber}")
+   public boolean checkFavorite(@PathVariable long userNumber, @PathVariable Long pictureNumber) {
+      System.out.println("--------즐겨찾기 구분");
+      Pictures pictureId = pictureRepository.findById(pictureNumber).orElseThrow(() -> null);
+      Users userId = usersRepository.findById(userNumber).orElseThrow(() -> null);
+      FavoritePictures favorite = favoriteRepository.findByUserIdAndPictureId(userId, pictureId);
+      if (favorite == null) {
+         return false;
+      } else {
+         return true;
+      }
+   }
+
+   // 확장기능.즐겨찾기 내에서 검색 (태그검색.picture)
+   // 확장기능.카테고리 저장
 
 }
