@@ -8,22 +8,17 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
+import picturesDTO.Pictures;
+import repositories.PicturesRepository;
 import repositories.UsersRepository;
 import service.JwtService;
 import usersDTO.Users;
@@ -32,12 +27,14 @@ import usersDTO.Users;
 //@CrossOrigin("http://localhost:8081")
 public class UsersController {
 	private final UsersRepository repository;
+	private final PicturesRepository pRepository;
 	
 	@Autowired
 	private JwtService jwtService;
 	
-	UsersController(UsersRepository repository) {
+	UsersController(UsersRepository repository, PicturesRepository pRepository) {
 		this.repository = repository;
+		this.pRepository = pRepository;
 	}
 	// 모든 회원 검색
 	@GetMapping("/users")
@@ -67,6 +64,11 @@ public class UsersController {
 	public String userDelete(@PathVariable long userNumber) {
 		// 예외처리 추가해야 Optional 안씀 null 부분에 예외처리 객체 추가하자
 		Users user = repository.findById(userNumber).orElseThrow(() -> null);
+		
+		List<Pictures> picturelist = pRepository.findByUserId(user);
+		for(Pictures picture : picturelist) {
+			user.removePictures(picture);
+		}
 		
 		repository.delete(user);
 		return "redirect:/somewhere.jsp";
