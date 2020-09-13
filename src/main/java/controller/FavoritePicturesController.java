@@ -35,60 +35,57 @@ public class FavoritePicturesController {
       this.usersRepository = usersRepository;
    }
 
-   // 해당하는 유저의 즐겨찾기에 저장
-   @PostMapping("/favorite/{userNumber}/{pictureNumber}")
-   public boolean newFavorite(@PathVariable long userNumber, @PathVariable long pictureNumber) {
-      System.out.println("------favoritePicture 저장");
-      Users userId = usersRepository.findById(userNumber).orElseThrow(() -> null);
-      Pictures pictureId = pictureRepository.findById(pictureNumber).orElseThrow(null);
-      // null값 아닐때
-      if (userId != null && pictureId != null) {
-         FavoritePictures favorite = favoriteRepository.findByUserIdAndPictureId(userId, pictureId);
-         // 중복저장 안되도록
-         if (favorite == null) {
-            FavoritePictures newFavorite = FavoritePictures.builder().pictureId(pictureId).userId(userId).build();
-            favoriteRepository.save(newFavorite);
-            return true;
-         }
-      }
-      return false;
-   }
 
-   // 유저 한 명의 즐겨찾기 전체 보여 주기
-   @GetMapping("/favorite/{userNumber}")
-   public Map<String, Object> favoriteAll(@PathVariable long userNumber) throws IOException {
-      System.out.println("------favoritePictureList");
-      List<FavoritePictures> favoriteList = favoriteRepository
-            .findByUserId(usersRepository.findById(userNumber).orElseThrow(() -> null));
-      Map<String, Object> resultMap = new HashMap<>();
-      List<String> resultBase64 = new ArrayList<>();
-      List<String> pictureNumberList = new ArrayList<>();
-      List<Pictures> pictureObject = new ArrayList<>();
-      for (FavoritePictures favorite : favoriteList) {
-         String fileName = String.valueOf(favorite.getPictureId().getPictureNumber());
-         File file = new File("C:/FinIMG");
-         File files[] = file.listFiles();
-         for (File j : files) {
-            String fileExtention = j.getName().substring(j.getName().lastIndexOf(".") + 1);
-            if (j.getName().equals(fileName + "." + fileExtention)) {
-               // base64로 변환하는 부분
-               FileInputStream in = new FileInputStream(j);
-               byte bytes[] = new byte[(int) j.length()];
-               in.read(bytes);
-               String encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
-               pictureObject.add(favorite.getPictureId());
-               pictureNumberList.add(fileName);
-               resultBase64.add("data:image/" + fileExtention + ";base64," + encodedfile);
-            }
-         }
-      }
-      System.out.println("pictureObject : " + pictureObject);
-      System.out.println("pictureNumberList : " + pictureNumberList);
-      resultMap.put("pictureObject", pictureObject);
-      resultMap.put("pictureNumberList", pictureNumberList);
-      resultMap.put("img", resultBase64);
-      return resultMap;
-   }
+	// 해당하는 유저의 즐겨찾기에 저장
+	@PostMapping("/favorite/{userNumber}/{pictureNumber}")
+	public boolean newFavorite(@PathVariable long userNumber, @PathVariable long pictureNumber) {
+		Users userId = usersRepository.findById(userNumber).orElseThrow(null);
+		Pictures pictureId = pictureRepository.findById(pictureNumber).orElseThrow(null);
+		//null값 아닐때
+		if(userId != null && pictureId != null){
+			FavoritePictures favorite = favoriteRepository.findByUserIdAndPictureId(userId,pictureId);
+			//중복저장 안되도록 
+			if(favorite == null) {
+				FavoritePictures newFavorite = FavoritePictures.builder().pictureId(pictureId).userId(userId).build();
+				favoriteRepository.save(newFavorite);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// 유저 한 명의 즐겨찾기 전체 보여 주기
+	@GetMapping("/favorite/{userNumber}")
+	public Map<String, Object> favoriteAll(@PathVariable long userNumber) throws IOException {
+		List<FavoritePictures> favoriteList = favoriteRepository.findByUserId(usersRepository.findById(userNumber).orElseThrow(() -> null));
+		Map<String, Object> resultMap = new HashMap<>();
+		List<String> resultBase64 = new ArrayList<>();
+		List<String> pictureNumberList = new ArrayList<>();
+		List<Pictures> pictureObject = new ArrayList<>();
+		for (FavoritePictures favorite : favoriteList) {
+			String fileName = String.valueOf(favorite.getPictureId().getPictureNumber());
+			File file = new File("C:/FinIMG/");
+			File files [] = file.listFiles();
+			for(File j : files) {
+				String fileExtention = j.getName().substring(j.getName().lastIndexOf(".")+1);
+				if(j.getName().equals(fileName+"."+fileExtention)) {
+					//base64로 변환하는 부분
+					FileInputStream in = new FileInputStream(j);
+					byte bytes[] = new byte[(int)j.length()];
+					in.read(bytes);
+					String encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
+					pictureObject.add(favorite.getPictureId());
+					pictureNumberList.add(fileName);
+					resultBase64.add("data:image/"+fileExtention+";base64,"+encodedfile);
+				}
+			}
+		}
+		resultMap.put("pictureObject",pictureObject);
+		resultMap.put("pictureNumberList", pictureNumberList);
+		resultMap.put("img", resultBase64);
+		return resultMap;
+	}
+
 
    // 즐겨찾기 삭제
    // Picture Number로 Picture 객체 찾고 찾은 Picture 객체로 favoritePicture 객체 찾아서 삭제
