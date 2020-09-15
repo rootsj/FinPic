@@ -11,6 +11,7 @@
       <div class="UploadButton">
         <UploadButton />
       </div>
+
       <br />
       <div class="LogOutButton">
         <LogOutButton />
@@ -29,9 +30,9 @@
           v-on:click="mypost()"
           v-if="myUserNumber == userNumber"
         >My Post</button>
+        <FollowButton />
         <br />
-        <br />
-        <FavoriteListButton />
+        <FavoriteListButton :toggleFollowList="toggleFollowList" />
         <br />
         <button
           class="updateButton"
@@ -40,7 +41,9 @@
           v-if="myUserNumber == userNumber"
         >Update Info</button>
       </div>
+      <div></div>
       <div id="content" class="content">
+        <FollowListButton :toggleFollowList="toggleFollowList" />
         <div class="UpdateProfileImg">
           <UpdateProfileImg v-if="toggleUpdate" />
         </div>
@@ -84,6 +87,8 @@ import MyPageUserImage from "../../components/MyPageUserImage.vue";
 import FavoriteListButton from "../../components/FavoriteListButton.vue";
 import FavoriteList from "../../components/FavoriteList.vue";
 import EventBus from "../../EventBus/EventBus.js";
+import FollowListButton from "../../components/FollowListButton.vue";
+import FollowButton from "../../components/FollowButton.vue";
 
 export default {
   name: "App",
@@ -145,6 +150,8 @@ export default {
     MyPageUserImage,
     FavoriteListButton,
     FavoriteList,
+    FollowListButton,
+    FollowButton,
   },
   created() {
     this.pictureNumber = storage.getItem("PictureNumber");
@@ -157,6 +164,14 @@ export default {
       this.toggleMyPicture = x;
       this.toggleFavorite = true;
       this.toggleFollowList = x;
+      this.toggleOnePicture = x;
+    });
+    EventBus.$on("followToggle", (x) => {
+      this.toggleUpdate = x;
+      this.toggleTagPicture = x;
+      this.toggleMyPicture = x;
+      this.toggleFavorite = x;
+      this.toggleFollowList = true;
       this.toggleOnePicture = x;
     });
     console.log(this.userEmail);

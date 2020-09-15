@@ -6,21 +6,38 @@
       v-on:click="followSearch"
       v-if="toUserEmail==userEmail"
     >FollowList({{followCount}})</button>
-    <div id="show" v-for="follow in followList" v-bind:key="follow.followId">
-      <button
-        class="followListButton"
-        type="button"
-        v-on:click="followPage(follow.followEmail, follow.followNumber)"
-      >
-        <img v-bind:src="follow.followImg" />
-        {{follow.followName}} {{follow.followEmail}} {{follow.followNumber}}
-      </button>
+    <div class="followListContainer">
+      <div class="wrapper">
+        <div
+          class="followProfile"
+          id="show"
+          v-for="follow in followList"
+          v-bind:key="follow.followId"
+        >
+          <i
+            class="userBtn"
+            type="button"
+            v-on:click="followPage(follow.followEmail, follow.followNumber)"
+            v-if="toggleFollowList"
+          >
+            <img class="pageImg" v-bind:src="follow.followImg" />
+          </i>
+          <div class="userInfo" v-if="toggleFollowList">
+            {{follow.followName}}
+            <br />
+            {{follow.followEmail}}
+            <br />
+            {{follow.followNumber}}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 const storage = window.sessionStorage;
+import EventBus from "../EventBus/EventBus.js";
 
 export default {
   name: "followListButton",
@@ -33,11 +50,12 @@ export default {
       followCount: "",
     };
   },
+  props: ["toggleFollowList"],
   methods: {
     followSearch: function () {
       let self = this;
       this.$axios
-        .get("http://localhost:80/follow/follow/" + self.userNumber)
+        .get("http://192.168.90.105:80/follow/follow/" + self.userNumber)
         .then((res) => {
           self.followList = [];
           for (let i = 0; i < res.data.data.length; i++) {
@@ -50,6 +68,8 @@ export default {
             });
           }
           console.log(self.followList);
+          self.toggleFollowList = !self.toggleFollowList;
+          EventBus.$emit("followToggle", false);
         })
         .catch();
     },
@@ -65,7 +85,7 @@ export default {
   mounted() {
     let self = this;
     this.$axios
-      .get("http://127.0.0.1:80/follow/count/" + self.userNumber)
+      .get("http://192.168.90.105:80/follow/count/" + self.userNumber)
       .then((res) => {
         console.log(res.data);
         self.followCount = res.data;
@@ -74,7 +94,51 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
+.followListContainer {
+  position: absolute;
+  width: 120%;
+  left: 0%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.wrapper {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.followProfile {
+  max-width: 25%;
+  margin: 2%;
+  margin-bottom: 5%;
+  transition: 0.15s all ease-in-out;
+}
+
+.pageImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+  -moz-border-radius: 30px;
+  -khtml-border-radius: 30px;
+  -webkit-border-radius: 30px;
+}
+.pageImg:hover {
+  transform: scale(1.05);
+}
+.userInfo {
+  position: relative;
+  left: 0%;
+  font-family: "NanumSquare";
+  color: white;
+}
+@font-face {
+  font-family: "NanumSquare";
+  src: url("./../assets/NanumSquare.ttf");
+}
+
 .followListButton {
   width: 30%;
   height: 25px;

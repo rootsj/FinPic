@@ -50,7 +50,7 @@ export default {
     req: function () {
       this.$axios({
         method: "post",
-        url: "http://127.0.0.1:80/users",
+        url: "http://192.168.90.105:80/users",
         data: {
           userName: document.getElementById("userName").value,
           userEmail: document.getElementById("userEmail").value,

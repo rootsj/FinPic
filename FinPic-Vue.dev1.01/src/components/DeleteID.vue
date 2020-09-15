@@ -12,7 +12,9 @@ export default {
     DeleteAction: function () {
       if (confirm("Do you want to delete your ID?") == true) {
         this.$axios
-          .delete("http://localhost:80/users/" + storage.getItem("userNumber"))
+          .delete(
+            "http://192.168.90.105:80/users/" + storage.getItem("userNumber")
+          )
           .then(() => {
             storage.setItem("jwt-auth-token", "");
             storage.setItem("userNumber", "");

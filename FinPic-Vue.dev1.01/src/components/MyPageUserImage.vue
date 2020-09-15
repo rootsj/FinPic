@@ -62,7 +62,7 @@ export default {
   created() {
     let self = this;
     this.$axios
-      .get("http://127.0.0.1:80/pictures/" + self.otherUserNumber)
+      .get("http://192.168.90.105:80/pictures/" + self.otherUserNumber)
       .then((res) => {
         this.postList = [];
         res.data.pictureObject.sort(function (a, b) {

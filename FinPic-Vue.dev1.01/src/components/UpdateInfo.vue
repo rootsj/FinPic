@@ -41,7 +41,7 @@ export default {
   methods: {
     UpdateInfoBtn() {
       this.$axios({
-        url: "http://localhost:80/users/" + storage.getItem("userNumber"),
+        url: "http://192.168.90.105:80/users/" + storage.getItem("userNumber"),
         method: "put",
         params: {
           userName: document.getElementById("userName").value,

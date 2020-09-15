@@ -34,7 +34,7 @@ export default {
       let self = this;
       this.$axios
         .put(
-          "http://localhost:80/report/" +
+          "http://192.168.90.105:80/report/" +
             storage.getItem("userNumber") +
             "/" +
             this.pictureNumber
@@ -50,7 +50,7 @@ export default {
       console.log(this.pictureNumber + "Report Button Created");
       this.$axios
         .get(
-          "http://localhost:80/report/verify/" +
+          "http://192.168.90.105:80/report/verify/" +
             storage.getItem("userNumber") +
             "/" +
             this.pictureNumber
@@ -66,7 +66,7 @@ export default {
     console.log(this.pictureNumber + "Report Button Created");
     this.$axios
       .get(
-        "http://localhost:80/report/verify/" +
+        "http://192.168.90.105:80/report/verify/" +
           storage.getItem("userNumber") +
           "/" +
           this.pictureNumber

@@ -46,7 +46,7 @@ export default {
     },
     UpdateBtn: function () {
       this.$axios.put(
-        "http://localhost:80/users/" +
+        "http://192.168.90.105:80/users/" +
           storage.getItem("userEmail") +
           "/profileImageDel"
       );
@@ -54,7 +54,7 @@ export default {
       formData.append("img", this.proImg);
       this.$axios
         .put(
-          "http://localhost:80/users/" +
+          "http://192.168.90.105:80/users/" +
             storage.getItem("userEmail") +
             "/profileImageUpdate",
           formData,

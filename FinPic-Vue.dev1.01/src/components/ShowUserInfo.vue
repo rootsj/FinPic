@@ -4,11 +4,11 @@
     <div class="showUserInfoContent">{{introduction }}</div>
     <div class="showUserInfo-container">Personal SNS</div>
     <div class="showUserInfoContent">
-      <a href="snsLink1">{{snsLink1}}</a>
+      <a v-bind:href="snsLink1" target="_blank">{{snsLink1}}</a>
       <br />
-      <a href="snsLink2">{{snsLink2}}</a>
+      <a v-bind:href="snsLink2" target="_blank">{{snsLink2}}</a>
       <br />
-      <a href="snsLink3">{{snsLink3}}</a>
+      <a v-bind:href="snsLink3" target="_blank">{{snsLink3}}</a>
     </div>
   </div>
 </template>
@@ -29,7 +29,7 @@ export default {
     let self = this;
     this.$axios
       .get(
-        "http://localhost:80/users/" +
+        "http://192.168.90.105:80/users/" +
           storage.getItem("otherUserNumber") +
           "/profile"
       )
@@ -59,7 +59,7 @@ export default {
   position: relative;
   left: 35%;
   font-family: "NanumSquare_acL", sans-serif;
-  font-size: inherit;
+  font-size: 10px;
   border: 0;
   background: transparent;
   width: 30%;

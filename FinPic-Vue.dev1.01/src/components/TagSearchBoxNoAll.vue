@@ -30,7 +30,7 @@ export default {
       let self = this;
       this.isActive = true;
       this.$axios
-        .get("http://localhost:80/pictures-and-tags/" + self.tagName)
+        .get("http://192.168.90.105:80/pictures-and-tags/" + self.tagName)
         .then((res) => {
           res.data.pictureNumberList.sort(function (a, b) {
             return a - b;

@@ -5,7 +5,7 @@
       style="position:relative;left:1px;font-size:30px;color:#8C8C8C"
       type="button"
       v-on:click="DeleteImg"
-      v-if="token != null && token.length != 0 && token != 'undefined'"
+      v-if="myUserNumber == userNumber && token != null && token.length != 0 && token != 'undefined'"
     ></i>
   </div>
 </template>
@@ -26,13 +26,17 @@ export default {
         this.$axios(
           {
             method: "delete",
-            url: "http://127.0.0.1:80/pictures/" + this.pictureNumber,
+            url: "http://192.168.90.105:80/pictures/" + this.pictureNumber,
           },
           this.$router.replace("/mypage"),
           this.$router.go("/")
         );
       }
     },
+  },
+  created() {
+    this.userNumber = storage.getItem("otherUserNumber");
+    this.myUserNumber = storage.getItem("userNumber");
   },
 };
 </script>

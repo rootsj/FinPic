@@ -32,7 +32,7 @@ export default {
     Update() {
       this.$axios({
         url:
-          "http://localhost:80/users/" +
+          "http://192.168.90.105:80/users/" +
           storage.getItem("userNumber") +
           "/profileUpdate",
         method: "put",

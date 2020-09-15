@@ -27,7 +27,7 @@ export default {
     console.log("FAVORITE BUTTON CREATED" + self.pictureNumber);
     this.$axios
       .get(
-        "http://127.0.0.1:80/favorite/" +
+        "http://192.168.90.105:80/favorite/" +
           storage.getItem("userNumber") +
           "/check/" +
           self.pictureNumber
@@ -52,7 +52,7 @@ export default {
         this.$axios({
           method: "delete",
           url:
-            "http://127.0.0.1:80/favorite/" +
+            "http://192.168.90.105:80/favorite/" +
             storage.getItem("userNumber") +
             "/" +
             self.pictureNumber,
@@ -64,7 +64,7 @@ export default {
         let self = this;
         this.$axios
           .post(
-            "http://127.0.0.1:80/favorite/" +
+            "http://192.168.90.105:80/favorite/" +
               storage.getItem("userNumber") +
               "/" +
               self.pictureNumber
@@ -81,7 +81,7 @@ export default {
       console.log("FAVORITE BUTTON CREATED" + self.pictureNumber);
       this.$axios
         .get(
-          "http://127.0.0.1:80/favorite/" +
+          "http://192.168.90.105:80/favorite/" +
             storage.getItem("userNumber") +
             "/check/" +
             self.pictureNumber

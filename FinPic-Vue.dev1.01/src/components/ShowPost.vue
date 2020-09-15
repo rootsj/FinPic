@@ -7,7 +7,7 @@
         <ReportButton :pictureNumber="pictureNumber" v-if="img" />
         <FavoriteButton :pictureNumber="pictureNumber" v-if="img" />
       </div>
-      <div class="UploadPageBtn">{{tags}}</div>
+      <div class="tagBtn">{{tags}}</div>
     </div>
   </div>
 </template>
@@ -34,7 +34,9 @@ export default {
   mounted() {
     let self = this;
     this.$axios
-      .get("http://localhost:80/showpost/" + storage.getItem("pictureNumber"))
+      .get(
+        "http://192.168.90.105:80/showpost/" + storage.getItem("pictureNumber")
+      )
       .then((res) => {
         self.img = res.data.img;
         self.tags = res.data.tags;
@@ -92,7 +94,7 @@ export default {
   font-family: "NanumSquare";
   src: url("./../assets/NanumSquare.ttf");
 }
-.UploadPageBtn {
+.tagBtn {
   width: 100%;
   height: 30px;
   font-family: "NanumSquare", sans-serif;
@@ -108,5 +110,6 @@ export default {
   outline: none;
   position: relative;
   top: 10px;
+  padding-top: 10px;
 }
 </style>

@@ -30,7 +30,7 @@ export default {
   created() {
     this.$axios
       .get(
-        "http://localhost:80/users/" +
+        "http://192.168.90.105:80/users/" +
           storage.getItem("otherUserEmail") +
           "/profileImg"
       )

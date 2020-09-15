@@ -2,14 +2,14 @@
   <div id="likeButton">
     <i
       class="fa fa-thumbs-up"
-      style="position:relative;right:3px;font-size:30px;color:#0500A5"
+      style="position:relative;right:3px;font-size:30px;color:white"
       v-on:click="like()"
       v-if="toggle && token != null && token.length != 0 && token != 'undefined'"
     ></i>
 
     <i
       class="fa fa-thumbs-up"
-      style="position:relative;right:3px;font-size:30px;color:white"
+      style="position:relative;right:3px;font-size:30px;color:#0500A5"
       v-on:click="like()"
       v-if="!toggle && token != null && token.length != 0 && token != 'undefined'"
     ></i>
@@ -37,7 +37,7 @@ export default {
       let self = this;
       this.$axios
         .put(
-          "http://localhost:80/like/" +
+          "http://192.168.90.105:80/like/" +
             storage.getItem("userNumber") +
             "/" +
             this.pictureNumber
@@ -53,7 +53,7 @@ export default {
       console.log("LIKE BUTTON CREATED" + this.pictureNumber);
       this.$axios
         .get(
-          "http://localhost:80/like/verify/" +
+          "http://192.168.90.105:80/like/verify/" +
             storage.getItem("userNumber") +
             "/" +
             this.pictureNumber
@@ -69,7 +69,7 @@ export default {
     console.log("LIKE BUTTON CREATED" + this.pictureNumber);
     this.$axios
       .get(
-        "http://localhost:80/like/verify/" +
+        "http://192.168.90.105:80/like/verify/" +
           storage.getItem("userNumber") +
           "/" +
           this.pictureNumber

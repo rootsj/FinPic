@@ -12,7 +12,7 @@ export default {
   methods: {
     DelBtn: function () {
       this.$axios.put(
-        "http://localhost:80/users/" +
+        "http://192.168.90.105:80/users/" +
           storage.getItem("userEmail") +
           "/profileImageDel"
       );

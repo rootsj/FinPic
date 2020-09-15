@@ -61,7 +61,7 @@ export default {
       formData.append("tagName", document.getElementById("tagName").value);
       this.$axios
         .post(
-          "http://127.0.0.1:80/pictures-and-tags/" +
+          "http://192.168.90.105:80/pictures-and-tags/" +
             storage.getItem("userNumber"),
           formData,
           {

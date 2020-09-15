@@ -27,7 +27,7 @@ export default {
   methods: {
     req: function () {
       this.$axios
-        .get("http://localhost:80/users/login", {
+        .get("http://192.168.90.105:80/users/login", {
           params: {
             userEmail: document.getElementById("userEmail").value,
             userPassword: document.getElementById("userPassword").value,
