@@ -1,17 +1,13 @@
 <template>
-    <div id = "mainPageButton">
-        <button type = "button" v-on:click = "MainPageButton">FinPic</button>
-    </div>
+  <div id="mainPageButton">
+    <a href="/mainpage">
+      <img src="./../assets/Logo.png" alt="FinPic" width="300" />
+    </a>
+  </div>
 </template>
 
 <script>
 export default {
-    name : "MainPageButton",
-    methods : {
-        MainPageButton : function(){
-            this.$router.push("/mainpage");
-            this.$router.go("/");
-        }
-    },
-}
+  name: "MainPageButton",
+};
 </script>

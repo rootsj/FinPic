@@ -2,23 +2,23 @@
 <template>
   <div id="app">
     <div id="nav">
-      <MainPageButton/>
-      <TagSearchBoxNoAll/>
+      <MainPageButton />
+      <TagSearchBoxNoAll />
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 <script>
-import MainPageButton from '../../components/MainPageButton.vue'
-import TagSearchBoxNoAll from '../../components/TagSearchBoxNoAll.vue'
+import MainPageButton from "../../components/MainPageButton.vue";
+import TagSearchBoxNoAll from "../../components/TagSearchBoxNoAll.vue";
 
 export default {
-    name : "App",
-    components : {
-      MainPageButton,
-      TagSearchBoxNoAll,
-    }
-}
+  name: "App",
+  components: {
+    MainPageButton,
+    TagSearchBoxNoAll,
+  },
+};
 </script>
 <style>
 #app {
