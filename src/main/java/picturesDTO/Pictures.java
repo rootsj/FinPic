@@ -36,7 +36,7 @@ import usersDTO.Users;
 public class Pictures {
 	@Id
 	@GeneratedValue(generator = "Pictures_seq")
-	@SequenceGenerator(name = "Pictures_seq", sequenceName = "Pictures_seq", allocationSize = 1)
+	@SequenceGenerator(name = "Pictures_seq", initialValue = 10000, sequenceName = "Pictures_seq", allocationSize = 1)
 	long pictureNumber;
 	
 	long likeCounter;
