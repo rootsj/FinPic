@@ -36,7 +36,7 @@ import usersDTO.Users;
 public class Pictures {
 	@Id
 	@GeneratedValue(generator = "Pictures_seq")
-	@SequenceGenerator(name = "Pictures_seq", sequenceName = "Pictures_seq", allocationSize = 1)
+	@SequenceGenerator(name = "Pictures_seq", initialValue = 10000, sequenceName = "Pictures_seq", allocationSize = 1)
 	long pictureNumber;
 	
 	long likeCounter;
@@ -49,22 +49,22 @@ public class Pictures {
 	@JoinColumn(name = "USERS_ID")
 	Users userId;
 	
-	//PicturesAndTags Entityì™€ ì–‘ë°©í–¥ê´€ê³„ Mapping
+	//PicturesAndTags Entity?€ ?‘ë°©?¥ê?ê³?Mapping
 	@OneToMany(mappedBy = "pictureId", cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	List<PicturesAndTags> picturesAndTags;
 	
-	//FavoritePictures Entityì™€ ì–‘ë°©í–¥ê´€ê³„ Mapping
+	//FavoritePictures Entity?€ ?‘ë°©?¥ê?ê³?Mapping
 	@OneToMany(mappedBy = "pictureId", cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	List<FavoritePictures> favoritePictures;
 	
-	//PicturesAndUsers Entityì™€ ì–‘ë°©í–¥ê´€ê³„ Mapping
+	//PicturesAndUsers Entity?€ ?‘ë°©?¥ê?ê³?Mapping
 	@OneToMany(mappedBy = "likedPictureId", cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	List<PicturesAndUsers> picturesAndUsers;
 	
-	//PicturesAndUsers Entityì™€ ì–‘ë°©í–¥ê´€ê³„ Mapping
+	//PicturesAndUsers Entity?€ ?‘ë°©?¥ê?ê³?Mapping
 	@OneToMany(mappedBy = "reportedPictureId", cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	List<PicturesAndUsers> reportedPicturesAndUsers;

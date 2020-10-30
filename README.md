@@ -1,6 +1,179 @@
 # FinPic
 
-# we are going to make funny webpage!
+### Notice
+- devBH1.03 and VueWithCSS are most recent working tree
+- If you want to take a look at source of this project, you should change branch to devBH1.03 and VueWithCSS
+	- https://github.com/byungs2/Finpic_vue/tree/VueWithCSS
+	- https://github.com/byungs2/FinPic/tree/devBH1.03
+# Team Members
+- 이병헌 (Project Manager)
+	- git : https://github.com/byungs2
+- 이종화 (Github Director, Follow Function Manager)
+	- git : https://github.com/rootsj
+- 채진재 (CSS Director, Subject Proposer, Profile Function Manager)
+	- git : https://github.com/jinjaeCHAE
+- 남기은 (CSS Director, Favorite Function Manager)
+	- git : https://github.com/pure-teatree
+
+# Subject of service
+- SNS web service based on image memes
+
+
+# Requirements of service
+- (Page One) Main Page<br>
+	- Logo : Move to mainpage if it has been clicked<br>
+	- Search Bar : Search pictures based on tags<br>
+	- Log In : Move to login page<br>
+	- Image and Image Click (Paging & Infinite loading, order by Trend) : Move to page that it has been posted <br>
+
+- (Page Two) Main Page<br>
+	- Upload : Move to upload page if it is clicked when only if the user has logged in <br>
+	- Mypage : Move to mypage<br>
+	- Log Out : Move to main page after log out<br>
+
+- (Page Three) Main Page<br>
+	- Search keywords and counting amount of resulting : show keywords and counting amount<br>
+
+- (Page Four) Log In Page<br>
+	- Log In : Move to main page after input user email and password<br>
+	- Sign Up : Move to sign up page<br>
+
+- (Page Five) Sign Up Page<br>
+	- Sign Up : Move to main page after input email, nickname, password. if there have same email, then sign up button will be deactivated<br>
+
+- (Page Six) Upload Page<br>
+	- Image Upload : Get Image if it has been clicked<br>
+	- Post : Move to main page after input tags and pictures<br>
+
+- (Page Seven) My Page<br>
+	- Show Profile Inform : Show information that has been updated by user<br>
+	- Show Favorites : Show pictures that has been selected by user<br>
+	- Update Profile Inform : Move to profile update page if it has been clicked<br>
+	- Click Image : Move to post that linked with picture<br>
+	- Show Follow : Show user that you followed<br>
+	- (Extension function) Search : Search only on my posts <br>
+
+- (Page Eight) Favorite page<br>
+	- Click Image : Move to post that linked with picture<br>
+	- (Extension function) Search : Search only on my posts<br>
+
+- (Page Nine) Update Profile Inform<br>
+	- Update Inform : Move to my page after input user inform<br>
+	- Update Sns Links : Move to my page after input SNS links<br>
+	- Delete Account : Move to main page after delete account<br>
+
+- (Page Ten) Other Users Post <br>
+	- Follow Button : Follow user that linked with picture<br>
+	- Like Button : Increase amount of 'LIKE' that linked with picture after it has been clicked <br>
+	- Favotrite Button : Register favorite picture <br>
+	- Download Button : Download picture <br>
+	- Copy Link Button : Copy link<br>
+	- Show Like : Show amount of 'LIKE' that linked with picture <br>
+
+# FrontEnd Structure 
+Because of spirit of adventure, we have used MPA structure with Vue_CLI single file component
+- Single File Components
+
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/VueComp.png)
+
+- MPA structure
+
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/VueMPA.png)
+
+# Skill set using in frontend
+- Vue CLI
+- Axios
+- JS
+
+
+# BackEnd Structure
+![BackEnd](https://github.com/byungs2/IMG/blob/master/SpringBootStructure.png)
+
+# Relations of DataBase
+![BackEnd](https://github.com/byungs2/IMG/blob/master/data_base.png)
+
+# Skill set using in backend
+- Framework : Spring boot
+- Spring JPA
+- MVC pattern
+- Oracle DB
+- Slf4j
+- Maven
+- Java 8
+- Rest Contoller
+
+
+- methods to fix error 
+	- addCorsMappings
+	- 
+
+- Testing Tool
+	- PostMan
+	- Swagger
+
+# Implemented functions
+- Main Page
+
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/Finpicmain.png)
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/allView.png)
+
+- Sign Up
+
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/signup.png)
+
+- Log In
+
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/login.png)
+
+- MyPage
+
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/Otherspage.png)
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/SearchInmyPage.png)
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/mypage.png)
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/mypost.png)
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/otheronespage.png)
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/followList.png)
+
+- Upload
+
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/FinpicUpload.png)
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/FinUploadDog.png)
+
+- Like & Report & Favorite
+
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/LikeReportFavorite.png)
+
+- Tag
+
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/SearchInmyPage.png)
+
+- Search based on Tags
+
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/searchPic.png)
+
+- Delete picture
+
+![FrontEnd](https://github.com/byungs2/IMG/blob/master/deletePic.png)
+
+# Teamwork Tools
+
+- GitHub
+	- issue
+	- project
+	- pull request
+- ESLint
+- Kakao Oven
+- Zoom
+- https://whereby.com/
+- https://codeshare.io/
+- 
+
+# Using board on Github
+
+![board](https://github.com/byungs2/IMG/blob/master/board.png)
+
+
+# Notice Document for Team
 
 # swagger API 문서화
 서버 실행 후 http://127.0.0.1/swagger-ui.html 접속<br>
@@ -145,7 +318,7 @@ logging.level.org.hibernate=info<br><br>
 jwt.expmin=30<br>
 jwt.salt=MYSALT<br>
 
-# Vue 설정
+# Vue Setting
   - vue create frontend<br>
     1) Manually select features<br>
     2) Router 추가 설정 나머지 default<br>
@@ -174,53 +347,4 @@ new Vue({<br>
 
   - Vuex 추가 설정 
     
-# Vue components 
-1페이지(메인 페이지)<br>
-핀픽로고 : 클릭 시, 메인페이지로 이동
-검색창 : 검색 결과로 이동
-로그인 : 로그인 페이지로 이동
-이미지 클릭(무한로딩, 트렌트 순으로 정렬) : 이미지가 게시된 페이지로 이동
 
-2페이지(메인 페이지)<br>
-업로드 : 클릭시, 업로드로 이등(로그인 되어 있는 상태에서)
-Mypage : 마이 페이지로 이동
-로그아웃 : 로그아웃 후, 메인페이지로 이동
-
-3페이지(메인 페이지)<br>
-검색명 및 검색 결과 수 : 검색명을 명시하고, 그 검색명에 따른 결과 수를 보여줌
-
-5페이지(로그인 페이지)<br>
-로그인 : 아이디, 비밀번호를 받아 로그인, 후에 로그인 된 상태로 메인페이지 이동
-가입하기 : 가업하기 페이지로 넘어감
-
-6페이지(가입하기 페이지)<br>
-sign up : 이메일, 닉네임, 비밀번호, 비밀번호 검증 총 4개의 값을 받고 사인업 버튼 클릭시 메인페이지 이동, 이메일 || 닉네임 중복되면 sign up 비활성화
-
-7페이지(업로드)<br>
-이미지 업로드 : 클릭하면 이미지 가져오기
-게시하기 : 태그입력 받고 앞선 업로드된 데이터를 포함해 게시, 게시하기 클릭 후 게시된 게시물로 이동
-
-8페이지(마이페이지)<br>
-프로필 이미지, 이름 , 설명 : 기존 입력되어 있는 것 창에 보여줌
-favorite : favorite 모아논 것 보여주는 것
-MyPage 수정 : 클릭하면 MyPage 수정으로 들어감
-이미지 클릭 : 그 이미지를 게시한 게시글로 들어감
-follower : 팔로워 수를 보여줌, 클릭 시 자신을 팔로워한 유저 명단 나옴
-(확장)검색 : 내가 올린 게시글 중에 검색 가능
-
-9페이지(Favorite)<br>
-이미지 클릭 : 그 이미지를 게시한 게시글로 들어감(마이페이지의 이미지 클릭과는 다름)
-(확장)검색 : 내가 올린 게시글 중에 검색 가능
-
-10페이지(개인정보 수정)<br>
-Save(개인정보 수정) : 닉네임, 이메일, 사용자 설명 값을 받고, save 클릭시 마이페이지로 이동
-Save(SNS address) : 각각의 SNS 주소값을 받고, save 클릭시 마이페이지로 이동
-계정 삭제 : 클릭시 계정 삭제되고 메인페이지로 이동
-
-11페이지(다른 사람 게시물)<br>
-follow : 이 게시글을 올린 유저를 follow함, 그 유저는 follower 증가
-like : 좋아요 선택, 게시글은 좋아요 수 늘어남
-Favotrite : 클릭시 Favorite 새로 등록
-Download : 다운로드하게 함
-Copy link : 링크 복사해줌
-조회수 : 이 글의 like 수를 보여줌
